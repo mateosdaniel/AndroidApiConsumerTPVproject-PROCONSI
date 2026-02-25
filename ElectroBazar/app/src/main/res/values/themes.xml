@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.ElectroBazar" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/accent_orange</item>
+        <item name="colorPrimaryVariant">@color/accent_orange_hover</item>
+        <item name="colorOnPrimary">@color/light_text_main</item>
+        <item name="colorSurface">@color/light_secondary</item>
+        <item name="colorOnSurface">@color/light_text_main</item>
+        <item name="android:windowBackground">@color/light_primary</item>
+        <item name="android:statusBarColor">@color/light_secondary</item>
+        <item name="android:navigationBarColor">@color/light_primary</item>
+        <item name="android:textColorPrimary">@color/light_text_main</item>
+        <item name="android:textColorSecondary">@color/light_text_muted</item>
+    </style>
+</resources>
