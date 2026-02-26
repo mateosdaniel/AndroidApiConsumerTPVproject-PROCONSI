@@ -5,16 +5,25 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient {
 
-    // Emulador Android → usa 10.0.2.2 para llegar a localhost del PC
-    // Móvil físico    → usa la IP local de tu PC o tu dominio
-    private static final String BASE_URL = "https://api.danis.studio/";
-
+    private static final String DEFAULT_BASE_URL = "https://api.danis.studio/";
+    private static String baseUrl = DEFAULT_BASE_URL;
     private static Retrofit retrofit;
+
+    public static String getBaseUrl() {
+        return baseUrl;
+    }
+
+    public static void setBaseUrl(String url) {
+        if (!url.equals(baseUrl)) {
+            baseUrl = url;
+            retrofit = null; // Force rebuild
+        }
+    }
 
     public static Retrofit getInstance() {
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
-                    .baseUrl(BASE_URL)
+                    .baseUrl(baseUrl)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }

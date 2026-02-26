@@ -39,4 +39,11 @@ public class SessionManager {
     public boolean isLoggedIn() {
         return getWorker() != null;
     }
+
+    public boolean hasPermission(String permission) {
+        Worker worker = getWorker();
+        if (worker == null || worker.getPermissions() == null)
+            return false;
+        return worker.getPermissions().contains(permission);
+    }
 }

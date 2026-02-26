@@ -3,6 +3,7 @@ package com.example.electrobazar.network;
 import com.example.electrobazar.models.CashRegister;
 import com.example.electrobazar.models.Category;
 import com.example.electrobazar.models.Customer;
+import com.example.electrobazar.models.DashboardData;
 import com.example.electrobazar.models.Product;
 import com.example.electrobazar.models.Sale;
 import com.example.electrobazar.models.Worker;
@@ -47,6 +48,10 @@ public interface ApiService {
     @GET("api/sales/today")
     Call<List<Sale>> getTodaySales();
 
+    @GET("api/sales/{id}/ticket")
+    @retrofit2.http.Streaming
+    Call<okhttp3.ResponseBody> getSaleTicket(@Path("id") Long id);
+
     // Customers
     @GET("api/customers/search")
     Call<List<Customer>> searchCustomers(@Query("query") String query);
@@ -60,4 +65,12 @@ public interface ApiService {
 
     @POST("api/cash-registers/close")
     Call<CashRegister> closeCashRegister(@Query("closingBalance") Double closingBalance, @Query("notes") String notes);
+
+    @GET("api/cash-registers/{id}/ticket")
+    @retrofit2.http.Streaming
+    Call<okhttp3.ResponseBody> getCashCloseTicket(@Path("id") Long id);
+
+    // Dashboard
+    @GET("api/dashboard/summary")
+    Call<DashboardData> getDashboardSummary();
 }

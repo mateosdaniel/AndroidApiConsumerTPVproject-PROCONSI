@@ -28,17 +28,16 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         sessionManager = new SessionManager(this);
-        if (sessionManager.isLoggedIn()) {
-            startActivity(new Intent(this, ProductsActivity.class));
-            finish();
-            return;
-        }
-
         setContentView(R.layout.activity_login);
 
         usernameInput = findViewById(R.id.usernameInput);
         passwordInput = findViewById(R.id.passwordInput);
         btnLogin = findViewById(R.id.btnLogin);
+
+        // Pre-fill username if there was a previous session, but still require password
+        if (sessionManager.isLoggedIn() && sessionManager.getWorker() != null) {
+            usernameInput.setText(sessionManager.getWorker().getUsername());
+        }
 
         btnLogin.setOnClickListener(v -> performLogin());
     }
