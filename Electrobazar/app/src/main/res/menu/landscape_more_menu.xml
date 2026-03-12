@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_admin"
+        android:icon="@drawable/ic_admin"
+        android:title="Administración" />
+    <item
+        android:id="@+id/menu_inventory"
+        android:icon="@drawable/ic_inventory"
+        android:title="Inventario" />
+    <item
+        android:id="@+id/menu_cash_movement"
+        android:icon="@drawable/ic_cash_movement"
+        android:title="Movimientos de caja" />
+    <item
+        android:id="@+id/menu_suspended"
+        android:icon="@drawable/ic_suspended"
+        android:title="Ventas en espera" />
+    <item
+        android:id="@+id/menu_returns"
+        android:icon="@drawable/ic_return"
+        android:title="Devoluciones" />
+    <item
+        android:id="@+id/menu_preferences"
+        android:icon="@drawable/ic_settings"
+        android:title="Preferencias" />
+    <item
+        android:id="@+id/menu_logout"
+        android:icon="@drawable/ic_logout"
+        android:title="Cerrar Sesión" />
+</menu>

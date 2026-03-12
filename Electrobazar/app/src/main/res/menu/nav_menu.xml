@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_tpv"
+            android:icon="@drawable/ic_cart"
+            android:title="TPV / Ventas" />
+        <item
+            android:id="@+id/nav_admin"
+            android:icon="@drawable/ic_admin"
+            android:title="Administración" />
+        <item
+            android:id="@+id/nav_inventory"
+            android:icon="@drawable/ic_inventory"
+            android:title="Inventario" />
+    </group>
+
+    <item android:title="Operaciones de Caja">
+        <menu>
+            <item
+                android:id="@+id/nav_cash_close"
+                android:icon="@drawable/ic_cash_close"
+                android:title="Cierre de caja" />
+            <item
+                android:id="@+id/nav_cash_movement"
+                android:icon="@drawable/ic_cash_movement"
+                android:title="Movimiento de caja" />
+        </menu>
+    </item>
+
+    <item android:title="Ventas y Devoluciones">
+        <menu>
+            <item
+                android:id="@+id/nav_suspended"
+                android:icon="@drawable/ic_suspended"
+                android:title="Ventas en espera" />
+            <item
+                android:id="@+id/nav_returns"
+                android:icon="@drawable/ic_return"
+                android:title="Devoluciones" />
+        </menu>
+    </item>
+
+    <item android:title="Otros">
+        <menu>
+            <item
+                android:id="@+id/nav_preferences"
+                android:icon="@drawable/ic_settings"
+                android:title="Preferencias" />
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/ic_logout"
+                android:title="Cerrar Sesión" />
+        </menu>
+    </item>
+</menu>
