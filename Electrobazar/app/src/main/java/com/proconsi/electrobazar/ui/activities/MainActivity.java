@@ -21,6 +21,8 @@ import com.proconsi.electrobazar.R;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.proconsi.electrobazar.ui.fragments.SaleFragment;
+import com.proconsi.electrobazar.ui.fragments.DashboardFragment;
+import com.proconsi.electrobazar.ui.fragments.AdminFragment;
 import com.proconsi.electrobazar.utils.SessionManager;
 import com.proconsi.electrobazar.viewmodels.SaleViewModel;
 
@@ -139,6 +141,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (id == R.id.nav_tpv || id == R.id.menu_suspended) { // Mapping suspended to TPV for now or adding specific logic
             loadFragment(new SaleFragment(), "TPV_FRAGMENT");
             return true;
+        } else if (id == R.id.nav_admin) {
+            loadFragment(new AdminFragment(), "ADMIN_FRAGMENT");
+            return true;
         } else if (id == R.id.nav_logout || id == R.id.menu_logout) {
             logout();
             return true;
@@ -169,6 +174,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (drawerLayout != null && drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
         } else {
+            Fragment currentFragment = getSupportFragmentManager().findFragmentByTag("ADMIN_FRAGMENT");
+            if (currentFragment instanceof AdminFragment && ((AdminFragment) currentFragment).onBackPressed()) {
+                return;
+            }
             super.onBackPressed();
         }
     }

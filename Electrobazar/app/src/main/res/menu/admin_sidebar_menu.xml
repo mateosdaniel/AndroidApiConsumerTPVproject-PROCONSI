@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/admin_nav_dashboard"
+            android:icon="@drawable/ic_admin"
+            android:title="Dashboard" />
+        <item
+            android:id="@+id/admin_nav_inventory"
+            android:icon="@drawable/ic_inventory"
+            android:title="Inventario" />
+        <item
+            android:id="@+id/admin_nav_invoices"
+            android:icon="@drawable/ic_invoice"
+            android:title="Facturas" />
+        <item
+            android:id="@+id/admin_nav_cash_closures"
+            android:icon="@drawable/ic_cash_close"
+            android:title="Cierres de Caja" />
+        <item
+            android:id="@+id/admin_nav_returns"
+            android:icon="@drawable/ic_return"
+            android:title="Devoluciones" />
+        <item
+            android:id="@+id/admin_nav_workers"
+            android:icon="@drawable/ic_workers"
+            android:title="Trabajadores" />
+        <item
+            android:id="@+id/admin_nav_roles"
+            android:icon="@drawable/ic_role"
+            android:title="Roles" />
+        <item
+            android:id="@+id/admin_nav_analytics"
+            android:icon="@drawable/ic_analytics"
+            android:title="Analytics" />
+        <item
+            android:id="@+id/admin_nav_crm"
+            android:icon="@drawable/ic_crm"
+            android:title="CRM" />
+        <item
+            android:id="@+id/admin_nav_price_temp"
+            android:icon="@drawable/ic_price_temp"
+            android:title="Precios Temporales" />
+        <item
+            android:id="@+id/admin_nav_price_bulk"
+            android:icon="@drawable/ic_price_bulk"
+            android:title="Precios Masivos" />
+        <item
+            android:id="@+id/admin_nav_activity"
+            android:icon="@drawable/ic_activity_log"
+            android:title="Log de Actividad" />
+        <item
+            android:id="@+id/admin_nav_tariffs"
+            android:icon="@drawable/ic_tariff"
+            android:title="Tarifas" />
+        <item
+            android:id="@+id/admin_nav_vat_types"
+            android:icon="@drawable/ic_vat"
+            android:title="Tipos de IVA" />
+        <item
+            android:id="@+id/admin_nav_vat_selective"
+            android:icon="@drawable/ic_vat_selective"
+            android:title="IVA Selectivo" />
+        <item
+            android:id="@+id/admin_nav_settings"
+            android:icon="@drawable/ic_settings"
+            android:title="Ajustes" />
+        <item
+            android:id="@+id/admin_nav_security"
+            android:icon="@drawable/ic_security"
+            android:title="Seguridad" />
+    </group>
+</menu>
