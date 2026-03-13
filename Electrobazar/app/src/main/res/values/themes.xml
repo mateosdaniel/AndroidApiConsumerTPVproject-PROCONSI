@@ -9,4 +9,11 @@
     </style>
 
     <style name="Theme.Electrobazar" parent="Base.Theme.Electrobazar" />
+
+    <style name="FullScreenDialog" parent="Base.Theme.Electrobazar">
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowBackground">@color/primary</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">false</item>
+    </style>
 </resources>

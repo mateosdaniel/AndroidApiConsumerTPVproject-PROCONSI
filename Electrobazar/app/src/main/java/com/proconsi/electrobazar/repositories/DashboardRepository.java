@@ -74,6 +74,24 @@ public class DashboardRepository {
         });
     }
 
+    public void getDashboardStats(String period, final DataCallback<com.proconsi.electrobazar.models.DashboardStats> callback) {
+        apiService.getDashboardStats(period).enqueue(new Callback<com.proconsi.electrobazar.models.DashboardStats>() {
+            @Override
+            public void onResponse(Call<com.proconsi.electrobazar.models.DashboardStats> call, Response<com.proconsi.electrobazar.models.DashboardStats> response) {
+                if (response.isSuccessful()) {
+                    callback.onSuccess(response.body());
+                } else {
+                    callback.onError("Error fetching stats: " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<com.proconsi.electrobazar.models.DashboardStats> call, Throwable t) {
+                callback.onError(t.getMessage());
+            }
+        });
+    }
+
     public interface DataCallback<T> {
         void onSuccess(T data);
         void onError(String error);

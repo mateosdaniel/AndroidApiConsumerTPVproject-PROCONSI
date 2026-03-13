@@ -24,7 +24,60 @@
                 android:textColor="@color/text_main"
                 android:textSize="24sp"
                 android:textStyle="bold"
-                android:layout_marginBottom="16dp" />
+                android:layout_marginBottom="8dp" />
+
+            <!-- Period Selection Chips -->
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:scrollbars="none">
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/chipGroupPeriod"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:singleSelection="true"
+                    app:selectionRequired="true">
+                    
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipShift"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Turno"
+                        android:checked="true"
+                        app:chipBackgroundColor="@color/chip_state_list"
+                        android:textColor="@color/white" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipToday"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Hoy"
+                        app:chipBackgroundColor="@color/chip_state_list"
+                        android:textColor="@color/white" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip7Days"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="7 Días"
+                        app:chipBackgroundColor="@color/chip_state_list"
+                        android:textColor="@color/white" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip1Month"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1 Mes"
+                        app:chipBackgroundColor="@color/chip_state_list"
+                        android:textColor="@color/white" />
+                        
+                </com.google.android.material.chip.ChipGroup>
+            </HorizontalScrollView>
 
             <!-- KPI Grid 2x2 -->
             <GridLayout
@@ -64,6 +117,7 @@
                             android:textStyle="bold"
                             android:layout_marginTop="8dp" />
                         <TextView
+                            android:id="@+id/labelRevenue"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Ventas Hoy"
@@ -100,6 +154,7 @@
                             android:textStyle="bold"
                             android:layout_marginTop="8dp" />
                         <TextView
+                            android:id="@+id/labelSales"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Pedidos Hoy"
@@ -198,6 +253,7 @@
                     android:orientation="vertical"
                     android:padding="16dp">
                     <TextView
+                        android:id="@+id/labelChart"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Tendencia de Ventas (7 días)"

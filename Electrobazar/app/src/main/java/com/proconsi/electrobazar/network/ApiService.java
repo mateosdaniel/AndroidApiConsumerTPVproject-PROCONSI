@@ -132,6 +132,10 @@ public interface ApiService {
     @DELETE("api/customers/{id}")
     Call<Void> deleteCustomer(@Path("id") Long id);
 
+    // --- Dashboard ---
+    @GET("api/admin/dashboard/stats")
+    Call<DashboardStats> getDashboardStats(@Query("period") String period);
+
     // --- INE / CPI ---
     @GET("api/ipc/current")
     Call<Map<String, Object>> getCurrentIpc();
