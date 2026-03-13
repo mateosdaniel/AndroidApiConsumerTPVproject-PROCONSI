@@ -20,6 +20,10 @@ public class SaleWithTaxRequest {
     public String getNotes() { return notes; }
     public void setNotes(String notes) { this.notes = notes; }
 
+    private Boolean requestInvoice;
+    public Boolean getRequestInvoice() { return requestInvoice; }
+    public void setRequestInvoice(Boolean requestInvoice) { this.requestInvoice = requestInvoice; }
+
     public BigDecimal getReceivedAmount() { return receivedAmount; }
     public void setReceivedAmount(BigDecimal receivedAmount) { this.receivedAmount = receivedAmount; }
 

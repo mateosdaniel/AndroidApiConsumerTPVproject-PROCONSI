@@ -71,7 +71,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         public void bind(final Product product, final OnProductClickListener listener) {
             productName.setText(product.getName());
             productPrice.setText(String.format(Locale.getDefault(), "%.2f€", product.getPrice()));
-            
+
             if (product.getCategory() != null) {
                 productCategory.setText(product.getCategory().getName());
                 productCategory.setVisibility(View.VISIBLE);
@@ -91,22 +91,32 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                 productPlaceholder.setVisibility(View.VISIBLE);
             }
 
-            itemView.setOnClickListener(v -> {
-                // Scale animation
-                v.animate()
-                    .scaleX(1.05f)
-                    .scaleY(1.05f)
-                    .setDuration(75)
-                    .withEndAction(() -> {
-                        v.animate()
-                            .scaleX(1.0f)
-                            .scaleY(1.0f)
-                            .setDuration(75)
-                            .start();
-                        listener.onProductClick(product);
-                    })
-                    .start();
-            });
+            // Stock check: disable cards with no stock
+            int stock = product.getStock() != null ? product.getStock() : 0;
+            if (stock <= 0) {
+                itemView.setAlpha(0.4f);
+                itemView.setOnClickListener(null);
+                itemView.setClickable(false);
+            } else {
+                itemView.setAlpha(1.0f);
+                itemView.setClickable(true);
+                itemView.setOnClickListener(v -> {
+                    // Scale animation
+                    v.animate()
+                        .scaleX(1.05f)
+                        .scaleY(1.05f)
+                        .setDuration(75)
+                        .withEndAction(() -> {
+                            v.animate()
+                                .scaleX(1.0f)
+                                .scaleY(1.0f)
+                                .setDuration(75)
+                                .start();
+                            listener.onProductClick(product);
+                        })
+                        .start();
+                });
+            }
         }
     }
 }

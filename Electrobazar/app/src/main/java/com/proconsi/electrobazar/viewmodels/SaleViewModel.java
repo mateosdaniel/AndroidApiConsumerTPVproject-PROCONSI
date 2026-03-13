@@ -8,8 +8,10 @@ import com.proconsi.electrobazar.models.Product;
 import com.proconsi.electrobazar.models.TicketLine;
 
 import java.math.BigDecimal;
+import com.proconsi.electrobazar.models.Customer;
 import com.proconsi.electrobazar.models.SaleWithTaxRequest;
 import com.proconsi.electrobazar.models.SaleWithTaxResponse;
+import com.proconsi.electrobazar.repositories.CustomerRepository;
 import com.proconsi.electrobazar.repositories.SaleRepository;
 
 import java.util.ArrayList;
@@ -17,6 +19,7 @@ import java.util.List;
 
 public class SaleViewModel extends ViewModel {
     private final SaleRepository saleRepository = new SaleRepository();
+    private final CustomerRepository customerRepository = new CustomerRepository();
     private final MutableLiveData<List<TicketLine>> ticketLines = new MutableLiveData<>(new ArrayList<>());
     private final MutableLiveData<Integer> totalItems = new MutableLiveData<>(0);
     private final MutableLiveData<BigDecimal> totalAmount = new MutableLiveData<>(BigDecimal.ZERO);
@@ -24,6 +27,7 @@ public class SaleViewModel extends ViewModel {
     private final MutableLiveData<SaleWithTaxResponse> saleResponse = new MutableLiveData<>();
     private final MutableLiveData<Boolean> isProcessing = new MutableLiveData<>(false);
     private final MutableLiveData<String> errorMessage = new MutableLiveData<>();
+    private final MutableLiveData<Customer> selectedCustomer = new MutableLiveData<>(null);
 
     public LiveData<List<TicketLine>> getTicketLines() {
         return ticketLines;
@@ -62,6 +66,24 @@ public class SaleViewModel extends ViewModel {
         return errorMessage;
     }
 
+    public LiveData<Customer> getSelectedCustomer() {
+        return selectedCustomer;
+    }
+
+    public void setCustomer(Customer customer) {
+        selectedCustomer.setValue(customer);
+        updateTicket(ticketLines.getValue());
+    }
+
+    public void clearCustomer() {
+        selectedCustomer.setValue(null);
+        updateTicket(ticketLines.getValue());
+    }
+
+    public LiveData<List<Customer>> searchCustomers(String query) {
+        return customerRepository.searchCustomers(query);
+    }
+
     public void confirmSale(SaleWithTaxRequest request) {
         if (Boolean.TRUE.equals(isProcessing.getValue())) return;
 
@@ -81,12 +103,18 @@ public class SaleViewModel extends ViewModel {
         });
     }
 
-    public void addProduct(Product product) {
+    /** @return false if the product stock would be exceeded, true if added successfully */
+    public boolean addProduct(Product product) {
+        int stock = product.getStock() != null ? product.getStock() : 0;
         List<TicketLine> currentLines = new ArrayList<>(ticketLines.getValue());
         boolean found = false;
 
         for (TicketLine line : currentLines) {
             if (line.getProduct().getId().equals(product.getId())) {
+                if (line.getQuantity() >= stock) {
+                    // Cannot add more than available stock
+                    return false;
+                }
                 line.setQuantity(line.getQuantity() + 1);
                 found = true;
                 break;
@@ -94,10 +122,12 @@ public class SaleViewModel extends ViewModel {
         }
 
         if (!found) {
+            if (stock <= 0) return false;
             currentLines.add(new TicketLine(product, 1));
         }
 
         updateTicket(currentLines);
+        return true;
     }
 
     public void removeProduct(Product product) {
@@ -132,17 +162,21 @@ public class SaleViewModel extends ViewModel {
     }
 
     private void updateTicket(List<TicketLine> lines) {
+        if (lines == null) lines = new ArrayList<>();
         ticketLines.setValue(lines);
 
         int items = 0;
         BigDecimal amount = BigDecimal.ZERO;
+        Customer customer = selectedCustomer.getValue();
+        boolean applyRE = customer != null && Boolean.TRUE.equals(customer.getHasRecargoEquivalencia());
 
         for (TicketLine line : lines) {
+            line.updateTotals(applyRE);
             items += line.getQuantity();
             amount = amount.add(line.getLineTotal());
         }
 
         totalItems.setValue(items);
-        totalAmount.setValue(amount);
+        totalAmount.setValue(amount.setScale(2, java.math.RoundingMode.HALF_UP));
     }
 }
