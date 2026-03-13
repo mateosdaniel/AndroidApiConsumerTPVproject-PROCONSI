@@ -93,6 +93,8 @@ public class AdminFragment extends Fragment {
             showSubFragment(new WorkersAdminFragment());
         } else if (id == R.id.admin_nav_crm) {
             showSubFragment(new CrmAdminFragment());
+        } else if (id == R.id.admin_nav_roles) {
+            showSubFragment(new RolesAdminFragment());
         } else {
             // Placeholder for other sections
             Toast.makeText(getContext(), "Sección: " + title, Toast.LENGTH_SHORT).show();

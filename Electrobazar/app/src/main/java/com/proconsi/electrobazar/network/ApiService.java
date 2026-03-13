@@ -211,6 +211,9 @@ public interface ApiService {
     @DELETE("api/roles/{id}")
     Call<Void> deleteRole(@Path("id") Long id);
 
+    @GET("api/permissions")
+    Call<List<String>> getPermissions();
+
     // --- Sales ---
     @GET("api/sales")
     Call<List<Sale>> getSales();
