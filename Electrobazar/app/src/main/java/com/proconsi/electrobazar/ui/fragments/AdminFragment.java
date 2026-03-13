@@ -87,6 +87,8 @@ public class AdminFragment extends Fragment {
             showSubFragment(new DashboardFragment());
         } else if (id == R.id.admin_nav_inventory) {
             showSubFragment(new InventoryTabsFragment());
+        } else if (id == R.id.admin_nav_invoices) {
+            showSubFragment(new InvoicesAdminFragment());
         } else {
             // Placeholder for other sections
             Toast.makeText(getContext(), "Sección: " + title, Toast.LENGTH_SHORT).show();

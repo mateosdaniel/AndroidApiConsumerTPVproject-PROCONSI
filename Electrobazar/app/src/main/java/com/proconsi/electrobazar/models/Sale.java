@@ -22,6 +22,8 @@ public class Sale {
     private String appliedTariff;
     private BigDecimal appliedDiscountPercentage;
     private BigDecimal totalDiscount;
+    private Invoice invoice;
+    private Ticket ticket;
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
@@ -76,4 +78,10 @@ public class Sale {
 
     public BigDecimal getTotalDiscount() { return totalDiscount; }
     public void setTotalDiscount(BigDecimal totalDiscount) { this.totalDiscount = totalDiscount; }
+
+    public Invoice getInvoice() { return invoice; }
+    public void setInvoice(Invoice invoice) { this.invoice = invoice; }
+
+    public Ticket getTicket() { return ticket; }
+    public void setTicket(Ticket ticket) { this.ticket = ticket; }
 }
