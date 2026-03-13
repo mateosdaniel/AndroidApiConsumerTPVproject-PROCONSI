@@ -165,6 +165,9 @@ public interface ApiService {
     @DELETE("api/products/{id}")
     Call<Void> deleteProduct(@Path("id") Long id);
 
+    @DELETE("api/products/{id}/hard")
+    Call<Void> hardDeleteProduct(@Path("id") Long id);
+
     @GET("api/products/selection")
     Call<List<ProductSelectionItem>> getProductsForSelection();
 
@@ -265,18 +268,18 @@ public interface ApiService {
     Call<Map<String, String>> activateTariff(@Path("id") Long id);
 
     // --- Tax Rates ---
-    @GET("api/tax-rates")
+    @GET("admin/api/tax-rates")
     Call<List<TaxRate>> getTaxRates();
 
-    @GET("api/tax-rates/active")
+    @GET("admin/api/tax-rates/active")
     Call<List<TaxRate>> getActiveTaxRates();
 
-    @POST("api/tax-rates")
+    @POST("admin/api/tax-rates")
     Call<TaxRate> createTaxRate(@Body TaxRate taxRate);
 
-    @PUT("api/tax-rates/{id}")
+    @PUT("admin/api/tax-rates/{id}")
     Call<TaxRate> updateTaxRate(@Path("id") Long id, @Body TaxRate taxRate);
 
-    @DELETE("api/tax-rates/{id}")
+    @DELETE("admin/api/tax-rates/{id}")
     Call<Void> deleteTaxRate(@Path("id") Long id);
 }

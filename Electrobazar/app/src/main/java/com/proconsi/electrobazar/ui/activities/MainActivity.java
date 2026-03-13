@@ -23,6 +23,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.proconsi.electrobazar.ui.fragments.SaleFragment;
 import com.proconsi.electrobazar.ui.fragments.DashboardFragment;
 import com.proconsi.electrobazar.ui.fragments.AdminFragment;
+import com.proconsi.electrobazar.ui.fragments.InventoryFragment;
 import com.proconsi.electrobazar.utils.SessionManager;
 import com.proconsi.electrobazar.viewmodels.SaleViewModel;
 
@@ -143,6 +144,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             return true;
         } else if (id == R.id.nav_admin) {
             loadFragment(new AdminFragment(), "ADMIN_FRAGMENT");
+            return true;
+        } else if (id == R.id.nav_inventory) {
+            loadFragment(new InventoryFragment(), "INVENTORY_FRAGMENT");
             return true;
         } else if (id == R.id.nav_logout || id == R.id.menu_logout) {
             logout();

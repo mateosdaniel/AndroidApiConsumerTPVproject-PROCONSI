@@ -85,10 +85,11 @@ public class AdminFragment extends Fragment {
     private void handleNavigation(int id, String title) {
         if (id == R.id.admin_nav_dashboard) {
             showSubFragment(new DashboardFragment());
+        } else if (id == R.id.admin_nav_inventory) {
+            showSubFragment(new InventoryTabsFragment());
         } else {
             // Placeholder for other sections
             Toast.makeText(getContext(), "Sección: " + title, Toast.LENGTH_SHORT).show();
-            // In a real app, we would load the corresponding fragment here
         }
     }
 
