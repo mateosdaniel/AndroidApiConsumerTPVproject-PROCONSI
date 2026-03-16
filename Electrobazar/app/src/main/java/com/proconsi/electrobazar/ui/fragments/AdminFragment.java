@@ -101,6 +101,12 @@ public class AdminFragment extends Fragment {
             showSubFragment(new ReturnsAdminFragment());
         } else if (id == R.id.admin_nav_tariffs) {
             showSubFragment(new TariffsAdminFragment());
+        } else if (id == R.id.admin_nav_vat_types) {
+            showSubFragment(new TaxRatesAdminFragment());
+        } else if (id == R.id.admin_nav_vat_selective) {
+            showSubFragment(new SelectiveTaxFragment());
+        } else if (id == R.id.admin_nav_price_bulk) {
+            showSubFragment(new BulkPricesFragment());
         } else {
 
             // Placeholder for other sections

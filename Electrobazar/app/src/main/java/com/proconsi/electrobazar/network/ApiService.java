@@ -198,8 +198,8 @@ public interface ApiService {
     @GET("api/product-prices/{productId}/history")
     Call<List<ProductPriceResponse>> getProductPriceHistory(@Path("productId") Long productId);
 
-    @POST("api/product-prices/bulk-update")
-    Call<Map<String, Object>> bulkUpdatePrices(@Body BulkPriceUpdateRequest request);
+    @POST("api/product-prices/bulk-schedule")
+    Call<List<ProductPriceResponse>> bulkSchedulePrices(@Body BulkPriceUpdateRequest request);
 
     // --- Returns ---
     @GET("api/returns/check")
@@ -310,4 +310,7 @@ public interface ApiService {
 
     @DELETE("admin/api/tax-rates/{id}")
     Call<Void> deleteTaxRate(@Path("id") Long id);
+
+    @POST("admin/api/tax-rates/apply-selective")
+    Call<Map<String, Object>> applySelectiveTaxRate(@Body ApplySelectiveTaxRateRequest request);
 }
