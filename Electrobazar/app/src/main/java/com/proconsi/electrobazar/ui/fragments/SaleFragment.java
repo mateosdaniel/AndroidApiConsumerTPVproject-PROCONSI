@@ -45,7 +45,7 @@ public class SaleFragment extends Fragment {
     private TicketAdapter ticketAdapter;
     private View emptyState, ticketContainer, ticketOverlay, btnCloseTicket;
     private TextView ticketTotalText, ticketCountBadge;
-    private View btnCobrar, btnClearTicket;
+    private View btnCobrar, btnClearTicket, btnSuspender;
     private View customerSearchContainer, selectedCustomerCard;
     private TextView customerNameText, customerTaxIdText, customerTariffBadge;
     private android.widget.AutoCompleteTextView customerSearchInput;
@@ -73,6 +73,7 @@ public class SaleFragment extends Fragment {
         ticketCountBadge = view.findViewById(R.id.ticketCountBadge);
         btnCobrar = view.findViewById(R.id.btnCobrar);
         btnClearTicket = view.findViewById(R.id.btnClearTicket);
+        btnSuspender = view.findViewById(R.id.btnSuspender);
 
         customerSearchContainer = view.findViewById(R.id.customerSearchContainer);
         selectedCustomerCard = view.findViewById(R.id.selectedCustomerCard);
@@ -288,6 +289,7 @@ public class SaleFragment extends Fragment {
         ticketOverlay.setOnClickListener(v -> saleViewModel.setTicketVisible(false));
         btnCobrar.setOnClickListener(v -> showCheckoutDialog());
         btnClearTicket.setOnClickListener(v -> saleViewModel.clearTicket());
+        btnSuspender.setOnClickListener(v -> showSuspendDialog());
     }
 
     private void observeViewModel() {
@@ -303,7 +305,15 @@ public class SaleFragment extends Fragment {
 
         saleViewModel.getTicketLines().observe(getViewLifecycleOwner(), lines -> {
             ticketAdapter.setLines(lines);
-            btnCobrar.setEnabled(!lines.isEmpty());
+            boolean hasItems = !lines.isEmpty();
+            btnCobrar.setEnabled(hasItems);
+            
+            SessionManager sessionManager = new SessionManager(requireContext());
+            if (hasItems && sessionManager.hasPermission("HOLD_SALES")) {
+                btnSuspender.setVisibility(View.VISIBLE);
+            } else {
+                btnSuspender.setVisibility(View.GONE);
+            }
         });
 
         saleViewModel.getTotalAmount().observe(getViewLifecycleOwner(), amount -> {
@@ -347,7 +357,11 @@ public class SaleFragment extends Fragment {
 
         saleViewModel.getErrorMessage().observe(getViewLifecycleOwner(), error -> {
             if (error != null) {
-                Toast.makeText(getContext(), error, Toast.LENGTH_LONG).show();
+                if (error.equals("SUCCESS_HOLD")) {
+                    Toast.makeText(getContext(), "Venta puesta en espera", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getContext(), error, Toast.LENGTH_LONG).show();
+                }
             }
         });
     }
@@ -553,4 +567,21 @@ public class SaleFragment extends Fragment {
 
         dialog.show();
     }
+
+    private void showSuspendDialog() {
+        android.widget.EditText input = new android.widget.EditText(requireContext());
+        input.setHint("Ej: Cliente esperando tarjeta");
+        
+        new androidx.appcompat.app.AlertDialog.Builder(requireContext(), R.style.AlertDialogTheme)
+                .setTitle("Suspender venta")
+                .setView(input)
+                .setPositiveButton("SUSPENDER", (dialog, which) -> {
+                    String label = input.getText().toString().trim();
+                    saleViewModel.holdSale(label);
+                })
+                .setNegativeButton("CANCELAR", null)
+                .show();
+    }
 }
+
+

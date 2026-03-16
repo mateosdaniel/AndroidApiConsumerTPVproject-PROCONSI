@@ -20,6 +20,7 @@ import java.util.List;
 public class SaleViewModel extends ViewModel {
     private final SaleRepository saleRepository = new SaleRepository();
     private final CustomerRepository customerRepository = new CustomerRepository();
+    private final com.proconsi.electrobazar.repositories.HeldSalesRepository heldSalesRepository = new com.proconsi.electrobazar.repositories.HeldSalesRepository();
     private final MutableLiveData<List<TicketLine>> ticketLines = new MutableLiveData<>(new ArrayList<>());
     private final MutableLiveData<Integer> totalItems = new MutableLiveData<>(0);
     private final MutableLiveData<BigDecimal> totalAmount = new MutableLiveData<>(BigDecimal.ZERO);
@@ -159,6 +160,55 @@ public class SaleViewModel extends ViewModel {
 
     public void clearTicket() {
         updateTicket(new ArrayList<>());
+    }
+
+    public void holdSale(String label) {
+        if (Boolean.TRUE.equals(isProcessing.getValue())) return;
+
+        List<TicketLine> lines = ticketLines.getValue();
+        if (lines == null || lines.isEmpty()) return;
+
+        java.util.List<com.proconsi.electrobazar.models.SuspendedSaleLineRequest> lineRequests = new java.util.ArrayList<>();
+        for (TicketLine line : lines) {
+            com.proconsi.electrobazar.models.SuspendedSaleLineRequest req = new com.proconsi.electrobazar.models.SuspendedSaleLineRequest();
+            req.setProductId(line.getProduct().getId());
+            req.setQuantity(line.getQuantity());
+            req.setUnitPrice(line.getUnitPrice());
+            lineRequests.add(req);
+        }
+
+        com.proconsi.electrobazar.models.SuspendRequest request = new com.proconsi.electrobazar.models.SuspendRequest(lineRequests, label);
+
+        isProcessing.setValue(true);
+        heldSalesRepository.holdSale(request).observeForever(response -> {
+            isProcessing.setValue(false);
+            if (response != null) {
+                clearTicket();
+                setTicketVisible(false);
+                errorMessage.setValue("SUCCESS_HOLD"); // Signal success
+            } else {
+                errorMessage.setValue("Error al poner la venta en espera.");
+            }
+        });
+    }
+
+    public void loadHeldSale(com.proconsi.electrobazar.models.SuspendedSaleResponse heldSale) {
+        clearTicket();
+        clearCustomer();
+        
+        List<TicketLine> lines = new ArrayList<>();
+        for (com.proconsi.electrobazar.models.SuspendedSaleResponse.SuspendedSaleLineResponse lineResp : heldSale.getLines()) {
+            Product p = new Product();
+            p.setId(lineResp.getProductId());
+            p.setName(lineResp.getProductName());
+            p.setPrice(lineResp.getUnitPrice());
+            p.setStock(999); // Assume stock is enough for resumed sale, or well handle it in addProduct if we had the full product
+            
+            TicketLine line = new TicketLine(p, lineResp.getQuantity());
+            lines.add(line);
+        }
+        updateTicket(lines);
+        setTicketVisible(true);
     }
 
     private void updateTicket(List<TicketLine> lines) {

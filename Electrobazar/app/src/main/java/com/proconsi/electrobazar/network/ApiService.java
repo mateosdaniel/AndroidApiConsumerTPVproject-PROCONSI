@@ -256,18 +256,19 @@ public interface ApiService {
     @POST("api/sales/with-tax")
     Call<SaleWithTaxResponse> createSaleWithTax(@Body SaleWithTaxRequest request);
 
-    // --- Suspended Sales ---
+    // --- Suspended Sales (Held Sales) ---
     @GET("api/suspended-sales")
     Call<List<SuspendedSaleResponse>> getSuspendedSales();
 
     @POST("api/suspended-sales")
-    Call<SuspendedSaleResponse> suspendSale(@Body List<SuspendedSaleLineRequest> lines, @Query("label") String label);
+    Call<SuspendedSaleResponse> suspendSale(@Body SuspendRequest request);
 
     @POST("api/suspended-sales/{id}/resume")
     Call<SuspendedSaleResponse> resumeSuspendedSale(@Path("id") Long id);
 
-    @DELETE("api/suspended-sales/{id}")
-    Call<Void> deleteSuspendedSale(@Path("id") Long id);
+    @POST("api/suspended-sales/{id}/cancel")
+    Call<SuspendedSaleResponse> cancelSuspendedSale(@Path("id") Long id);
+
 
     // --- Tariffs ---
     @GET("api/tariffs")

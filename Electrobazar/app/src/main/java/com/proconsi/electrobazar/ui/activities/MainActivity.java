@@ -26,6 +26,7 @@ import com.proconsi.electrobazar.ui.fragments.AdminFragment;
 import com.proconsi.electrobazar.ui.fragments.InventoryFragment;
 import com.proconsi.electrobazar.ui.fragments.CashRegisterFragment;
 import com.proconsi.electrobazar.ui.fragments.ReturnsFragment;
+import com.proconsi.electrobazar.ui.fragments.HeldSalesFragment;
 
 import com.proconsi.electrobazar.utils.SessionManager;
 import com.proconsi.electrobazar.viewmodels.SaleViewModel;
@@ -188,8 +189,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
      * Unified navigation handler for Drawer, Landscape Header, and Popup Menus
      */
     private boolean handleNavigation(int id, String title) {
-        if (id == R.id.nav_tpv || id == R.id.menu_suspended) { // Mapping suspended to TPV for now or adding specific logic
+        if (id == R.id.nav_tpv) {
             loadFragment(new SaleFragment(), "TPV_FRAGMENT");
+            return true;
+        } else if (id == R.id.nav_suspended || id == R.id.menu_suspended) {
+            loadFragment(new HeldSalesFragment(), "HELD_SALES_FRAGMENT");
             return true;
         } else if (id == R.id.nav_admin) {
             loadFragment(new AdminFragment(), "ADMIN_FRAGMENT");
@@ -206,7 +210,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_preferences || id == R.id.menu_preferences) {
             Toast.makeText(this, "Preferencias", Toast.LENGTH_SHORT).show();
             return true;
-        } else if (id == R.id.nav_returns) {
+        } else if (id == R.id.nav_returns || id == R.id.menu_returns) {
             loadFragment(new ReturnsFragment(), "RETURNS_FRAGMENT");
             return true;
         } else {

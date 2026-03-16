@@ -374,7 +374,21 @@
                 app:icon="@drawable/ic_logout"
                 app:iconSize="14dp"
                 app:iconTint="@color/danger" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSuspender"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Poner en espera"
+                android:textColor="@color/white"
+                android:visibility="gone"
+                app:icon="@android:drawable/ic_menu_recent_history"
+                app:iconTint="@color/white"
+                app:strokeColor="@color/border" />
         </LinearLayout>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
