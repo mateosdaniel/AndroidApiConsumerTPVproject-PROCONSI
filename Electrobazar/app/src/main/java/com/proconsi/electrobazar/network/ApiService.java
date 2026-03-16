@@ -205,6 +205,13 @@ public interface ApiService {
     @POST("api/returns")
     Call<SaleReturn> processReturn(@Body ReturnRequest request);
 
+    @GET("api/returns")
+    Call<List<SaleReturn>> getReturns(@Query("from") String from, @Query("to") String to);
+
+    @GET("api/returns/{id}")
+    Call<SaleReturn> getReturnById(@Path("id") Long id);
+
+
     // --- Roles ---
     @GET("api/roles")
     Call<List<Role>> getRoles();

@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Title -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Devolución de Venta"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="24dp" />
+
+            <!-- Search Section -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/primary_variant"
+                app:cardCornerRadius="12dp"
+                app:strokeColor="@color/border"
+                app:strokeWidth="1dp"
+                android:layout_marginBottom="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="12dp"
+                    android:gravity="center_vertical">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="ID o Número de Ticket"
+                        app:boxStrokeColor="@color/accent"
+                        app:hintTextColor="@color/accent">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/returnSearchInput"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="text"
+                            android:textColor="@color/white" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnSearchTicket"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="BUSCAR"
+                        android:backgroundTint="@color/accent"
+                        android:textColor="@color/black" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Loading ProgressBar -->
+            <ProgressBar
+                android:id="@+id/loadingProgress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="gone" />
+
+            <!-- Return Details Section (Initially hidden) -->
+            <LinearLayout
+                android:id="@+id/returnDetailsContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <!-- Sale Info Card -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardBackgroundColor="@color/primary_variant"
+                    app:cardCornerRadius="12dp"
+                    app:strokeColor="@color/border"
+                    app:strokeWidth="1dp"
+                    android:layout_marginBottom="16dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:id="@+id/saleInfoText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Ticket #123 - 13/03/2026"
+                            android:textColor="@color/white"
+                            android:textStyle="bold"
+                            android:layout_marginBottom="4dp" />
+
+                        <TextView
+                            android:id="@+id/saleCustomerText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Cliente: Sin cliente"
+                            android:textColor="@color/text_muted" />
+
+                        <TextView
+                            android:id="@+id/saleTotalText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Total: 150.00€"
+                            android:textColor="@color/info"
+                            android:textStyle="bold"
+                            android:layout_marginTop="8dp" />
+
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Lines Table Header -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="8dp"
+                    android:background="@color/primary_variant"
+                    android:layout_marginBottom="1dp">
+                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="3" android:text="Producto" android:textColor="@color/text_muted" android:textSize="12sp" />
+                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Vendido" android:textColor="@color/text_muted" android:textSize="12sp" android:gravity="center" />
+                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Devolver" android:textColor="@color/text_muted" android:textSize="12sp" android:gravity="center" />
+                </LinearLayout>
+
+                <!-- Lines List -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/returnLinesRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false"
+                    android:layout_marginBottom="24dp" />
+
+                <!-- Refund Form -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardBackgroundColor="@color/primary_variant"
+                    app:cardCornerRadius="12dp"
+                    app:strokeColor="@color/border"
+                    app:strokeWidth="1dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Método de Reembolso"
+                            android:textColor="@color/text_muted"
+                            android:layout_marginBottom="8dp" />
+
+                        <Spinner
+                            android:id="@+id/refundMethodSpinner"
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:backgroundTint="@color/white"
+                            android:layout_marginBottom="16dp" />
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Motivo de devolución"
+                            app:boxStrokeColor="@color/accent"
+                            android:layout_marginBottom="20dp">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/returnReasonInput"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/white" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <TextView
+                            android:id="@+id/totalRefundPreviewText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Total a devolver: 0.00€"
+                            android:textColor="@color/accent"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:layout_marginBottom="20dp" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnSubmitReturn"
+                            android:layout_width="match_parent"
+                            android:layout_height="56dp"
+                            android:text="PROCESAR DEVOLUCIÓN"
+                            android:backgroundTint="@color/accent"
+                            android:textColor="@color/black"
+                            app:cornerRadius="8dp" />
+
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

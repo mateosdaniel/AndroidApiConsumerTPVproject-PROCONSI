@@ -25,6 +25,8 @@ import com.proconsi.electrobazar.ui.fragments.DashboardFragment;
 import com.proconsi.electrobazar.ui.fragments.AdminFragment;
 import com.proconsi.electrobazar.ui.fragments.InventoryFragment;
 import com.proconsi.electrobazar.ui.fragments.CashRegisterFragment;
+import com.proconsi.electrobazar.ui.fragments.ReturnsFragment;
+
 import com.proconsi.electrobazar.utils.SessionManager;
 import com.proconsi.electrobazar.viewmodels.SaleViewModel;
 
@@ -204,7 +206,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_preferences || id == R.id.menu_preferences) {
             Toast.makeText(this, "Preferencias", Toast.LENGTH_SHORT).show();
             return true;
+        } else if (id == R.id.nav_returns) {
+            loadFragment(new ReturnsFragment(), "RETURNS_FRAGMENT");
+            return true;
         } else {
+
             // General handler for items not yet having a fragment
             Toast.makeText(this, "Opción: " + title, Toast.LENGTH_SHORT).show();
             return true;
