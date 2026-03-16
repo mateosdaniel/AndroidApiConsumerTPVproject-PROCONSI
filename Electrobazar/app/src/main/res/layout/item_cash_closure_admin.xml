@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    app:cardBackgroundColor="@color/primary_variant"
+    app:cardCornerRadius="12dp"
+    app:strokeColor="@color/border"
+    app:strokeWidth="1dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/closureIdText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="#123"
+                android:textColor="@color/accent"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/closureDateText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="13/03/2026"
+                android:textColor="@color/text_main" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/closureWorkerText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Trabajador: Admin"
+            android:textColor="@color/text_muted"
+            android:textSize="12sp"
+            android:layout_marginBottom="12dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/divider"
+            android:layout_marginBottom="12dp" />
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="2">
+
+            <LinearLayout android:orientation="vertical" android:layout_columnWeight="1">
+                <TextView android:text="Saldo Inicial" android:textColor="@color/text_muted" android:textSize="10sp" />
+                <TextView android:id="@+id/openingText" android:text="0.00€" android:textColor="@color/white" android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout android:orientation="vertical" android:layout_columnWeight="1">
+                <TextView android:text="Ventas" android:textColor="@color/text_muted" android:textSize="10sp" />
+                <TextView android:id="@+id/salesText" android:text="0.00€" android:textColor="@color/success" android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout android:orientation="vertical" android:layout_columnWeight="1" android:layout_marginTop="8dp">
+                <TextView android:text="Diferencia" android:textColor="@color/text_muted" android:textSize="10sp" />
+                <TextView android:id="@+id/diffText" android:text="0.00€" android:textColor="@color/white" android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout android:orientation="vertical" android:layout_columnWeight="1" android:layout_marginTop="8dp">
+                <TextView android:text="Saldo Final" android:textColor="@color/text_muted" android:textSize="10sp" />
+                <TextView android:id="@+id/closingText" android:text="0.00€" android:textColor="@color/white" android:textSize="14sp" android:textStyle="bold" />
+            </LinearLayout>
+        </GridLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnDownloadPdf"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="DESCARGAR PDF"
+            android:textColor="@color/info"
+            app:icon="@android:drawable/stat_sys_download"
+            app:iconTint="@color/info"
+            android:layout_marginTop="8dp" />
+
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

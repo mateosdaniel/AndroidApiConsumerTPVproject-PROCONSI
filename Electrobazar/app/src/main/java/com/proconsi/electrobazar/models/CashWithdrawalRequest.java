@@ -5,6 +5,14 @@ public class CashWithdrawalRequest {
     private String reason;
     private String type; // WITHDRAWAL, ENTRY
 
+    public CashWithdrawalRequest() {}
+
+    public CashWithdrawalRequest(String amount, String reason, String type) {
+        this.amount = amount;
+        this.reason = reason;
+        this.type = type;
+    }
+
     public String getAmount() { return amount; }
     public void setAmount(String amount) { this.amount = amount; }
 

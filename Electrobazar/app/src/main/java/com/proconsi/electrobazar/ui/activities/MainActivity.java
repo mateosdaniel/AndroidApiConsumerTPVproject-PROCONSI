@@ -24,6 +24,7 @@ import com.proconsi.electrobazar.ui.fragments.SaleFragment;
 import com.proconsi.electrobazar.ui.fragments.DashboardFragment;
 import com.proconsi.electrobazar.ui.fragments.AdminFragment;
 import com.proconsi.electrobazar.ui.fragments.InventoryFragment;
+import com.proconsi.electrobazar.ui.fragments.CashRegisterFragment;
 import com.proconsi.electrobazar.utils.SessionManager;
 import com.proconsi.electrobazar.viewmodels.SaleViewModel;
 
@@ -67,7 +68,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Landscape elements
         cartBadgeLand = findViewById(R.id.cartBadgeLand);
         View cashCloseBtn = findViewById(R.id.cashCloseBtn);
-        if (cashCloseBtn != null) cashCloseBtn.setOnClickListener(v -> Toast.makeText(this, "Cierre de caja", Toast.LENGTH_SHORT).show());
+        if (cashCloseBtn != null) cashCloseBtn.setOnClickListener(v -> loadFragment(new CashRegisterFragment(), "CASH_REGISTER_FRAGMENT"));
+
+        View hamburgerBtnLand = findViewById(R.id.hamburgerBtnLand);
+        if (hamburgerBtnLand != null) {
+            hamburgerBtnLand.setOnClickListener(v -> {
+                if (drawerLayout != null) {
+                    drawerLayout.openDrawer(GravityCompat.START);
+                }
+            });
+        }
 
         View cartButton = findViewById(R.id.cartButton);
         if (cartButton != null) cartButton.setOnClickListener(v -> saleViewModel.toggleTicket());
@@ -101,6 +111,43 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (savedInstanceState == null) {
             loadFragment(new SaleFragment(), "TPV_FRAGMENT");
         }
+
+        checkPermissions();
+    }
+
+    private void checkPermissions() {
+        NavigationView navigationView = findViewById(R.id.navigationView);
+        if (navigationView == null) return;
+
+        android.view.Menu menu = navigationView.getMenu();
+        if (menu == null) return;
+
+        // Admin Access
+        boolean isAdmin = sessionManager.hasPermission("ADMIN_ACCESS");
+        MenuItem adminItem = menu.findItem(R.id.nav_admin);
+        if (adminItem != null) adminItem.setVisible(isAdmin);
+
+        // Cash Operations
+        boolean canCashClose = sessionManager.hasPermission("CASH_CLOSE");
+        MenuItem cashCloseItem = menu.findItem(R.id.nav_cash_close);
+        if (cashCloseItem != null) cashCloseItem.setVisible(canCashClose);
+        MenuItem cashMovementItem = menu.findItem(R.id.nav_cash_movement);
+        if (cashMovementItem != null) cashMovementItem.setVisible(canCashClose);
+
+        // Inventory
+        boolean canManageProducts = sessionManager.hasPermission("MANAGE_PRODUCTS_TPV") || isAdmin;
+        MenuItem inventoryItem = menu.findItem(R.id.nav_inventory);
+        if (inventoryItem != null) inventoryItem.setVisible(canManageProducts);
+
+        // Sales and Returns
+        MenuItem suspendedItem = menu.findItem(R.id.nav_suspended);
+        if (suspendedItem != null) suspendedItem.setVisible(sessionManager.hasPermission("HOLD_SALES"));
+        MenuItem returnsItem = menu.findItem(R.id.nav_returns);
+        if (returnsItem != null) returnsItem.setVisible(sessionManager.hasPermission("RETURNS"));
+
+        // Preferences
+        MenuItem preferencesItem = menu.findItem(R.id.nav_preferences);
+        if (preferencesItem != null) preferencesItem.setVisible(sessionManager.hasPermission("PREFERENCES"));
     }
 
     private void updateNavHeader() {
@@ -147,6 +194,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             return true;
         } else if (id == R.id.nav_inventory) {
             loadFragment(new InventoryFragment(), "INVENTORY_FRAGMENT");
+            return true;
+        } else if (id == R.id.nav_cash_close || id == R.id.nav_cash_movement) {
+            loadFragment(new CashRegisterFragment(), "CASH_REGISTER_FRAGMENT");
             return true;
         } else if (id == R.id.nav_logout || id == R.id.menu_logout) {
             logout();

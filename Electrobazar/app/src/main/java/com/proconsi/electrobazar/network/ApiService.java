@@ -69,26 +69,36 @@ public interface ApiService {
     Call<List<ActivityLog>> getRecentActivityLogs();
 
     // --- Cash Register ---
-    @GET("api/cash-registers/status")
-    Call<Map<String, Object>> getCashRegisterStatus();
+    @GET("api/cash-registers/open")
+    Call<CashRegister> getOpenRegister();
+
+    @GET("api/cash-registers/closed")
+    Call<List<CashRegister>> getAllClosedRegisters();
+
+    @GET("api/cash-registers/close-info")
+    Call<CashCloseInfoDTO> getCashCloseInfo();
 
     @GET("api/cash-registers/open-suggestion")
     Call<CashRegisterOpenSuggestion> getOpenSuggestion();
 
     @POST("api/cash-registers/open")
-    Call<CashRegister> openCashRegister(@Body Map<String, Object> body);
-
-    @GET("api/cash-registers/close-info")
-    Call<CashCloseInfoDTO> getCashCloseInfo();
+    Call<CashRegister> openCashRegister(
+            @Query("openingBalance") BigDecimal openingBalance,
+            @Header("X-Worker-Id") Long workerId);
 
     @POST("api/cash-registers/close")
-    Call<CashRegister> closeCashRegister(@Body Map<String, Object> body);
-
-    @GET("api/cash-registers/history")
-    Call<List<CashRegister>> getCashRegisterHistory();
+    Call<CashRegister> closeCashRegister(
+            @Query("closingBalance") BigDecimal closingBalance,
+            @Query("notes") String notes,
+            @Query("retainedAmount") BigDecimal retainedAmount,
+            @Header("X-Worker-Id") Long workerId);
 
     @GET("api/cash-registers/{id}")
     Call<CashRegister> getCashRegisterById(@Path("id") Long id);
+
+    @GET("api/cash-registers/{id}/ticket")
+    @Streaming
+    Call<ResponseBody> downloadCashRegisterTicket(@Path("id") Long id);
 
     // --- Cash Withdrawals ---
     @POST("api/cash-withdrawals")

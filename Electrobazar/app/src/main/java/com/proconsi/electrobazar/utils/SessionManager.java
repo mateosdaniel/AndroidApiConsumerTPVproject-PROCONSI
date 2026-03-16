@@ -2,6 +2,14 @@ package com.proconsi.electrobazar.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Base64;
+import android.util.Log;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SessionManager {
     private static final String PREF_NAME = "ElectrobazarPrefs";
@@ -50,5 +58,34 @@ public class SessionManager {
     public void clearSession() {
         editor.clear();
         editor.apply();
+    }
+
+    public List<String> getPermissions() {
+        List<String> permissions = new ArrayList<>();
+        String token = getToken();
+        if (token == null || token.split("\\.").length < 2) {
+            return permissions;
+        }
+
+        try {
+            String payloadBase64 = token.split("\\.")[1];
+            byte[] decodedBytes = Base64.decode(payloadBase64, Base64.URL_SAFE);
+            String payloadJson = new String(decodedBytes, "UTF-8");
+            JSONObject jsonObject = new JSONObject(payloadJson);
+            JSONArray permsArray = jsonObject.optJSONArray("permissions");
+            if (permsArray != null) {
+                for (int i = 0; i < permsArray.length(); i++) {
+                    permissions.add(permsArray.getString(i));
+                }
+            }
+            Log.d("SessionManager", "Extracted permissions: " + permissions);
+        } catch (Exception e) {
+            Log.e("SessionManager", "Error decoding JWT token for permissions", e);
+        }
+        return permissions;
+    }
+
+    public boolean hasPermission(String permission) {
+        return getPermissions().contains(permission);
     }
 }
