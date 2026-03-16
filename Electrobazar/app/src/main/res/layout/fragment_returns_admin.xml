@@ -4,7 +4,7 @@
     android:id="@+id/swipeRefresh"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background">
+    android:background="?attr/android:windowBackground">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Historial de Devoluciones"
-            android:textColor="@color/white"
+            android:textColor="?attr/android:textColorPrimary"
             android:textSize="24sp"
             android:textStyle="bold"
             android:layout_marginBottom="16dp" />
@@ -25,9 +25,9 @@
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardBackgroundColor="@color/primary_variant"
+            app:cardBackgroundColor="?attr/colorSurface"
             app:cardCornerRadius="12dp"
-            app:strokeColor="@color/border"
+            app:strokeColor="?attr/colorOutline"
             app:strokeWidth="1dp"
             android:layout_marginBottom="16dp">
 
@@ -41,13 +41,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Buscar por número o ticket..."
-                    app:boxStrokeColor="@color/accent"
+                    app:boxStrokeColor="?attr/colorPrimary"
                     android:layout_marginBottom="12dp">
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/searchFilter"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/white" />
+                        android:textColor="?attr/android:textColorPrimary" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <HorizontalScrollView
@@ -89,7 +89,7 @@
                     android:layout_height="wrap_content"
                     android:text="Rango de Fechas"
                     app:icon="@android:drawable/ic_menu_today"
-                    app:strokeColor="@color/border" />
+                    app:strokeColor="?attr/colorOutline" />
 
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
@@ -105,7 +105,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="No se encontraron devoluciones"
-            android:textColor="@color/text_muted"
+            android:textColor="?attr/android:textColorSecondary"
             android:gravity="center"
             android:layout_marginTop="48dp"
             android:visibility="gone" />

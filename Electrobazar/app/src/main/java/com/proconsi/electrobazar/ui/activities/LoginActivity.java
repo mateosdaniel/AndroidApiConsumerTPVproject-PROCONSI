@@ -26,8 +26,11 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        com.proconsi.electrobazar.utils.ThemeManager.applyTheme(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        com.proconsi.electrobazar.utils.ThemeManager.applyColors(this);
+        com.proconsi.electrobazar.utils.ThemeManager.applyFontToView(getWindow().getDecorView(), this);
 
         authViewModel = new ViewModelProvider(this).get(AuthViewModel.class);
 
@@ -70,5 +73,10 @@ public class LoginActivity extends AppCompatActivity {
         loginProgress.setVisibility(View.VISIBLE);
         
         authViewModel.login(username, password);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }

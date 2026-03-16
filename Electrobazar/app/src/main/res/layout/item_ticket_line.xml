@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="12dp"
-    android:background="@color/secondary"
+    android:background="?attr/android:windowBackground"
     android:layout_marginBottom="1dp">
 
     <TextView
@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:ellipsize="end"
         android:maxLines="1"
-        android:textColor="@color/text_main"
+        android:textColor="?attr/android:textColorPrimary"
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/btnRemove"
@@ -28,7 +28,7 @@
         android:layout_height="24dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:src="@drawable/ic_logout"
-        app:tint="@color/danger"
+        app:tint="?attr/colorError"
         android:rotation="90"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -53,14 +53,14 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:src="@drawable/ic_arrow_right"
             android:rotation="180"
-            app:tint="@color/text_main" />
+            app:tint="?attr/android:textColorPrimary" />
 
         <TextView
             android:id="@+id/lineQty"
             android:layout_width="32dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:textColor="@color/text_main"
+            android:textColor="?attr/android:textColorPrimary"
             android:textSize="13sp"
             android:textStyle="bold"
             tools:text="1" />
@@ -71,7 +71,7 @@
             android:layout_height="24dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:src="@drawable/ic_arrow_right"
-            app:tint="@color/text_main" />
+            app:tint="?attr/android:textColorPrimary" />
     </LinearLayout>
 
     <LinearLayout
@@ -87,7 +87,7 @@
             android:id="@+id/lineOriginalPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/text_muted"
+            android:textColor="?attr/android:textColorSecondary"
             android:textSize="11sp"
             android:visibility="gone"
             tools:text="30.00€"
@@ -97,7 +97,7 @@
             android:id="@+id/lineTotal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/accent"
+            android:textColor="?attr/colorPrimary"
             android:textSize="15sp"
             android:textStyle="bold"
             tools:text="25.00€" />

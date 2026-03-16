@@ -8,6 +8,7 @@ public class Tariff {
     private BigDecimal discountPercentage;
     private String description;
     private Boolean active;
+    private Boolean systemTariff;
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
@@ -23,4 +24,7 @@ public class Tariff {
 
     public Boolean getActive() { return active; }
     public void setActive(Boolean active) { this.active = active; }
+
+    public Boolean getSystemTariff() { return systemTariff; }
+    public void setSystemTariff(Boolean systemTariff) { this.systemTariff = systemTariff; }
 }

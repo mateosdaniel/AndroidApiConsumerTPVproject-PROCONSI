@@ -6,7 +6,6 @@ public class Ticket {
     private String serie;
     private int year;
     private int sequenceNumber;
-    private Sale sale;
     private String createdAt;
     private boolean applyRecargo;
 
@@ -24,9 +23,6 @@ public class Ticket {
 
     public int getSequenceNumber() { return sequenceNumber; }
     public void setSequenceNumber(int sequenceNumber) { this.sequenceNumber = sequenceNumber; }
-
-    public Sale getSale() { return sale; }
-    public void setSale(Sale sale) { this.sale = sale; }
 
     public String getCreatedAt() { return createdAt; }
     public void setCreatedAt(String createdAt) { this.createdAt = createdAt; }

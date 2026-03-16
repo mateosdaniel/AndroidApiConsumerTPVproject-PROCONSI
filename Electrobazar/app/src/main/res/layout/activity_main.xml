@@ -5,7 +5,7 @@
     android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primary"
+    android:background="?attr/android:windowBackground"
     android:fitsSystemWindows="true"
     tools:context=".ui.activities.MainActivity">
 
@@ -17,7 +17,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/secondary"
+            android:background="?attr/colorSurface"
             app:layout_constraintTop_toTopOf="parent"
             app:contentInsetStart="16dp">
 
@@ -39,7 +39,7 @@
                     android:layout_marginStart="8dp"
                     android:fontFamily="sans-serif-condensed-light"
                     android:text="ElectroBazar"
-                    android:textColor="@color/text_main"
+                    android:textColor="?attr/android:textColorPrimary"
                     android:textSize="18sp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -56,7 +56,7 @@
                     android:layout_height="48dp"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:src="@drawable/ic_cart"
-                    app:tint="@color/text_main" />
+                    app:tint="?attr/android:textColorPrimary" />
 
                 <TextView
                     android:id="@+id/cartBadge"
@@ -69,7 +69,7 @@
                     android:background="@drawable/bg_badge"
                     android:gravity="center"
                     android:text="0"
-                    android:textColor="@color/white"
+                    android:textColor="?attr/android:windowBackground"
                     android:textSize="10sp"
                     android:textStyle="bold"
                     android:visibility="gone" />
@@ -82,7 +82,7 @@
                     android:layout_toEndOf="@id/cartButton"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:src="@drawable/ic_menu"
-                    app:tint="@color/text_main" />
+                    app:tint="?attr/android:textColorPrimary" />
             </RelativeLayout>
 
         </com.google.android.material.appbar.MaterialToolbar>
@@ -101,10 +101,10 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="@color/secondary"
+        android:background="?attr/colorSurface"
         app:headerLayout="@layout/nav_header"
-        app:itemIconTint="@color/text_muted"
-        app:itemTextColor="@color/text_main"
+        app:itemIconTint="?attr/android:textColorSecondary"
+        app:itemTextColor="?attr/android:textColorPrimary"
         app:menu="@menu/nav_menu" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

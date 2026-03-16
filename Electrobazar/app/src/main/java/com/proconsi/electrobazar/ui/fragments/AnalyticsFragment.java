@@ -27,7 +27,7 @@ import com.proconsi.electrobazar.databinding.FragmentAnalyticsBinding;
 import com.proconsi.electrobazar.models.DashboardStats;
 import com.proconsi.electrobazar.models.Product;
 import com.proconsi.electrobazar.models.Sale;
-import com.proconsi.electrobazar.network.ApiClient;
+import com.proconsi.electrobazar.network.RetrofitClient;
 import com.proconsi.electrobazar.network.ApiService;
 
 import java.text.SimpleDateFormat;
@@ -53,7 +53,8 @@ public class AnalyticsFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentAnalyticsBinding.inflate(inflater, container, false);
-        apiService = ApiClient.getClient().create(ApiService.class);
+        com.proconsi.electrobazar.utils.ThemeManager.applyFontToView(binding.getRoot(), requireContext());
+        apiService = RetrofitClient.getInstance().getApi();
 
         setupPeriodSpinner();
         setupSwipeRefresh();

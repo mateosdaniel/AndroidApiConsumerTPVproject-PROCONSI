@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background">
+    android:background="?attr/android:windowBackground">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,7 +13,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/primary"
+            android:background="?attr/colorSurface"
             android:orientation="vertical"
             android:padding="16dp">
 
@@ -21,7 +21,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Precios Masivos"
-                android:textColor="@color/text_main"
+                    android:textColor="?attr/android:textColorPrimary"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -29,7 +29,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Actualiza precios de forma global o por categorías"
-                android:textColor="@color/text_muted"
+                    android:textColor="?attr/android:textColorSecondary"
                 android:textSize="14sp" />
         </LinearLayout>
 
@@ -37,9 +37,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            app:cardBackgroundColor="@color/secondary"
+            app:cardBackgroundColor="?attr/colorSurface"
             app:cardCornerRadius="12dp"
-            app:strokeColor="@color/border"
+            app:strokeColor="?attr/colorOutline"
             app:strokeWidth="1dp">
 
             <LinearLayout
@@ -53,7 +53,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
                     android:text="Herramienta IPC (INE)"
-                    android:textColor="@color/accent"
+                    android:textColor="?attr/colorPrimary"
                     android:textStyle="bold" />
 
                 <LinearLayout
@@ -68,7 +68,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Último IPC: --"
-                        android:textColor="@color/text_main" />
+                            android:textColor="?attr/android:textColorPrimary" />
 
                     <Button
                         android:id="@+id/btnFetchIpc"
@@ -76,7 +76,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Consultar INE"
-                        android:textColor="@color/info" />
+                        android:textColor="?attr/colorPrimary" />
                 </LinearLayout>
 
                 <Button
@@ -85,7 +85,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:text="Aplicar IPC sugerido"
-                    app:backgroundTint="@color/info" />
+                    app:backgroundTint="?attr/colorPrimary" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
@@ -94,9 +94,9 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:layout_marginBottom="16dp"
-            app:cardBackgroundColor="@color/secondary"
+            app:cardBackgroundColor="?attr/colorSurface"
             app:cardCornerRadius="12dp"
-            app:strokeColor="@color/border"
+            app:strokeColor="?attr/colorOutline"
             app:strokeWidth="1dp">
 
             <LinearLayout
@@ -110,7 +110,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
                     android:text="Ajuste Manual"
-                    android:textColor="@color/accent"
+                    android:textColor="?attr/colorPrimary"
                     android:textStyle="bold" />
 
                 <com.google.android.material.button.MaterialButtonToggleGroup
@@ -151,7 +151,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="numberDecimal|numberSigned"
-                        android:textColor="@color/text_main" />
+                            android:textColor="?attr/android:textColorPrimary" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -168,7 +168,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:focusable="false"
-                        android:textColor="@color/text_main" />
+                            android:textColor="?attr/android:textColorPrimary" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -184,7 +184,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="text"
-                        android:textColor="@color/text_main" />
+                            android:textColor="?attr/android:textColorPrimary" />
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
@@ -194,9 +194,9 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:layout_marginBottom="16dp"
-            app:cardBackgroundColor="@color/secondary"
+            app:cardBackgroundColor="?attr/colorSurface"
             app:cardCornerRadius="12dp"
-            app:strokeColor="@color/border"
+            app:strokeColor="?attr/colorOutline"
             app:strokeWidth="1dp">
 
             <LinearLayout
@@ -210,7 +210,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
                     android:text="Selección de Productos"
-                    android:textColor="@color/accent"
+                    android:textColor="?attr/colorPrimary"
                     android:textStyle="bold" />
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -238,7 +238,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Seleccionar todos los visibles"
-                    android:textColor="@color/text_muted" />
+                        android:textColor="?attr/android:textColorSecondary" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
@@ -250,8 +250,8 @@
             android:layout_marginHorizontal="16dp"
             android:layout_marginBottom="8dp"
             android:text="Previsualizar Cambios"
-            android:textColor="@color/accent"
-            app:strokeColor="@color/accent" />
+            android:textColor="?attr/colorPrimary"
+            app:strokeColor="?attr/colorPrimary" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnSubmitBulk"
@@ -260,8 +260,8 @@
             android:layout_marginHorizontal="16dp"
             android:layout_marginBottom="32dp"
             android:text="Programar Cambio de Precios"
-            android:textColor="@color/primary"
-            app:backgroundTint="@color/accent"
+            android:textColor="?attr/android:windowBackground"
+            app:backgroundTint="?attr/colorPrimary"
             app:cornerRadius="8dp" />
 
     </LinearLayout>

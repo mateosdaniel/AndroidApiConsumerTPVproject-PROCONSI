@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="160dp"
-    android:background="@color/primary"
+    android:background="?attr/colorPrimary"
     android:gravity="bottom"
     android:orientation="vertical"
     android:padding="16dp">
@@ -12,14 +12,14 @@
         android:layout_height="64dp"
         android:layout_marginBottom="16dp"
         android:src="@drawable/ic_person"
-        android:tint="@color/accent" />
+        android:tint="?attr/android:windowBackground" />
 
     <TextView
         android:id="@+id/navWorkerName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Trabajador"
-        android:textColor="@color/text_main"
+        android:textColor="?attr/android:windowBackground"
         android:textSize="18sp"
         android:textStyle="bold" />
 
@@ -28,7 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Rol del trabajador"
-        android:textColor="@color/text_muted"
+        android:textColor="?attr/android:windowBackground"
         android:textSize="14sp" />
 
 </LinearLayout>

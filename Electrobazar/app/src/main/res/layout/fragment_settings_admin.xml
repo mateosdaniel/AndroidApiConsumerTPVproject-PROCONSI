@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primary">
+    android:background="?attr/android:windowBackground">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,7 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Ajustes de Empresa"
-            android:textColor="@color/text_main"
+            android:textColor="?attr/android:textColorPrimary"
             android:textSize="22sp"
             android:textStyle="bold"
             android:layout_marginBottom="24dp" />
@@ -23,7 +23,7 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardBackgroundColor="@color/secondary"
+            app:cardBackgroundColor="?attr/colorSurface"
             app:cardCornerRadius="12dp">
 
             <LinearLayout
@@ -36,7 +36,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Datos de la Empresa"
-                    android:textColor="@color/text_main"
+                    android:textColor="?attr/android:textColorPrimary"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     android:layout_marginBottom="16dp"/>
@@ -46,7 +46,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Nombre de la Aplicación"
-                    android:textColor="@color/text_muted"
+                    android:textColor="?attr/android:textColorSecondary"
                     android:textSize="12sp"
                     android:layout_marginBottom="4dp"/>
                 <EditText
@@ -55,7 +55,7 @@
                     android:layout_height="45dp"
                     android:background="@drawable/bg_edittext"
                     android:padding="12dp"
-                    android:textColor="@color/text_main"
+                    android:textColor="?attr/android:textColorPrimary"
                     android:layout_marginBottom="16dp"/>
 
                 <!-- Name / Razón Social -->
@@ -63,7 +63,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Nombre / Razón Social"
-                    android:textColor="@color/text_muted"
+                    android:textColor="?attr/android:textColorSecondary"
                     android:textSize="12sp"
                     android:layout_marginBottom="4dp"/>
                 <EditText
@@ -72,7 +72,7 @@
                     android:layout_height="45dp"
                     android:background="@drawable/bg_edittext"
                     android:padding="12dp"
-                    android:textColor="@color/text_main"
+                    android:textColor="?attr/android:textColorPrimary"
                     android:layout_marginBottom="16dp"/>
 
                 <!-- CIF -->
@@ -80,7 +80,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="CIF / NIF"
-                    android:textColor="@color/text_muted"
+                    android:textColor="?attr/android:textColorSecondary"
                     android:textSize="12sp"
                     android:layout_marginBottom="4dp"/>
                 <EditText
@@ -89,7 +89,7 @@
                     android:layout_height="45dp"
                     android:background="@drawable/bg_edittext"
                     android:padding="12dp"
-                    android:textColor="@color/text_main"
+                    android:textColor="?attr/android:textColorPrimary"
                     android:layout_marginBottom="16dp"/>
 
                 <!-- Address -->
@@ -97,7 +97,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Dirección"
-                    android:textColor="@color/text_muted"
+                    android:textColor="?attr/android:textColorSecondary"
                     android:textSize="12sp"
                     android:layout_marginBottom="4dp"/>
                 <EditText
@@ -106,7 +106,7 @@
                     android:layout_height="45dp"
                     android:background="@drawable/bg_edittext"
                     android:padding="12dp"
-                    android:textColor="@color/text_main"
+                    android:textColor="?attr/android:textColorPrimary"
                     android:layout_marginBottom="16dp"/>
 
                 <LinearLayout
@@ -125,7 +125,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Ciudad"
-                            android:textColor="@color/text_muted"
+                            android:textColor="?attr/android:textColorSecondary"
                             android:textSize="12sp"
                             android:layout_marginBottom="4dp"/>
                         <EditText
@@ -134,7 +134,7 @@
                             android:layout_height="45dp"
                             android:background="@drawable/bg_edittext"
                             android:padding="12dp"
-                            android:textColor="@color/text_main"
+                            android:textColor="?attr/android:textColorPrimary"
                             android:layout_marginBottom="16dp"/>
                     </LinearLayout>
 
@@ -148,7 +148,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="C.P."
-                            android:textColor="@color/text_muted"
+                            android:textColor="?attr/android:textColorSecondary"
                             android:textSize="12sp"
                             android:layout_marginBottom="4dp"/>
                         <EditText
@@ -157,7 +157,7 @@
                             android:layout_height="45dp"
                             android:background="@drawable/bg_edittext"
                             android:padding="12dp"
-                            android:textColor="@color/text_main"
+                            android:textColor="?attr/android:textColorPrimary"
                             android:layout_marginBottom="16dp"/>
                     </LinearLayout>
                 </LinearLayout>
@@ -166,7 +166,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Teléfono"
-                    android:textColor="@color/text_muted"
+                    android:textColor="?attr/android:textColorSecondary"
                     android:textSize="12sp"
                     android:layout_marginBottom="4dp"/>
                 <EditText
@@ -175,7 +175,7 @@
                     android:layout_height="45dp"
                     android:background="@drawable/bg_edittext"
                     android:padding="12dp"
-                    android:textColor="@color/text_main"
+                    android:textColor="?attr/android:textColorPrimary"
                     android:inputType="phone"
                     android:layout_marginBottom="16dp"/>
 
@@ -183,7 +183,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Email"
-                    android:textColor="@color/text_muted"
+                    android:textColor="?attr/android:textColorSecondary"
                     android:textSize="12sp"
                     android:layout_marginBottom="4dp"/>
                 <EditText
@@ -192,7 +192,7 @@
                     android:layout_height="45dp"
                     android:background="@drawable/bg_edittext"
                     android:padding="12dp"
-                    android:textColor="@color/text_main"
+                    android:textColor="?attr/android:textColorPrimary"
                     android:inputType="textEmailAddress"
                     android:layout_marginBottom="24dp"/>
 
@@ -202,8 +202,8 @@
                     android:layout_height="50dp"
                     android:text="Guardar Configuración"
                     android:textAllCaps="false"
-                    android:backgroundTint="@color/accent"
-                    android:textColor="@color/primary"
+                    android:backgroundTint="?attr/colorPrimary"
+                    android:textColor="?attr/android:windowBackground"
                     android:textStyle="bold" />
 
             </LinearLayout>

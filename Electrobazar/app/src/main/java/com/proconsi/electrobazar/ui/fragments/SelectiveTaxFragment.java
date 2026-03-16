@@ -21,7 +21,7 @@ import com.proconsi.electrobazar.models.ApplySelectiveTaxRateRequest;
 import com.proconsi.electrobazar.models.Category;
 import com.proconsi.electrobazar.models.Product;
 import com.proconsi.electrobazar.models.TaxRate;
-import com.proconsi.electrobazar.network.ApiClient;
+import com.proconsi.electrobazar.network.RetrofitClient;
 import com.proconsi.electrobazar.network.ApiService;
 import com.proconsi.electrobazar.ui.adapters.SelectableAdminAdapter;
 import java.util.ArrayList;
@@ -53,7 +53,7 @@ public class SelectiveTaxFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_selective_tax, container, false);
-        apiService = ApiClient.getApiService();
+        apiService = RetrofitClient.getInstance().getApi();
 
         autoTaxRate = view.findViewById(R.id.autoTaxRate);
         autoCategoryFilter = view.findViewById(R.id.autoCategoryFilter);

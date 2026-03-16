@@ -4,7 +4,7 @@
     android:id="@+id/swipeRefresh"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background">
+    android:background="?attr/android:windowBackground">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -21,7 +21,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Dashboard Principal"
-                android:textColor="@color/text_main"
+                android:textColor="?attr/android:textColorPrimary"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:layout_marginBottom="8dp" />
@@ -47,7 +47,7 @@
                         android:text="Turno"
                         android:checked="true"
                         app:chipBackgroundColor="@color/chip_state_list"
-                        android:textColor="@color/white" />
+                        android:textColor="?attr/android:windowBackground" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipToday"
@@ -56,7 +56,7 @@
                         android:layout_height="wrap_content"
                         android:text="Hoy"
                         app:chipBackgroundColor="@color/chip_state_list"
-                        android:textColor="@color/white" />
+                        android:textColor="?attr/android:windowBackground" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chip7Days"
@@ -65,7 +65,7 @@
                         android:layout_height="wrap_content"
                         android:text="7 Días"
                         app:chipBackgroundColor="@color/chip_state_list"
-                        android:textColor="@color/white" />
+                        android:textColor="?attr/android:windowBackground" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chip1Month"
@@ -74,7 +74,7 @@
                         android:layout_height="wrap_content"
                         android:text="1 Mes"
                         app:chipBackgroundColor="@color/chip_state_list"
-                        android:textColor="@color/white" />
+                        android:textColor="?attr/android:windowBackground" />
                         
                 </com.google.android.material.chip.ChipGroup>
             </HorizontalScrollView>
@@ -94,7 +94,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
-                    app:cardBackgroundColor="@color/secondary"
+                    app:cardBackgroundColor="?attr/colorSurface"
                     app:cardCornerRadius="12dp"
                     app:cardElevation="2dp">
                     <LinearLayout
@@ -112,7 +112,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="0.00 €"
-                            android:textColor="@color/text_main"
+                            android:textColor="?attr/android:textColorPrimary"
                             android:textSize="20sp"
                             android:textStyle="bold"
                             android:layout_marginTop="8dp" />
@@ -121,7 +121,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Ventas Hoy"
-                            android:textColor="@color/text_muted"
+                            android:textColor="?attr/android:textColorSecondary"
                             android:textSize="12sp" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -131,7 +131,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
-                    app:cardBackgroundColor="@color/secondary"
+                    app:cardBackgroundColor="?attr/colorSurface"
                     app:cardCornerRadius="12dp"
                     app:cardElevation="2dp">
                     <LinearLayout
@@ -143,13 +143,13 @@
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:src="@drawable/ic_cart"
-                            app:tint="@color/info" />
+                            app:tint="?attr/colorPrimary" />
                         <TextView
                             android:id="@+id/tvSalesCount"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="0"
-                            android:textColor="@color/text_main"
+                            android:textColor="?attr/android:textColorPrimary"
                             android:textSize="20sp"
                             android:textStyle="bold"
                             android:layout_marginTop="8dp" />
@@ -158,7 +158,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Pedidos Hoy"
-                            android:textColor="@color/text_muted"
+                            android:textColor="?attr/android:textColorSecondary"
                             android:textSize="12sp" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -168,7 +168,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
-                    app:cardBackgroundColor="@color/secondary"
+                    app:cardBackgroundColor="?attr/colorSurface"
                     app:cardCornerRadius="12dp"
                     app:cardElevation="2dp">
                     <LinearLayout
@@ -180,13 +180,13 @@
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:src="@drawable/ic_star"
-                            app:tint="@color/warning" />
+                            app:tint="?attr/colorPrimary" />
                         <TextView
                             android:id="@+id/tvTopProduct"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="—"
-                            android:textColor="@color/text_main"
+                            android:textColor="?attr/android:textColorPrimary"
                             android:textSize="16sp"
                             android:textStyle="bold"
                             android:ellipsize="end"
@@ -196,7 +196,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Producto Top"
-                            android:textColor="@color/text_muted"
+                            android:textColor="?attr/android:textColorSecondary"
                             android:textSize="12sp" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -206,7 +206,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
-                    app:cardBackgroundColor="@color/secondary"
+                    app:cardBackgroundColor="?attr/colorSurface"
                     app:cardCornerRadius="12dp"
                     app:cardElevation="2dp">
                     <LinearLayout
@@ -224,7 +224,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="0"
-                            android:textColor="@color/text_main"
+                            android:textColor="?attr/android:textColorPrimary"
                             android:textSize="20sp"
                             android:textStyle="bold"
                             android:layout_marginTop="8dp" />
@@ -232,7 +232,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Stock Bajo"
-                            android:textColor="@color/text_muted"
+                            android:textColor="?attr/android:textColorSecondary"
                             android:textSize="12sp" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -244,7 +244,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
                 android:layout_marginTop="16dp"
-                app:cardBackgroundColor="@color/secondary"
+                app:cardBackgroundColor="?attr/colorSurface"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="2dp">
                 <LinearLayout
@@ -257,7 +257,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Tendencia de Ventas (7 días)"
-                        android:textColor="@color/text_main"
+                        android:textColor="?attr/android:textColorPrimary"
                         android:textStyle="bold"
                         android:layout_marginBottom="8dp" />
                     <com.github.mikephil.charting.charts.LineChart
@@ -273,7 +273,7 @@
                 android:layout_height="300dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="32dp"
-                app:cardBackgroundColor="@color/secondary"
+                app:cardBackgroundColor="?attr/colorSurface"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="2dp">
                 <LinearLayout
@@ -285,7 +285,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Distribución por Categorías"
-                        android:textColor="@color/text_main"
+                        android:textColor="?attr/android:textColorPrimary"
                         android:textStyle="bold"
                         android:layout_marginBottom="8dp" />
                     <com.github.mikephil.charting.charts.PieChart

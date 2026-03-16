@@ -19,7 +19,7 @@ public class TariffsAdminRepository {
     private final ApiService apiService;
 
     public TariffsAdminRepository() {
-        this.apiService = RetrofitClient.getApiService();
+        this.apiService = RetrofitClient.getInstance().getApi();
     }
 
     public LiveData<List<Tariff>> getTariffs(boolean includeInactive) {

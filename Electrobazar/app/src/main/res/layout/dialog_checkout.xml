@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/secondary"
+    android:background="?attr/colorSurface"
     android:orientation="vertical"
     android:padding="20dp">
 
@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:text="Finalizar Venta"
-        android:textColor="@color/text_main"
+        android:textColor="?attr/android:textColorPrimary"
         android:textSize="20sp"
         android:textStyle="bold" />
 
@@ -21,7 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginBottom="16dp"
-        android:background="@color/border" />
+        android:background="?attr/colorOutline" />
 
     <!-- Customer Summary (Ticket vs Invoice) -->
     <FrameLayout
@@ -43,7 +43,7 @@
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:src="@drawable/ic_person"
-                app:tint="@color/accent" />
+                app:tint="?attr/colorPrimary" />
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -56,7 +56,7 @@
                     android:id="@+id/checkoutCustomerName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/black"
+                    android:textColor="?attr/android:textColorPrimary"
                     android:textStyle="bold"
                     android:textSize="14sp" />
 
@@ -64,7 +64,7 @@
                     android:id="@+id/checkoutCustomerTaxId"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/text_muted"
+                    android:textColor="?attr/android:textColorSecondary"
                     android:textSize="12sp" />
             </LinearLayout>
 
@@ -75,7 +75,7 @@
                 android:paddingHorizontal="8dp"
                 android:paddingVertical="4dp"
                 android:text="FACTURA"
-                android:textColor="@color/primary"
+                android:textColor="?attr/android:windowBackground"
                 android:textSize="10sp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -94,14 +94,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Ticket Estándar"
-                android:textColor="@color/black"
+                android:textColor="?attr/android:textColorPrimary"
                 android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Sin cliente asignado"
-                android:textColor="@color/text_muted"
+                android:textColor="?attr/android:textColorSecondary"
                 android:textSize="12sp" />
         </LinearLayout>
     </FrameLayout>
@@ -117,7 +117,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Total a Pagar:"
-            android:textColor="@color/text_muted"
+            android:textColor="?attr/android:textColorSecondary"
             android:textSize="18sp" />
 
         <TextView
@@ -125,7 +125,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0.00 €"
-            android:textColor="@color/accent"
+            android:textColor="?attr/colorPrimary"
             android:textSize="24sp"
             android:textStyle="bold" />
     </LinearLayout>
@@ -135,7 +135,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:text="Método de Pago"
-        android:textColor="@color/text_muted"
+        android:textColor="?attr/android:textColorSecondary"
         android:textSize="14sp" />
 
     <com.google.android.material.button.MaterialButtonToggleGroup
@@ -154,7 +154,7 @@
             android:layout_weight="1"
             android:text="Efectivo"
             android:textAllCaps="false"
-            android:textColor="@color/text_main"
+            android:textColor="?attr/android:textColorPrimary"
             app:icon="@drawable/ic_cash" />
 
         <com.google.android.material.button.MaterialButton
@@ -165,7 +165,7 @@
             android:layout_weight="1"
             android:text="Tarjeta"
             android:textAllCaps="false"
-            android:textColor="@color/text_main"
+            android:textColor="?attr/android:textColorPrimary"
             app:icon="@drawable/ic_card" />
     </com.google.android.material.button.MaterialButtonToggleGroup>
 
@@ -191,16 +191,16 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:hint="Cantidad Recibida"
-                app:hintTextColor="@color/accent"
+                app:hintTextColor="?attr/colorPrimary"
                 app:prefixText="€"
-                app:prefixTextColor="@color/text_muted">
+                app:prefixTextColor="?attr/android:textColorSecondary">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/receivedAmountInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="numberDecimal"
-                    android:textColor="@color/text_main" />
+                    android:textColor="?attr/android:textColorPrimary" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.button.MaterialButton
@@ -211,10 +211,10 @@
                 android:layout_marginStart="8dp"
                 android:paddingHorizontal="12dp"
                 android:text="Exacto"
-                android:textColor="@color/accent"
+                android:textColor="?attr/colorPrimary"
                 android:textStyle="bold"
                 app:icon="@drawable/ic_arrow_right"
-                app:iconTint="@color/accent" />
+                app:iconTint="?attr/colorPrimary" />
         </LinearLayout>
 
         <LinearLayout
@@ -228,7 +228,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Cambio:"
-                android:textColor="@color/text_muted" />
+                android:textColor="?attr/android:textColorSecondary" />
 
             <TextView
                 android:id="@+id/changeAmountText"
@@ -244,10 +244,10 @@
         android:id="@+id/btnConfirmCheckout"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:text="COBRAR"
+        android:textColor="?attr/android:windowBackground"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:backgroundTint="@color/accent"
+        app:backgroundTint="?attr/colorPrimary"
         app:cornerRadius="12dp" />
 
 </LinearLayout>

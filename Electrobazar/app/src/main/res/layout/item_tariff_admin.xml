@@ -6,10 +6,10 @@
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="12dp"
     android:layout_marginVertical="6dp"
-    app:cardBackgroundColor="@color/secondary"
+    app:cardBackgroundColor="?attr/colorSurface"
     app:cardCornerRadius="12dp"
     app:cardElevation="2dp"
-    app:strokeColor="@color/border"
+    app:strokeColor="?attr/colorOutline"
     app:strokeWidth="1dp">
 
     <LinearLayout
@@ -29,7 +29,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textColor="@color/text_main"
+                android:textColor="?attr/android:textColorPrimary"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 tools:text="VIP" />
@@ -41,7 +41,7 @@
                 android:background="@drawable/bg_badge_tariff"
                 android:paddingHorizontal="10dp"
                 android:paddingVertical="4dp"
-                android:textColor="@color/primary"
+                android:textColor="?attr/android:windowBackground"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 tools:text="20.00%" />
@@ -52,7 +52,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:textColor="@color/text_muted"
+            android:textColor="?attr/android:textColorSecondary"
             android:textSize="14sp"
             tools:text="Descripción de la tarifa VIP para clientes especiales" />
 
@@ -71,7 +71,7 @@
                 android:paddingHorizontal="8dp"
                 android:paddingVertical="2dp"
                 android:text="ACTIVA"
-                android:textColor="@color/white"
+                android:textColor="?attr/android:windowBackground"
                 android:textSize="10sp"
                 android:textStyle="bold" />
 
@@ -81,7 +81,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
                 android:layout_weight="1"
-                android:textColor="@color/text_muted"
+                android:textColor="?attr/android:textColorSecondary"
                 android:textSize="12sp"
                 tools:text="0 clientes asociados" />
         </LinearLayout>
@@ -90,7 +90,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginVertical="12dp"
-            android:background="@color/border" />
+            android:background="?attr/colorOutline" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -104,7 +104,7 @@
                 android:layout_height="40dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:src="@drawable/ic_search"
-                app:tint="@color/accent"
+                app:tint="?attr/colorPrimary"
                 android:contentDescription="Bajar PDF" />
 
             <ImageButton
@@ -114,7 +114,7 @@
                 android:layout_marginStart="8dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:src="@drawable/ic_close"
-                app:tint="@color/text_main" />
+                app:tint="?attr/android:textColorPrimary" />
 
             <ImageButton
                 android:id="@+id/btnEditTariff"
@@ -123,7 +123,7 @@
                 android:layout_marginStart="8dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:src="@drawable/ic_plus"
-                app:tint="@color/accent" />
+                app:tint="?attr/colorPrimary" />
         </LinearLayout>
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

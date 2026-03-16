@@ -25,7 +25,7 @@ import com.proconsi.electrobazar.models.Category;
 import com.proconsi.electrobazar.models.IpcPreviewItem;
 import com.proconsi.electrobazar.models.Product;
 import com.proconsi.electrobazar.models.ProductPriceResponse;
-import com.proconsi.electrobazar.network.ApiClient;
+import com.proconsi.electrobazar.network.RetrofitClient;
 import com.proconsi.electrobazar.network.ApiService;
 import com.proconsi.electrobazar.ui.adapters.SelectableAdminAdapter;
 import java.math.BigDecimal;
@@ -57,7 +57,7 @@ public class BulkPricesFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_bulk_prices_admin, container, false);
-        apiService = ApiClient.getApiService();
+        apiService = RetrofitClient.getInstance().getApi();
 
         tvCurrentIpc = view.findViewById(R.id.tvCurrentIpc);
         btnFetchIpc = view.findViewById(R.id.btnFetchIpc);

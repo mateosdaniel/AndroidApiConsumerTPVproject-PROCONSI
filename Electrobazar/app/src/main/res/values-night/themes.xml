@@ -1,7 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.Electrobazar" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
-    </style>
+    <!--
+        We control dark/light manually via ThemeManager (user preference),
+        NOT via the system night mode. This file intentionally left minimal
+        so the system night-mode qualifier does NOT override our manual theme.
+    -->
 </resources>

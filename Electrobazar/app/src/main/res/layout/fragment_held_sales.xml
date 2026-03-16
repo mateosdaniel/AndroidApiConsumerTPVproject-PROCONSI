@@ -4,7 +4,7 @@
     android:id="@+id/swipeRefresh"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background">
+    android:background="?attr/android:windowBackground">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Ventas en Espera"
-            android:textColor="@color/white"
+            android:textColor="?attr/android:textColorPrimary"
             android:textSize="24sp"
             android:textStyle="bold"
             android:layout_marginBottom="16dp" />
@@ -44,14 +44,14 @@
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:src="@android:drawable/ic_menu_recent_history"
-                    app:tint="@color/text_muted"
+                    app:tint="?attr/android:textColorSecondary"
                     android:alpha="0.5" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="No hay ventas en espera"
-                    android:textColor="@color/text_muted"
+                    android:textColor="?attr/android:textColorSecondary"
                     android:textSize="16sp"
                     android:layout_marginTop="16dp" />
             </LinearLayout>

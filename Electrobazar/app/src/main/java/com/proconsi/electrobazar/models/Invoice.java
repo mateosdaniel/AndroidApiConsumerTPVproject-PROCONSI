@@ -6,7 +6,6 @@ public class Invoice {
     private String serie;
     private int year;
     private int sequenceNumber;
-    private Sale sale;
     private String createdAt;
     private String status; // ACTIVE, RECTIFIED
     private Invoice rectifiedBy;
@@ -25,9 +24,6 @@ public class Invoice {
 
     public int getSequenceNumber() { return sequenceNumber; }
     public void setSequenceNumber(int sequenceNumber) { this.sequenceNumber = sequenceNumber; }
-
-    public Sale getSale() { return sale; }
-    public void setSale(Sale sale) { this.sale = sale; }
 
     public String getCreatedAt() { return createdAt; }
     public void setCreatedAt(String createdAt) { this.createdAt = createdAt; }

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background">
+    android:background="?attr/android:windowBackground">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,7 +13,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/primary"
+            android:background="?attr/colorSurface"
             android:orientation="vertical"
             android:padding="16dp">
 
@@ -21,7 +21,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tipos de IVA"
-                android:textColor="@color/text_main"
+                android:textColor="?attr/android:textColorPrimary"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -29,7 +29,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Configura los tipos de impuestos y recargos"
-                android:textColor="@color/text_muted"
+                android:textColor="?attr/android:textColorSecondary"
                 android:textSize="14sp" />
 
             <Button
@@ -39,8 +39,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:text="Aplicar IVA a todos los productos"
-                android:textColor="@color/accent"
-                app:strokeColor="@color/accent" />
+                android:textColor="?attr/colorPrimary"
+                app:strokeColor="?attr/colorPrimary" />
         </LinearLayout>
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -65,7 +65,7 @@
         android:layout_margin="16dp"
         android:contentDescription="Añadir tipo de IVA"
         android:src="@android:drawable/ic_input_add"
-        app:backgroundTint="@color/accent"
-        app:tint="@color/primary" />
+        app:backgroundTint="?attr/colorPrimary"
+        app:tint="?attr/android:windowBackground" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background">
+    android:background="?attr/android:windowBackground">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -21,7 +21,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Devolución de Venta"
-                android:textColor="@color/white"
+                android:textColor="?attr/android:textColorPrimary"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:layout_marginBottom="24dp" />
@@ -30,9 +30,9 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardBackgroundColor="@color/primary_variant"
+                app:cardBackgroundColor="?attr/colorSurface"
                 app:cardCornerRadius="12dp"
-                app:strokeColor="@color/border"
+                app:strokeColor="?attr/colorOutline"
                 app:strokeWidth="1dp"
                 android:layout_marginBottom="16dp">
 
@@ -48,15 +48,15 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:hint="ID o Número de Ticket"
-                        app:boxStrokeColor="@color/accent"
-                        app:hintTextColor="@color/accent">
+                        app:boxStrokeColor="?attr/colorPrimary"
+                        app:hintTextColor="?attr/colorPrimary">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/returnSearchInput"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="text"
-                            android:textColor="@color/white" />
+                            android:textColor="?attr/android:textColorPrimary" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.button.MaterialButton
@@ -65,8 +65,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:text="BUSCAR"
-                        android:backgroundTint="@color/accent"
-                        android:textColor="@color/black" />
+                        android:backgroundTint="?attr/colorPrimary"
+                        android:textColor="?attr/android:windowBackground" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -90,9 +90,9 @@
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:cardBackgroundColor="@color/primary_variant"
+                    app:cardBackgroundColor="?attr/colorSurface"
                     app:cardCornerRadius="12dp"
-                    app:strokeColor="@color/border"
+                    app:strokeColor="?attr/colorOutline"
                     app:strokeWidth="1dp"
                     android:layout_marginBottom="16dp">
 
@@ -107,7 +107,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Ticket #123 - 13/03/2026"
-                            android:textColor="@color/white"
+                            android:textColor="?attr/android:textColorPrimary"
                             android:textStyle="bold"
                             android:layout_marginBottom="4dp" />
 
@@ -116,14 +116,14 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Cliente: Sin cliente"
-                            android:textColor="@color/text_muted" />
+                            android:textColor="?attr/android:textColorSecondary" />
 
                         <TextView
                             android:id="@+id/saleTotalText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Total: 150.00€"
-                            android:textColor="@color/info"
+                            android:textColor="?attr/colorPrimary"
                             android:textStyle="bold"
                             android:layout_marginTop="8dp" />
 
@@ -136,11 +136,11 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:padding="8dp"
-                    android:background="@color/primary_variant"
+                    android:background="?attr/colorSurface"
                     android:layout_marginBottom="1dp">
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="3" android:text="Producto" android:textColor="@color/text_muted" android:textSize="12sp" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Vendido" android:textColor="@color/text_muted" android:textSize="12sp" android:gravity="center" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Devolver" android:textColor="@color/text_muted" android:textSize="12sp" android:gravity="center" />
+                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="3" android:text="Producto" android:textColor="?attr/android:textColorSecondary" android:textSize="12sp" />
+                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Vendido" android:textColor="?attr/android:textColorSecondary" android:textSize="12sp" android:gravity="center" />
+                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Devolver" android:textColor="?attr/android:textColorSecondary" android:textSize="12sp" android:gravity="center" />
                 </LinearLayout>
 
                 <!-- Lines List -->
@@ -155,9 +155,9 @@
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:cardBackgroundColor="@color/primary_variant"
+                    app:cardBackgroundColor="?attr/colorSurface"
                     app:cardCornerRadius="12dp"
-                    app:strokeColor="@color/border"
+                    app:strokeColor="?attr/colorOutline"
                     app:strokeWidth="1dp">
 
                     <LinearLayout
@@ -170,28 +170,28 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Método de Reembolso"
-                            android:textColor="@color/text_muted"
+                            android:textColor="?attr/android:textColorSecondary"
                             android:layout_marginBottom="8dp" />
 
                         <Spinner
                             android:id="@+id/refundMethodSpinner"
                             android:layout_width="match_parent"
                             android:layout_height="48dp"
-                            android:backgroundTint="@color/white"
+                            android:backgroundTint="?attr/android:textColorSecondary"
                             android:layout_marginBottom="16dp" />
 
                         <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Motivo de devolución"
-                            app:boxStrokeColor="@color/accent"
+                            app:boxStrokeColor="?attr/colorPrimary"
                             android:layout_marginBottom="20dp">
 
                             <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/returnReasonInput"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:textColor="@color/white" />
+                                android:textColor="?attr/android:textColorPrimary" />
                         </com.google.android.material.textfield.TextInputLayout>
 
                         <TextView
@@ -199,7 +199,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Total a devolver: 0.00€"
-                            android:textColor="@color/accent"
+                            android:textColor="?attr/colorPrimary"
                             android:textSize="20sp"
                             android:textStyle="bold"
                             android:gravity="center"
@@ -210,8 +210,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="56dp"
                             android:text="PROCESAR DEVOLUCIÓN"
-                            android:backgroundTint="@color/accent"
-                            android:textColor="@color/black"
+                            android:backgroundTint="?attr/colorPrimary"
+                            android:textColor="?attr/android:windowBackground"
                             app:cornerRadius="8dp" />
 
                     </LinearLayout>

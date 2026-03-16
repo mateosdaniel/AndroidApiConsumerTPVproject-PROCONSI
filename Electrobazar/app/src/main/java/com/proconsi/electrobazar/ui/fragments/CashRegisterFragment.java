@@ -58,6 +58,7 @@ public class CashRegisterFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentCashRegisterBinding.inflate(inflater, container, false);
+        com.proconsi.electrobazar.utils.ThemeManager.applyFontToView(binding.getRoot(), requireContext());
         return binding.getRoot();
     }
 

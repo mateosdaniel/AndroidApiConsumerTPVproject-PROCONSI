@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/primary">
+    android:background="?attr/colorSurface">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
             android:text="Trabajador"
-            android:textColor="@color/text_main"
+            android:textColor="?attr/android:textColorPrimary"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -25,7 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nombre de usuario *"
-            android:textColor="@color/text_muted"
+            android:textColor="?attr/android:textColorSecondary"
             android:textSize="12sp"
             android:textStyle="bold" />
 
@@ -39,15 +39,15 @@
             android:hint="Ej: juan.perez"
             android:inputType="text"
             android:paddingHorizontal="16dp"
-            android:textColor="@color/text_main"
-            android:textColorHint="@color/text_muted" />
+            android:textColor="?attr/android:textColorPrimary"
+            android:textColorHint="?attr/android:textColorSecondary" />
 
         <TextView
             android:id="@+id/workerPasswordLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Contraseña *"
-            android:textColor="@color/text_muted"
+            android:textColor="?attr/android:textColorSecondary"
             android:textSize="12sp"
             android:textStyle="bold" />
 
@@ -61,14 +61,14 @@
             android:hint="••••••"
             android:inputType="textPassword"
             android:paddingHorizontal="16dp"
-            android:textColor="@color/text_main"
-            android:textColorHint="@color/text_muted" />
+            android:textColor="?attr/android:textColorPrimary"
+            android:textColorHint="?attr/android:textColorSecondary" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Rol *"
-            android:textColor="@color/text_muted"
+            android:textColor="?attr/android:textColorSecondary"
             android:textSize="12sp"
             android:textStyle="bold" />
 
@@ -88,7 +88,7 @@
             android:layout_marginBottom="24dp"
             android:checked="true"
             android:text="Trabajador Activo"
-            android:textColor="@color/text_main" />
+            android:textColor="?attr/android:textColorPrimary" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -102,16 +102,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="CANCELAR"
-                android:textColor="@color/text_muted" />
+                android:textColor="?attr/android:textColorSecondary" />
 
             <Button
                 android:id="@+id/saveWorkerBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:backgroundTint="@color/accent"
+                android:backgroundTint="?attr/colorPrimary"
                 android:text="GUARDAR"
-                android:textColor="@color/white" />
+                android:textColor="?attr/android:windowBackground" />
         </LinearLayout>
 
     </LinearLayout>

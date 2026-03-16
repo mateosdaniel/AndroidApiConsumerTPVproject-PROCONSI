@@ -5,7 +5,7 @@
     android:id="@+id/adminDrawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background">
+    android:background="?attr/android:windowBackground">
 
     <!-- Content Area -->
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,7 +17,7 @@
             android:id="@+id/adminToolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/primary_variant"
+            android:background="?attr/colorPrimary"
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageButton
@@ -26,14 +26,14 @@
                 android:layout_height="48dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:src="@drawable/ic_menu"
-                app:tint="@color/text_main" />
+                app:tint="?attr/colorOnPrimary" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:text="Administración"
-                android:textColor="@color/text_main"
+                android:textColor="?attr/colorOnPrimary"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -67,9 +67,9 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="@color/secondary"
-        app:itemIconTint="@color/text_muted"
-        app:itemTextColor="@color/text_main"
+        android:background="?attr/colorSurface"
+        app:itemIconTint="?attr/android:textColorSecondary"
+        app:itemTextColor="?attr/android:textColorPrimary"
         app:menu="@menu/admin_sidebar_menu" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

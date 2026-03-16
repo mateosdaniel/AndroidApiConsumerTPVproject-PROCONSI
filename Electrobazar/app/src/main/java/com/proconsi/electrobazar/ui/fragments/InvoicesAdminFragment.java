@@ -1,7 +1,10 @@
 package com.proconsi.electrobazar.ui.fragments;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -12,6 +15,16 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.core.content.FileProvider;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+
+import okhttp3.ResponseBody;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -205,9 +218,61 @@ public class InvoicesAdminFragment extends Fragment implements InvoicesAdminAdap
 
     @Override
     public void onDownloadInvoice(Sale sale) {
-        // Implement PDF download or view
-        Toast.makeText(getContext(), "Descargando PDF de la venta #" + sale.getId(), Toast.LENGTH_SHORT).show();
-        // Here we could use a DownloadHelper or just open the browser URL
+        boolean hasInvoice = sale.getInvoice() != null;
+        String filename = hasInvoice
+                ? "Factura_" + sale.getInvoice().getInvoiceNumber() + ".pdf"
+                : "Ticket_" + sale.getId() + ".pdf";
+
+        repository.downloadInvoice(sale.getId(), new InvoicesAdminRepository.RepositoryCallback<ResponseBody>() {
+            @Override
+            public void onSuccess(ResponseBody body) {
+                saveAndOpenFile(body, filename);
+            }
+
+            @Override
+            public void onError(String error) {
+                Toast.makeText(getContext(), "Error al descargar PDF: " + error, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void saveAndOpenFile(ResponseBody body, String filename) {
+        try {
+            File file = new File(requireContext().getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), filename);
+            InputStream inputStream = null;
+            OutputStream outputStream = null;
+
+            try {
+                byte[] fileReader = new byte[4096];
+                inputStream = body.byteStream();
+                outputStream = new FileOutputStream(file);
+
+                while (true) {
+                    int read = inputStream.read(fileReader);
+                    if (read == -1) break;
+                    outputStream.write(fileReader, 0, read);
+                }
+                outputStream.flush();
+
+                // Open File
+                Uri fileUri = FileProvider.getUriForFile(
+                        requireContext(),
+                        requireContext().getPackageName() + ".provider",
+                        file);
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setDataAndType(fileUri, "application/pdf");
+                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                startActivity(Intent.createChooser(intent, "Abrir Factura / Ticket"));
+
+            } catch (IOException e) {
+                Toast.makeText(requireContext(), "Error al guardar archivo", Toast.LENGTH_SHORT).show();
+            } finally {
+                if (inputStream != null) inputStream.close();
+                if (outputStream != null) outputStream.close();
+            }
+        } catch (IOException e) {
+            Log.e(TAG, "saveAndOpenFile: " + e.getMessage(), e);
+        }
     }
 
     @Override

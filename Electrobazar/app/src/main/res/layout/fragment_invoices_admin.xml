@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primary"
+    android:background="?attr/android:windowBackground"
     android:orientation="vertical"
     android:padding="16dp">
 
@@ -25,8 +25,8 @@
             android:drawablePadding="12dp"
             android:hint="Nº Factura, Cliente o NIF..."
             android:paddingHorizontal="16dp"
-            android:textColor="@color/text_main"
-            android:textColorHint="@color/text_muted"
+            android:textColor="?attr/android:textColorPrimary"
+            android:textColorHint="?attr/android:textColorSecondary"
             android:inputType="text" />
 
         <HorizontalScrollView
@@ -103,7 +103,7 @@
                 android:layout_height="40dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:src="@drawable/ic_calendar"
-                app:tint="@color/accent" />
+                app:tint="?attr/colorPrimary" />
                 
             <TextView
                 android:id="@+id/selectedDateText"
@@ -112,7 +112,7 @@
                 android:layout_weight="1"
                 android:layout_marginStart="8dp"
                 android:text="Cualquier fecha"
-                android:textColor="@color/text_muted"
+                android:textColor="?attr/android:textColorSecondary"
                 android:textSize="14sp" />
                 
             <ImageButton
@@ -121,7 +121,7 @@
                 android:layout_height="40dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:src="@drawable/ic_refresh"
-                app:tint="@color/text_muted" />
+                app:tint="?attr/android:textColorSecondary" />
         </LinearLayout>
     </LinearLayout>
 
@@ -132,7 +132,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:text="Cargando ventas..."
-        android:textColor="@color/text_muted"
+        android:textColor="?attr/android:textColorSecondary"
         android:textSize="12sp" />
 
     <!-- List Section -->

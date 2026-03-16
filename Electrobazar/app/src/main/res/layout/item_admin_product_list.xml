@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="12dp"
-    app:cardBackgroundColor="@color/secondary"
+    app:cardBackgroundColor="?attr/colorSurface"
     app:cardCornerRadius="14dp"
     app:cardElevation="0dp">
 
@@ -25,7 +25,7 @@
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:scaleType="centerCrop"
-                android:background="@color/primary" />
+                android:background="?attr/colorPrimary" />
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -39,7 +39,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Nombre"
-                    android:textColor="@color/text_main"
+                    android:textColor="?attr/android:textColorPrimary"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -50,7 +50,7 @@
                     android:maxLines="2"
                     android:ellipsize="end"
                     android:text="Descripción..."
-                    android:textColor="@color/text_muted"
+                    android:textColor="?attr/android:textColorSecondary"
                     android:textSize="12sp" />
 
                 <LinearLayout
@@ -64,7 +64,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Categoría"
-                        android:textColor="@color/text_muted"
+                        android:textColor="?attr/android:textColorSecondary"
                         android:textSize="11sp"
                         android:background="@drawable/bg_category_badge"
                         android:paddingHorizontal="6dp" />
@@ -95,7 +95,7 @@
                     android:paddingHorizontal="8dp"
                     android:paddingVertical="2dp"
                     android:text="Stock"
-                    android:textColor="@color/white"
+                    android:textColor="?attr/android:windowBackground"
                     android:textSize="12sp"
                     android:textStyle="bold" />
 
@@ -105,7 +105,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
                     android:text="0.00 €"
-                    android:textColor="@color/accent"
+                    android:textColor="?attr/colorPrimary"
                     android:textSize="18sp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -115,7 +115,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginVertical="12dp"
-            android:background="@color/border"
+            android:background="?attr/colorOutline"
             android:alpha="0.3" />
 
         <LinearLayout
@@ -130,9 +130,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Editar"
-                android:textColor="@color/info"
+                android:textColor="?attr/colorPrimary"
                 app:icon="@drawable/ic_settings"
-                app:iconTint="@color/info" />
+                app:iconTint="?attr/colorPrimary" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnDelete"

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background">
+    android:background="?attr/android:windowBackground">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -37,7 +37,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Apertura de Caja"
-                    android:textColor="@color/white"
+                    android:textColor="?attr/android:textColorPrimary"
                     android:textSize="24sp"
                     android:textStyle="bold"
                     android:layout_marginBottom="24dp" />
@@ -45,9 +45,9 @@
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="500dp"
                     android:layout_height="wrap_content"
-                    app:cardBackgroundColor="@color/primary_variant"
+                    app:cardBackgroundColor="?attr/colorSurface"
                     app:cardCornerRadius="12dp"
-                    app:strokeColor="@color/border"
+                    app:strokeColor="?attr/colorOutline"
                     app:strokeWidth="1dp">
 
                     <LinearLayout
@@ -60,14 +60,14 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Saldo Inicial"
-                            android:textColor="@color/text_muted"
+                            android:textColor="?attr/android:textColorSecondary"
                             android:textSize="14sp"
                             android:layout_marginBottom="8dp" />
 
                         <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            app:boxStrokeColor="@color/accent"
+                            app:boxStrokeColor="?attr/colorPrimary"
                             app:hintEnabled="false"
                             android:layout_marginBottom="20dp">
 
@@ -77,7 +77,7 @@
                                 android:layout_height="wrap_content"
                                 android:hint="0.00"
                                 android:inputType="numberDecimal"
-                                android:textColor="@color/white"
+                                android:textColor="?attr/android:textColorPrimary"
                                 android:background="@android:color/transparent" />
 
                         </com.google.android.material.textfield.TextInputLayout>
@@ -96,8 +96,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="56dp"
                             android:text="ABRIR CAJA"
-                            android:backgroundTint="@color/accent"
-                            android:textColor="@color/black"
+                            android:backgroundTint="?attr/colorPrimary"
+                            android:textColor="?attr/android:windowBackground"
                             app:cornerRadius="8sp" />
 
                     </LinearLayout>
@@ -124,7 +124,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Panel de Control de Caja"
-                        android:textColor="@color/white"
+                        android:textColor="?attr/android:textColorPrimary"
                         android:textSize="20sp"
                         android:textStyle="bold"
                         android:layout_marginBottom="12dp" />
@@ -132,9 +132,9 @@
                     <com.google.android.material.card.MaterialCardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:cardBackgroundColor="@color/primary_variant"
+                        app:cardBackgroundColor="?attr/colorSurface"
                         app:cardCornerRadius="12dp"
-                        app:strokeColor="@color/border"
+                        app:strokeColor="?attr/colorOutline"
                         app:strokeWidth="1dp"
                         android:layout_marginBottom="12dp">
                         <LinearLayout
@@ -142,8 +142,8 @@
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
                             android:padding="12dp">
-                            <TextView android:id="@+id/shiftWorkerText" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Trabajador: Admin" android:textColor="@color/text_main" />
-                            <TextView android:id="@+id/shiftOpeningTimeText" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Apertura: 09:00" android:textColor="@color/text_muted" android:textSize="12sp" />
+                            <TextView android:id="@+id/shiftWorkerText" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Trabajador: Admin" android:textColor="?attr/android:textColorPrimary" />
+                            <TextView android:id="@+id/shiftOpeningTimeText" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Apertura: 09:00" android:textColor="?attr/android:textColorSecondary" android:textSize="12sp" />
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
 
@@ -157,10 +157,10 @@
                             android:layout_height="wrap_content"
                             android:layout_columnWeight="1"
                             android:layout_margin="4dp"
-                            app:cardBackgroundColor="@color/primary_variant"
+                            app:cardBackgroundColor="?attr/colorSurface"
                             app:cardCornerRadius="8dp">
                             <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="10dp">
-                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Ventas Efectivo" android:textColor="@color/text_muted" android:textSize="11sp" />
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Ventas Efectivo" android:textColor="?attr/android:textColorSecondary" android:textSize="11sp" />
                                 <TextView android:id="@+id/cashSalesText" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0.00€" android:textColor="@color/success" android:textSize="16sp" android:textStyle="bold" />
                             </LinearLayout>
                         </com.google.android.material.card.MaterialCardView>
@@ -169,10 +169,10 @@
                             android:layout_height="wrap_content"
                             android:layout_columnWeight="1"
                             android:layout_margin="4dp"
-                            app:cardBackgroundColor="@color/primary_variant"
+                            app:cardBackgroundColor="?attr/colorSurface"
                             app:cardCornerRadius="8dp">
                             <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="10dp">
-                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Ventas Tarjeta" android:textColor="@color/text_muted" android:textSize="11sp" />
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Ventas Tarjeta" android:textColor="?attr/android:textColorSecondary" android:textSize="11sp" />
                                 <TextView android:id="@+id/cardSalesText" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0.00€" android:textColor="@color/info" android:textSize="16sp" android:textStyle="bold" />
                             </LinearLayout>
                         </com.google.android.material.card.MaterialCardView>
@@ -181,10 +181,10 @@
                             android:layout_height="wrap_content"
                             android:layout_columnWeight="1"
                             android:layout_margin="4dp"
-                            app:cardBackgroundColor="@color/primary_variant"
+                            app:cardBackgroundColor="?attr/colorSurface"
                             app:cardCornerRadius="8dp">
                             <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="10dp">
-                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Retiradas" android:textColor="@color/text_muted" android:textSize="11sp" />
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Retiradas" android:textColor="?attr/android:textColorSecondary" android:textSize="11sp" />
                                 <TextView android:id="@+id/withdrawalsText" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0.00€" android:textColor="@color/danger" android:textSize="16sp" android:textStyle="bold" />
                             </LinearLayout>
                         </com.google.android.material.card.MaterialCardView>
@@ -193,23 +193,23 @@
                             android:layout_height="wrap_content"
                             android:layout_columnWeight="1"
                             android:layout_margin="4dp"
-                            app:cardBackgroundColor="@color/primary_variant"
+                            app:cardBackgroundColor="?attr/colorSurface"
                             app:cardCornerRadius="8dp">
                             <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="10dp">
-                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Saldo Esperado" android:textColor="@color/white" android:textSize="11sp" />
-                                <TextView android:id="@+id/expectedBalanceText" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0.00€" android:textColor="@color/accent" android:textSize="16sp" android:textStyle="bold" />
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Saldo Esperado" android:textColor="?attr/android:textColorPrimary" android:textSize="11sp" />
+                                <TextView android:id="@+id/expectedBalanceText" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0.00€" android:textColor="?attr/colorPrimary" android:textSize="16sp" android:textStyle="bold" />
                             </LinearLayout>
                         </com.google.android.material.card.MaterialCardView>
                     </GridLayout>
 
-                    <com.google.android.material.button.MaterialButton
+                        <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnGotoClose"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         android:text="CERRAR SESIÓN DE CAJA"
-                        android:backgroundTint="@color/danger"
-                        android:textColor="@color/white" />
+                        android:backgroundTint="?attr/colorError"
+                        android:textColor="?attr/android:windowBackground" />
                 </LinearLayout>
 
                 <!-- Right Column: Movements & Recent -->
@@ -231,7 +231,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="Movimientos Recientes"
-                            android:textColor="@color/text_muted"
+                            android:textColor="?attr/android:textColorSecondary"
                             android:textSize="14sp" />
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/btnNewMovement"
@@ -239,7 +239,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="+ MOVIMIENTO"
-                            android:textColor="@color/accent" />
+                            android:textColor="?attr/colorPrimary" />
                     </LinearLayout>
 
                     <androidx.recyclerview.widget.RecyclerView
@@ -265,7 +265,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Nuevo Movimiento"
-                    android:textColor="@color/white"
+                    android:textColor="?attr/android:textColorPrimary"
                     android:textSize="24sp"
                     android:textStyle="bold"
                     android:layout_marginBottom="24dp" />
@@ -273,9 +273,9 @@
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="500dp"
                     android:layout_height="wrap_content"
-                    app:cardBackgroundColor="@color/primary_variant"
+                    app:cardBackgroundColor="?attr/colorSurface"
                     app:cardCornerRadius="12dp"
-                    app:strokeColor="@color/border"
+                    app:strokeColor="?attr/colorOutline"
                     app:strokeWidth="1dp">
 
                     <LinearLayout
@@ -299,7 +299,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:text="RETIRADA"
-                                app:strokeColor="@color/border" />
+                                app:strokeColor="?attr/colorOutline" />
                             <com.google.android.material.button.MaterialButton
                                 android:id="@+id/btnEntry"
                                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
@@ -307,34 +307,34 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:text="ENTRADA"
-                                app:strokeColor="@color/border" />
+                                app:strokeColor="?attr/colorOutline" />
                         </com.google.android.material.button.MaterialButtonToggleGroup>
 
                         <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Importe"
-                            app:boxStrokeColor="@color/accent"
+                            app:boxStrokeColor="?attr/colorPrimary"
                             android:layout_marginBottom="16dp">
                             <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/movementAmountInput"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:inputType="numberDecimal"
-                                android:textColor="@color/white" />
+                                android:textColor="?attr/android:textColorPrimary" />
                         </com.google.android.material.textfield.TextInputLayout>
 
                         <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Concepto / Motivo"
-                            app:boxStrokeColor="@color/accent"
+                            app:boxStrokeColor="?attr/colorPrimary"
                             android:layout_marginBottom="24dp">
                             <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/movementReasonInput"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:textColor="@color/white" />
+                                android:textColor="?attr/android:textColorPrimary" />
                         </com.google.android.material.textfield.TextInputLayout>
 
                         <com.google.android.material.button.MaterialButton
@@ -342,8 +342,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="56dp"
                             android:text="CONFIRMAR MOVIMIENTO"
-                            android:backgroundTint="@color/accent"
-                            android:textColor="@color/black" />
+                            android:backgroundTint="?attr/colorPrimary"
+                            android:textColor="?attr/android:windowBackground" />
 
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/btnCancelMovement"
@@ -351,7 +351,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="VOLVER"
-                            android:textColor="@color/text_muted"
+                            android:textColor="?attr/android:textColorSecondary"
                             android:layout_marginTop="8dp" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
@@ -370,7 +370,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Cierre de Caja"
-                    android:textColor="@color/white"
+                    android:textColor="?attr/android:textColorPrimary"
                     android:textSize="24sp"
                     android:textStyle="bold"
                     android:layout_marginBottom="24dp" />
@@ -378,9 +378,9 @@
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="550dp"
                     android:layout_height="wrap_content"
-                    app:cardBackgroundColor="@color/primary_variant"
+                    app:cardBackgroundColor="?attr/colorSurface"
                     app:cardCornerRadius="12dp"
-                    app:strokeColor="@color/border"
+                    app:strokeColor="?attr/colorOutline"
                     app:strokeWidth="1dp">
 
                     <LinearLayout
@@ -394,7 +394,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Efectivo Teórico: 0.00€"
-                            android:textColor="@color/white"
+                            android:textColor="?attr/android:textColorPrimary"
                             android:textSize="18sp"
                             android:layout_marginBottom="24dp" />
 
@@ -402,14 +402,14 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Efectivo Real en Caja"
-                            app:boxStrokeColor="@color/accent"
+                            app:boxStrokeColor="?attr/colorPrimary"
                             android:layout_marginBottom="8dp">
                             <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/closeRealAmountInput"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:inputType="numberDecimal"
-                                android:textColor="@color/white" />
+                                android:textColor="?attr/android:textColorPrimary" />
                         </com.google.android.material.textfield.TextInputLayout>
 
                         <TextView
@@ -417,7 +417,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Diferencia: 0.00€"
-                            android:textColor="@color/text_muted"
+                            android:textColor="?attr/android:textColorSecondary"
                             android:layout_marginBottom="24dp" />
 
                         <com.google.android.material.switchmaterial.SwitchMaterial
@@ -425,7 +425,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Retener efectivo para siguiente turno"
-                            android:textColor="@color/text_main"
+                            android:textColor="?attr/android:textColorPrimary"
                             android:layout_marginBottom="16dp" />
 
                         <com.google.android.material.textfield.TextInputLayout
@@ -433,7 +433,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Cantidad a retener"
-                            app:boxStrokeColor="@color/accent"
+                            app:boxStrokeColor="?attr/colorPrimary"
                             android:layout_marginBottom="16dp"
                             android:visibility="gone">
                             <com.google.android.material.textfield.TextInputEditText
@@ -441,20 +441,20 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:inputType="numberDecimal"
-                                android:textColor="@color/white" />
+                                android:textColor="?attr/android:textColorPrimary" />
                         </com.google.android.material.textfield.TextInputLayout>
 
                         <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Notas de cierre"
-                            app:boxStrokeColor="@color/accent"
+                            app:boxStrokeColor="?attr/colorPrimary"
                             android:layout_marginBottom="24dp">
                             <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/closeNotesInput"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:textColor="@color/white" />
+                                android:textColor="?attr/android:textColorPrimary" />
                         </com.google.android.material.textfield.TextInputLayout>
 
                         <com.google.android.material.button.MaterialButton
@@ -462,8 +462,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="56dp"
                             android:text="CONFIRMAR CIERRE"
-                            android:backgroundTint="@color/danger"
-                            android:textColor="@color/white" />
+                            android:backgroundTint="?attr/colorError"
+                            android:textColor="?attr/android:windowBackground" />
 
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/btnCancelClose"
@@ -471,7 +471,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="VOLVER"
-                            android:textColor="@color/text_muted"
+                            android:textColor="?attr/android:textColorSecondary"
                             android:layout_marginTop="8dp" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>

@@ -25,7 +25,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Nombre del Rol"
-                android:textColor="@color/text_main"
+                android:textColor="?attr/android:textColorPrimary"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -34,7 +34,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Descripción del rol..."
-                android:textColor="@color/text_muted"
+            android:textColor="?attr/android:textColorSecondary"
                 android:textSize="13sp" />
         </LinearLayout>
 
@@ -49,7 +49,7 @@
                 android:layout_height="40dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:src="@drawable/ic_edit"
-                app:tint="@color/text_muted" />
+                app:tint="?attr/android:textColorSecondary" />
 
             <ImageButton
                 android:id="@+id/deleteRoleBtn"
@@ -75,17 +75,17 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginVertical="12dp"
-        android:background="@color/divider" />
+        android:background="?attr/colorOutline" />
 
     <TextView
         android:id="@+id/roleWorkersCountText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="0 trabajadores asignados"
-        android:textColor="@color/text_muted"
+        android:textColor="?attr/android:textColorSecondary"
         android:textSize="12sp"
         android:drawablePadding="6dp"
         app:drawableStartCompat="@drawable/ic_person"
-        app:drawableTint="@color/text_muted" />
+        app:drawableTint="?attr/android:textColorSecondary" />
 
 </LinearLayout>

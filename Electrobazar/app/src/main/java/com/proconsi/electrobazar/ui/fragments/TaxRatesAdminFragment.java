@@ -19,8 +19,9 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.proconsi.electrobazar.R;
+import com.proconsi.electrobazar.ui.adapters.TaxRatesAdapter;
 import com.proconsi.electrobazar.models.TaxRate;
-import com.proconsi.electrobazar.network.ApiClient;
+import com.proconsi.electrobazar.network.RetrofitClient;
 import com.proconsi.electrobazar.network.ApiService;
 import java.math.BigDecimal;
 import java.util.Calendar;
@@ -42,7 +43,8 @@ public class TaxRatesAdminFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_tax_rates_admin, container, false);
-        apiService = ApiClient.getApiService();
+        com.proconsi.electrobazar.utils.ThemeManager.applyFontToView(view, requireContext());
+        apiService = RetrofitClient.getInstance().getApi();
         
         rvTaxRates = view.findViewById(R.id.rvTaxRates);
         swipeRefresh = view.findViewById(R.id.swipeRefresh);

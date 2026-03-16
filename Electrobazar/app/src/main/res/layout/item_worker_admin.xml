@@ -25,7 +25,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Username"
-                android:textColor="@color/text_main"
+                android:textColor="?attr/android:textColorPrimary"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -44,7 +44,7 @@
                     android:paddingHorizontal="8dp"
                     android:paddingVertical="2dp"
                     android:text="ADMIN"
-                    android:textColor="#22d3ee"
+                    android:textColor="?attr/colorPrimary"
                     android:textSize="11sp"
                     android:textStyle="bold" />
 
@@ -57,7 +57,7 @@
                     android:paddingHorizontal="8dp"
                     android:paddingVertical="2dp"
                     android:text="ACTIVO"
-                    android:textColor="@color/white"
+                    android:textColor="?attr/android:windowBackground"
                     android:textSize="11sp"
                     android:textStyle="bold" />
 
@@ -75,7 +75,7 @@
                 android:layout_height="40dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:src="@drawable/ic_edit"
-                app:tint="@color/text_muted" />
+                app:tint="?attr/android:textColorSecondary" />
 
             <ImageButton
                 android:id="@+id/deleteWorkerBtn"
@@ -84,7 +84,7 @@
                 android:layout_marginStart="8dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:src="@drawable/ic_delete"
-                app:tint="@color/danger" />
+                app:tint="?attr/colorError" />
         </LinearLayout>
     </LinearLayout>
 
@@ -94,7 +94,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Última actividad: Hace 5 min"
-        android:textColor="@color/text_muted"
+        android:textColor="?attr/android:textColorSecondary"
         android:textSize="12sp"
         android:visibility="gone" />
 

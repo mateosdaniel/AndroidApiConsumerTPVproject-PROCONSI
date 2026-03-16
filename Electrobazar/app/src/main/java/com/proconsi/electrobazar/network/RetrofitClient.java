@@ -2,6 +2,8 @@ package com.proconsi.electrobazar.network;
 
 import android.content.Context;
 import com.proconsi.electrobazar.utils.SessionManager;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;

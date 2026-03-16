@@ -41,8 +41,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        com.proconsi.electrobazar.utils.ThemeManager.applyTheme(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        com.proconsi.electrobazar.utils.ThemeManager.applyColors(this);
+        com.proconsi.electrobazar.utils.ThemeManager.applyFontToView(getWindow().getDecorView(), this);
 
         sessionManager = new SessionManager(this);
         saleViewModel = new ViewModelProvider(this).get(SaleViewModel.class);
@@ -208,7 +211,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             logout();
             return true;
         } else if (id == R.id.nav_preferences || id == R.id.menu_preferences) {
-            Toast.makeText(this, "Preferencias", Toast.LENGTH_SHORT).show();
+            loadFragment(new com.proconsi.electrobazar.ui.fragments.PreferencesFragment(), "PREFERENCES_FRAGMENT");
             return true;
         } else if (id == R.id.nav_returns || id == R.id.menu_returns) {
             loadFragment(new ReturnsFragment(), "RETURNS_FRAGMENT");
@@ -224,6 +227,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void loadFragment(Fragment fragment, String tag) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment_container, fragment, tag);
+        transaction.addToBackStack(null);
         transaction.commit();
     }
 
@@ -238,11 +242,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (drawerLayout != null && drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
         } else {
-            Fragment currentFragment = getSupportFragmentManager().findFragmentByTag("ADMIN_FRAGMENT");
-            if (currentFragment instanceof AdminFragment && ((AdminFragment) currentFragment).onBackPressed()) {
-                return;
+            Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+            if (currentFragment instanceof SaleFragment) {
+                super.onBackPressed();
+            } else {
+                // Ensure AdminFragment internal navigation still works if applicable
+                Fragment adminFragment = getSupportFragmentManager().findFragmentByTag("ADMIN_FRAGMENT");
+                if (adminFragment instanceof AdminFragment && ((AdminFragment) adminFragment).onBackPressed()) {
+                    return;
+                }
+                
+                if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+                    getSupportFragmentManager().popBackStack();
+                } else {
+                    super.onBackPressed();
+                }
             }
-            super.onBackPressed();
         }
     }
 }

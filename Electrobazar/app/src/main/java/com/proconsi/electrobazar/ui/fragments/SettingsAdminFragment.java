@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 
 import com.proconsi.electrobazar.databinding.FragmentSettingsAdminBinding;
 import com.proconsi.electrobazar.models.CompanySettings;
-import com.proconsi.electrobazar.network.ApiClient;
+import com.proconsi.electrobazar.network.RetrofitClient;
 import com.proconsi.electrobazar.network.ApiService;
 
 import java.util.Map;
@@ -31,7 +31,7 @@ public class SettingsAdminFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentSettingsAdminBinding.inflate(inflater, container, false);
-        apiService = ApiClient.getClient().create(ApiService.class);
+        apiService = RetrofitClient.getInstance().getApi();
 
         loadSettings();
 

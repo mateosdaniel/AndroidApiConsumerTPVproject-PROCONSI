@@ -4,7 +4,7 @@
     android:id="@+id/swipeRefresh"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background">
+    android:background="?attr/android:windowBackground">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,7 +23,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Cierres de Caja"
-                android:textColor="@color/white"
+                android:textColor="?attr/android:textColorPrimary"
                 android:textSize="22sp"
                 android:textStyle="bold"
                 android:layout_marginBottom="24dp" />
@@ -31,9 +31,9 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardBackgroundColor="@color/primary_variant"
+                app:cardBackgroundColor="?attr/colorSurface"
                 app:cardCornerRadius="12dp"
-                app:strokeColor="@color/border"
+                app:strokeColor="?attr/colorOutline"
                 app:strokeWidth="1dp">
 
                 <LinearLayout
@@ -46,7 +46,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Filtros"
-                        android:textColor="@color/text_main"
+                        android:textColor="?attr/android:textColorPrimary"
                         android:textStyle="bold"
                         android:layout_marginBottom="16dp" />
 
@@ -55,13 +55,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Trabajador"
-                        app:boxStrokeColor="@color/accent"
+                        app:boxStrokeColor="?attr/colorPrimary"
                         android:layout_marginBottom="12dp">
                         <AutoCompleteTextView
                             android:id="@+id/workerFilter"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/white"
+                            android:textColor="?attr/android:textColorPrimary"
                             android:inputType="none" />
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -72,7 +72,7 @@
                         android:layout_height="wrap_content"
                         android:text="Seleccionar Fechas"
                         app:icon="@android:drawable/ic_menu_today"
-                        app:strokeColor="@color/border" />
+                        app:strokeColor="?attr/colorOutline" />
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -95,7 +95,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="No se encontraron cierres"
-                android:textColor="@color/text_muted"
+                android:textColor="?attr/android:textColorSecondary"
                 android:visibility="gone" />
 
         </FrameLayout>

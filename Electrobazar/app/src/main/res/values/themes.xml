@@ -1,19 +1,113 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
+
+    <!-- ══════════════════════════════════════════════
+         BASE — ThemeManager applies dynamic colors at runtime.
+         These XML attrs are used by Material widgets that pick up
+         colorPrimary, colorSurface, colorOnSurface, etc.
+    ════════════════════════════════════════════════ -->
     <style name="Base.Theme.Electrobazar" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="colorPrimary">@color/primary</item>
-        <item name="colorSecondary">@color/secondary</item>
-        <item name="android:windowBackground">@color/background</item>
+        <!-- Accent / Brand color drives buttons, FABs, checkboxes, etc. -->
+        <item name="colorPrimary">@color/accent</item>
+        <item name="colorOnPrimary">@color/primary</item>
+        <item name="colorSecondary">@color/accent</item>
+        <item name="colorOnSecondary">@color/primary</item>
+        <item name="colorPrimaryContainer">@color/surface</item>
+        <item name="colorOnPrimaryContainer">@color/text_main</item>
+        <!-- Surface / background tokens used by Cards, BottomSheets, etc. -->
+        <item name="colorSurface">@color/surface</item>
+        <item name="colorOnSurface">@color/text_main</item>
+        <item name="colorSurfaceVariant">@color/secondary</item>
+        <item name="colorOnSurfaceVariant">@color/text_muted</item>
+        <item name="colorOutline">@color/border</item>
+        <!-- Window / text -->
+        <item name="android:windowBackground">@color/primary</item>
+        <item name="android:colorBackground">@color/primary</item>
         <item name="android:textColorPrimary">@color/text_main</item>
+        <item name="android:textColorSecondary">@color/text_muted</item>
+        <item name="android:textColorHint">@color/text_muted</item>
+        <!-- Status / nav bars — overridden at runtime by ThemeManager -->
+        <item name="android:statusBarColor">@color/primary</item>
+        <item name="android:navigationBarColor">@color/primary</item>
+        <!-- Error -->
         <item name="colorError">@color/danger</item>
     </style>
 
     <style name="Theme.Electrobazar" parent="Base.Theme.Electrobazar" />
 
+    <!-- ──────────────────────────────────────────────
+         DARK theme (Medianoche defaults)
+         ThemeManager.applyTheme() will override window/status
+         colors at runtime based on the user's darkPrimaryIdx.
+    ────────────────────────────────────────────── -->
+    <style name="Theme.Electrobazar.Dark" parent="Base.Theme.Electrobazar">
+        <item name="android:windowBackground">@color/dark0_primary</item>
+        <item name="android:colorBackground">@color/dark0_primary</item>
+        <item name="android:statusBarColor">@color/dark0_primary</item>
+        <item name="android:navigationBarColor">@color/dark0_primary</item>
+        <item name="colorSurface">@color/dark0_surface</item>
+        <item name="colorSurfaceVariant">@color/dark0_secondary</item>
+        <item name="colorOutline">@color/dark0_border</item>
+        <item name="android:textColorPrimary">@color/dark0_text</item>
+        <item name="android:textColorSecondary">@color/dark0_muted</item>
+        <item name="android:textColorHint">@color/dark0_muted</item>
+        <item name="colorOnSurface">@color/dark0_text</item>
+        <item name="colorOnSurfaceVariant">@color/dark0_muted</item>
+        <!-- Default dark accent: cian (#06b6d4) — matches web darkAccent default=7 -->
+        <item name="colorPrimary">@color/accent_7</item>
+        <item name="colorOnPrimary">@color/dark0_primary</item>
+        <item name="colorSecondary">@color/accent_7</item>
+        <item name="colorOnSecondary">@color/dark0_primary</item>
+    </style>
+
+    <!-- ──────────────────────────────────────────────
+         LIGHT theme (Blanco Puro defaults)
+         ThemeManager.applyTheme() will override window/status
+         colors at runtime based on the user's lightPrimaryIdx.
+    ────────────────────────────────────────────── -->
+    <style name="Theme.Electrobazar.Light" parent="Base.Theme.Electrobazar">
+        <item name="android:windowBackground">@color/light0_primary</item>
+        <item name="android:colorBackground">@color/light0_primary</item>
+        <item name="android:statusBarColor">@color/light0_primary</item>
+        <item name="android:navigationBarColor">@color/light0_primary</item>
+        <item name="colorSurface">@color/light0_surface</item>
+        <item name="colorSurfaceVariant">@color/light0_secondary</item>
+        <item name="colorOutline">@color/light_border</item>
+        <item name="android:textColorPrimary">@color/light_text</item>
+        <item name="android:textColorSecondary">@color/light_muted</item>
+        <item name="android:textColorHint">@color/light_muted</item>
+        <item name="colorOnSurface">@color/light_text</item>
+        <item name="colorOnSurfaceVariant">@color/light_muted</item>
+        <!-- Default light accent: monochrome = black — matches web lightAccent default=0 -->
+        <item name="colorPrimary">@color/accent_0_light</item>
+        <item name="colorOnPrimary">@color/light0_primary</item>
+        <item name="colorSecondary">@color/accent_0_light</item>
+        <item name="colorOnSecondary">@color/light0_primary</item>
+    </style>
+
+    <!-- ──────────────────────────────────────────────
+         DIALOGS — inherit current surface/text colors
+    ────────────────────────────────────────────── -->
     <style name="FullScreenDialog" parent="Base.Theme.Electrobazar">
         <item name="android:windowIsTranslucent">false</item>
         <item name="android:windowBackground">@color/primary</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowIsFloating">false</item>
     </style>
+
+    <style name="CustomAlertDialog" parent="Theme.Material3.DayNight.Dialog">
+        <item name="android:windowBackground">@color/surface</item>
+        <item name="android:textColorPrimary">@color/text_main</item>
+        <item name="colorSurface">@color/surface</item>
+        <item name="colorOnSurface">@color/text_main</item>
+        <item name="colorOutline">@color/border</item>
+    </style>
+
+    <style name="AlertDialogTheme" parent="Theme.Material3.DayNight.Dialog">
+        <item name="android:windowBackground">@color/surface</item>
+        <item name="android:textColorPrimary">@color/text_main</item>
+        <item name="colorSurface">@color/surface</item>
+        <item name="colorOnSurface">@color/text_main</item>
+        <item name="colorOutline">@color/border</item>
+    </style>
+
 </resources>

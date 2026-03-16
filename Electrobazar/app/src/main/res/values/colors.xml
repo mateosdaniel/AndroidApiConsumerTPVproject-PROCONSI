@@ -1,19 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="primary">#1a1a2e</color>
-    <color name="primary_variant">#16213e</color>
-    <color name="secondary">#16213e</color>
+    <!-- ══════════════════════════════════════════════
+         DYNAMIC COLORS — overridden at runtime by ThemeManager
+         These are fallback defaults (dark/medianoche)
+    ════════════════════════════════════════════════ -->
+    <color name="primary">#151525</color>
+    <color name="secondary">#1e1e35</color>
+    <color name="surface">#252545</color>
     <color name="accent">#f5a623</color>
     <color name="accent_hover">#e09400</color>
     <color name="text_main">#e8eaf0</color>
     <color name="text_muted">#8892a4</color>
-    <color name="background">#111111</color>
-    <color name="border">#1e2d45</color>
-    <color name="divider">#334155</color>
+    <color name="background">#151525</color>
+    <color name="border">#2c2c4d</color>
+    <color name="divider">#2c2c4d</color>
+
+    <!-- Semantic colors (unchanged by theme) -->
     <color name="danger">#ef4444</color>
     <color name="success">#22c55e</color>
     <color name="info">#3b82f6</color>
     <color name="warning">#f5a623</color>
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
+    <color name="transparent">#00000000</color>
+
+    <!-- ══════════════════════════════════════════════
+         ACCENT PALETTE (matches web accentColors[])
+    ════════════════════════════════════════════════ -->
+    <!-- index 0: monochrome — value set at runtime (#fff dark / #000 light) -->
+    <color name="accent_0_dark">#ffffff</color>
+    <color name="accent_0_light">#000000</color>
+    <color name="accent_1">#f5a623</color>  <!-- Naranja -->
+    <color name="accent_2">#3b82f6</color>  <!-- Azul -->
+    <color name="accent_3">#22c55e</color>  <!-- Verde -->
+    <color name="accent_4">#ef4444</color>  <!-- Rojo -->
+    <color name="accent_5">#a855f7</color>  <!-- Morado -->
+    <color name="accent_6">#ec4899</color>  <!-- Rosa -->
+    <color name="accent_7">#06b6d4</color>  <!-- Cian -->
+
+    <!-- ══════════════════════════════════════════════
+         DARK PALETTES (matches web darkP[])
+    ════════════════════════════════════════════════ -->
+    <!-- Dark 0: Medianoche -->
+    <color name="dark0_primary">#151525</color>
+    <color name="dark0_secondary">#1e1e35</color>
+    <color name="dark0_surface">#252545</color>
+    <color name="dark0_border">#2c2c4d</color>
+    <color name="dark0_muted">#8892a4</color>
+    <color name="dark0_text">#e8eaf0</color>
+
+    <!-- Dark 1: Negro Total -->
+    <color name="dark1_primary">#000000</color>
+    <color name="dark1_secondary">#0c0c0c</color>
+    <color name="dark1_surface">#161616</color>
+    <color name="dark1_border">#222222</color>
+    <color name="dark1_muted">#777777</color>
+    <color name="dark1_text">#e0e0e0</color>
+
+    <!-- Dark 2: Carbon -->
+    <color name="dark2_primary">#121212</color>
+    <color name="dark2_secondary">#1a1a1a</color>
+    <color name="dark2_surface">#242424</color>
+    <color name="dark2_border">#2d2d2d</color>
+    <color name="dark2_muted">#888888</color>
+    <color name="dark2_text">#e8e8e8</color>
+
+    <!-- ══════════════════════════════════════════════
+         LIGHT PALETTES (matches web lightP[] + lightFixed)
+    ════════════════════════════════════════════════ -->
+    <!-- Light 0: Blanco Puro -->
+    <color name="light0_primary">#ffffff</color>
+    <color name="light0_secondary">#f8fafc</color>
+    <color name="light0_surface">#f1f5f9</color>
+
+    <!-- Light 1: Arena -->
+    <color name="light1_primary">#f5edc5</color>
+    <color name="light1_secondary">#faf3e0</color>
+    <color name="light1_surface">#f0e6c8</color>
+
+    <!-- Light 2: Ceniza -->
+    <color name="light2_primary">#eef2f7</color>
+    <color name="light2_secondary">#e4e9f0</color>
+    <color name="light2_surface">#d8e0ea</color>
+
+    <!-- Light fixed values -->
+    <color name="light_border">#dae1e7</color>
+    <color name="light_muted">#64748b</color>
+    <color name="light_text">#0f172a</color>
 </resources>

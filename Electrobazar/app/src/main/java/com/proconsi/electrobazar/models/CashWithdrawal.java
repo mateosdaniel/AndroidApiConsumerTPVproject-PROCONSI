@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 
 public class CashWithdrawal {
     private Long id;
-    private CashRegister cashRegister;
     private BigDecimal amount;
     private String reason;
     private Worker worker;
@@ -13,9 +12,6 @@ public class CashWithdrawal {
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
-
-    public CashRegister getCashRegister() { return cashRegister; }
-    public void setCashRegister(CashRegister cashRegister) { this.cashRegister = cashRegister; }
 
     public BigDecimal getAmount() { return amount; }
     public void setAmount(BigDecimal amount) { this.amount = amount; }

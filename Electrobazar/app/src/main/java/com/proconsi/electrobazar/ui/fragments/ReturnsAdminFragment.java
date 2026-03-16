@@ -24,7 +24,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.proconsi.electrobazar.R;
 import com.proconsi.electrobazar.models.SaleReturn;
-import com.proconsi.electrobazar.network.ApiClient;
+import com.proconsi.electrobazar.network.RetrofitClient;
 import com.proconsi.electrobazar.network.ReturnsRepository;
 
 import java.io.File;
@@ -159,8 +159,7 @@ public class ReturnsAdminFragment extends Fragment {
         String finalMethodFilter = methodFilter;
         List<SaleReturn> filtered = allReturns.stream().filter(r -> {
             boolean matchesQuery = query.isEmpty() || 
-                    r.getReturnNumber().toLowerCase().contains(query) ||
-                    (r.getOriginalSale() != null && String.valueOf(r.getOriginalSale().getId()).contains(query));
+                    r.getReturnNumber().toLowerCase().contains(query);
             
             boolean matchesMethod = finalMethodFilter == null || 
                     (r.getPaymentMethod() != null && r.getPaymentMethod().name().equals(finalMethodFilter));
@@ -260,7 +259,7 @@ public class ReturnsAdminFragment extends Fragment {
             }
             holder.returnDate.setText(dateStr);
 
-            holder.returnSaleRef.setText("Ticket Ref: #" + (r.getOriginalSale() != null ? r.getOriginalSale().getId() : "?"));
+            holder.returnSaleRef.setText("Ticket Ref: N/A");
             holder.returnWorker.setText("Atendido por: " + (r.getWorker() != null ? r.getWorker().getUsername() : "Sistema"));
             holder.refundMethod.setText(r.getPaymentMethod() != null ? r.getPaymentMethod().name() : "N/A");
             holder.refundAmount.setText(String.format("%.2f€", r.getTotalRefunded()));

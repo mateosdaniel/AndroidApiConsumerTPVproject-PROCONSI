@@ -31,7 +31,7 @@ import com.proconsi.electrobazar.models.ReturnRequest;
 import com.proconsi.electrobazar.models.Sale;
 import com.proconsi.electrobazar.models.SaleLine;
 import com.proconsi.electrobazar.models.SaleReturn;
-import com.proconsi.electrobazar.network.ApiClient;
+import com.proconsi.electrobazar.network.RetrofitClient;
 import com.proconsi.electrobazar.network.ApiService;
 import com.proconsi.electrobazar.network.ReturnsRepository;
 import com.proconsi.electrobazar.network.SalesRepository;
@@ -77,6 +77,7 @@ public class ReturnsFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_returns, container, false);
+        com.proconsi.electrobazar.utils.ThemeManager.applyFontToView(root, requireContext());
 
         ApiService apiService = com.proconsi.electrobazar.network.RetrofitClient.getInstance().getApi();
         salesRepository = new SalesRepository(apiService);

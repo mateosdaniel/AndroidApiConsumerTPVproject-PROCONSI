@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 
 public class ReturnLine {
     private Long id;
-    private SaleLine saleLine;
     private Integer quantity;
     private BigDecimal unitPrice;
     private BigDecimal subtotal;
@@ -12,9 +11,6 @@ public class ReturnLine {
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
-
-    public SaleLine getSaleLine() { return saleLine; }
-    public void setSaleLine(SaleLine saleLine) { this.saleLine = saleLine; }
 
     public Integer getQuantity() { return quantity; }
     public void setQuantity(Integer quantity) { this.quantity = quantity; }

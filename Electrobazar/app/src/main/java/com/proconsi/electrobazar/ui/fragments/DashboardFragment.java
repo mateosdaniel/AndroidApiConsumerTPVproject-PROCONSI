@@ -56,6 +56,7 @@ public class DashboardFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_dashboard, container, false);
+        com.proconsi.electrobazar.utils.ThemeManager.applyFontToView(view, requireContext());
 
         tvRevenue = view.findViewById(R.id.tvRevenue);
         tvSalesCount = view.findViewById(R.id.tvSalesCount);

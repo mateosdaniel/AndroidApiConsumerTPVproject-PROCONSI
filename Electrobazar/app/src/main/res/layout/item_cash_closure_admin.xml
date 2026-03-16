@@ -4,9 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="8dp"
-    app:cardBackgroundColor="@color/primary_variant"
+    app:cardBackgroundColor="?attr/colorSurface"
     app:cardCornerRadius="12dp"
-    app:strokeColor="@color/border"
+    app:strokeColor="?attr/colorOutline"
     app:strokeWidth="1dp">
 
     <LinearLayout
@@ -25,7 +25,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="#123"
-                android:textColor="@color/accent"
+                android:textColor="?attr/colorPrimary"
                 android:textStyle="bold" />
 
             <View
@@ -38,7 +38,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="13/03/2026"
-                android:textColor="@color/text_main" />
+                android:textColor="?attr/android:textColorPrimary" />
         </LinearLayout>
 
         <TextView
@@ -46,14 +46,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Trabajador: Admin"
-            android:textColor="@color/text_muted"
+            android:textColor="?attr/android:textColorSecondary"
             android:textSize="12sp"
             android:layout_marginBottom="12dp" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/divider"
+            android:background="?attr/colorOutline"
             android:layout_marginBottom="12dp" />
 
         <GridLayout
@@ -61,24 +61,87 @@
             android:layout_height="wrap_content"
             android:columnCount="2">
 
-            <LinearLayout android:orientation="vertical" android:layout_columnWeight="1">
-                <TextView android:text="Saldo Inicial" android:textColor="@color/text_muted" android:textSize="10sp" />
-                <TextView android:id="@+id/openingText" android:text="0.00€" android:textColor="@color/white" android:textSize="14sp" />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_columnWeight="1">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Saldo Inicial"
+                    android:textColor="?attr/android:textColorSecondary"
+                    android:textSize="10sp" />
+                <TextView
+                    android:id="@+id/openingText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0.00€"
+                    android:textColor="?attr/android:textColorPrimary"
+                    android:textSize="14sp" />
             </LinearLayout>
 
-            <LinearLayout android:orientation="vertical" android:layout_columnWeight="1">
-                <TextView android:text="Ventas" android:textColor="@color/text_muted" android:textSize="10sp" />
-                <TextView android:id="@+id/salesText" android:text="0.00€" android:textColor="@color/success" android:textSize="14sp" />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_columnWeight="1">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ventas"
+                    android:textColor="?attr/android:textColorSecondary"
+                    android:textSize="10sp" />
+                <TextView
+                    android:id="@+id/salesText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0.00€"
+                    android:textColor="@color/success"
+                    android:textSize="14sp" />
             </LinearLayout>
 
-            <LinearLayout android:orientation="vertical" android:layout_columnWeight="1" android:layout_marginTop="8dp">
-                <TextView android:text="Diferencia" android:textColor="@color/text_muted" android:textSize="10sp" />
-                <TextView android:id="@+id/diffText" android:text="0.00€" android:textColor="@color/white" android:textSize="14sp" />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_columnWeight="1"
+                android:layout_marginTop="8dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Diferencia"
+                    android:textColor="?attr/android:textColorSecondary"
+                    android:textSize="10sp" />
+                <TextView
+                    android:id="@+id/diffText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0.00€"
+                    android:textColor="?attr/android:textColorPrimary"
+                    android:textSize="14sp" />
             </LinearLayout>
 
-            <LinearLayout android:orientation="vertical" android:layout_columnWeight="1" android:layout_marginTop="8dp">
-                <TextView android:text="Saldo Final" android:textColor="@color/text_muted" android:textSize="10sp" />
-                <TextView android:id="@+id/closingText" android:text="0.00€" android:textColor="@color/white" android:textSize="14sp" android:textStyle="bold" />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_columnWeight="1"
+                android:layout_marginTop="8dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Saldo Final"
+                    android:textColor="?attr/android:textColorSecondary"
+                    android:textSize="10sp" />
+                <TextView
+                    android:id="@+id/closingText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0.00€"
+                    android:textColor="?attr/android:textColorPrimary"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
             </LinearLayout>
         </GridLayout>
 

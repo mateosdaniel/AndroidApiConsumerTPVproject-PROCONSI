@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primary">
+    android:background="?attr/colorPrimary">
 
     <!-- Catalog (Full Screen by default) -->
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -29,7 +29,7 @@
                 android:layout_width="16dp"
                 android:layout_height="16dp"
                 android:src="@drawable/ic_search"
-                app:tint="@color/text_muted" />
+                app:tint="?attr/android:textColorSecondary" />
 
             <EditText
                 android:id="@+id/searchInput"
@@ -40,8 +40,8 @@
                 android:hint="Buscar..."
                 android:imeOptions="actionSearch"
                 android:inputType="text"
-                android:textColor="@color/text_main"
-                android:textColorHint="@color/text_muted"
+                android:textColor="?attr/android:textColorPrimary"
+                android:textColorHint="?attr/android:textColorSecondary"
                 android:textSize="14sp" />
         </LinearLayout>
 
@@ -88,7 +88,7 @@
                 android:layout_width="64dp"
                 android:layout_height="64dp"
                 android:src="@drawable/ic_inventory"
-                app:tint="@color/text_muted"
+                app:tint="?attr/android:textColorSecondary"
                 android:alpha="0.3" />
 
             <TextView
@@ -96,7 +96,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:text="No hay productos"
-                android:textColor="@color/text_muted"
+                android:textColor="?attr/android:textColorSecondary"
                 android:textSize="14sp" />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -115,7 +115,7 @@
         android:id="@+id/ticketContainer"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@color/secondary"
+        android:background="?attr/colorSurface"
         android:elevation="8dp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -126,7 +126,7 @@
             android:id="@+id/ticketHeader"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:background="@color/primary_variant"
+            android:background="?attr/colorSurfaceVariant"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:paddingHorizontal="16dp"
@@ -136,7 +136,7 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:src="@drawable/ic_cart"
-                app:tint="@color/accent" />
+                app:tint="?attr/colorPrimary" />
 
             <TextView
                 android:layout_width="0dp"
@@ -144,7 +144,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_weight="1"
                 android:text="Ticket Actual"
-                android:textColor="@color/text_main"
+                android:textColor="?attr/android:textColorPrimary"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -155,7 +155,7 @@
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:src="@drawable/ic_logout"
                 android:rotation="90"
-                app:tint="@color/text_muted"
+                app:tint="?attr/android:textColorSecondary"
                 android:contentDescription="Cerrar ticket" />
             
             <TextView
@@ -166,7 +166,7 @@
                 android:background="@drawable/bg_badge"
                 android:gravity="center"
                 android:text="0"
-                android:textColor="@color/white"
+                android:textColor="?attr/android:windowBackground"
                 android:textSize="12sp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -178,7 +178,7 @@
             android:orientation="vertical"
             android:paddingHorizontal="16dp"
             android:paddingVertical="12dp"
-            android:background="@color/primary_variant"
+            android:background="?attr/colorSurfaceVariant"
             app:layout_constraintTop_toBottomOf="@id/ticketHeader">
 
             <LinearLayout
@@ -194,10 +194,10 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:hint="Buscar cliente..."
-                    app:hintTextColor="@color/text_muted"
-                    app:boxStrokeColor="@color/accent"
-                    app:boxBackgroundColor="@color/primary"
-                    android:textColorHint="@color/text_muted"
+                    app:hintTextColor="?attr/android:textColorSecondary"
+                    app:boxStrokeColor="?attr/colorPrimary"
+                    app:boxBackgroundColor="?attr/android:windowBackground"
+                    android:textColorHint="?attr/android:textColorSecondary"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
 
                     <AutoCompleteTextView
@@ -206,7 +206,7 @@
                         android:layout_height="wrap_content"
                         android:inputType="text"
                         android:textSize="14sp"
-                        android:textColor="@color/text_main" />
+                        android:textColor="?attr/android:textColorPrimary" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <ImageButton
@@ -216,7 +216,7 @@
                     android:layout_marginStart="8dp"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:src="@drawable/ic_plus"
-                    app:tint="@color/accent"
+                    app:tint="?attr/colorPrimary"
                     android:contentDescription="Nuevo cliente" />
             </LinearLayout>
 
@@ -225,9 +225,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
-                app:cardBackgroundColor="@color/primary"
+                app:cardBackgroundColor="?attr/android:windowBackground"
                 app:cardCornerRadius="8dp"
-                app:strokeColor="@color/border"
+                app:strokeColor="?attr/colorOutline"
                 app:strokeWidth="1dp"
                 tools:visibility="visible">
 
@@ -256,7 +256,7 @@
                                 android:layout_height="wrap_content"
                                 android:ellipsize="end"
                                 android:maxLines="1"
-                                android:textColor="@color/text_main"
+                                android:textColor="?attr/android:textColorPrimary"
                                 android:textSize="14sp"
                                 android:textStyle="bold"
                                 tools:text="Daniel Mateos" />
@@ -269,7 +269,7 @@
                                 android:background="@drawable/bg_badge_tariff"
                                 android:paddingHorizontal="6dp"
                                 android:paddingVertical="1dp"
-                                android:textColor="@color/primary"
+                                android:textColor="?attr/android:windowBackground"
                                 android:textSize="10sp"
                                 android:textStyle="bold"
                                 android:visibility="gone"
@@ -281,7 +281,7 @@
                             android:id="@+id/customerTaxIdText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/text_muted"
+                            android:textColor="?attr/android:textColorSecondary"
                             android:textSize="12sp"
                             tools:text="12345678X" />
                     </LinearLayout>
@@ -292,7 +292,7 @@
                         android:layout_height="32dp"
                         android:background="?attr/selectableItemBackgroundBorderless"
                         android:src="@drawable/ic_close"
-                        app:tint="@color/text_muted" />
+                        app:tint="?attr/android:textColorSecondary" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
         </LinearLayout>
@@ -310,7 +310,7 @@
             android:id="@+id/ticketFooter"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/primary_variant"
+            android:background="?attr/colorSurfaceVariant"
             android:orientation="vertical"
             android:padding="16dp"
             app:layout_constraintBottom_toBottomOf="parent">
@@ -319,7 +319,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginBottom="12dp"
-                android:background="@color/border" />
+                android:background="?attr/colorOutline" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -331,7 +331,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="TOTAL"
-                    android:textColor="@color/text_main"
+                    android:textColor="?attr/android:textColorPrimary"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -340,7 +340,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0,00€"
-                    android:textColor="@color/accent"
+                    android:textColor="?attr/colorPrimary"
                     android:textSize="22sp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -352,15 +352,15 @@
                 android:layout_marginTop="16dp"
                 android:enabled="false"
                 android:text="COBRAR"
-                android:textColor="@color/primary"
+                android:textColor="?attr/android:windowBackground"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                app:backgroundTint="@color/accent"
+                app:backgroundTint="?attr/colorPrimary"
                 app:cornerRadius="12dp"
                 app:icon="@drawable/ic_arrow_right"
                 app:iconGravity="textEnd"
                 app:iconSize="20dp"
-                app:iconTint="@color/primary" />
+                app:iconTint="?attr/android:windowBackground" />
             
             <Button
                 android:id="@+id/btnClearTicket"
@@ -369,11 +369,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="Vaciar ticket"
-                android:textColor="@color/danger"
+                android:textColor="?attr/colorError"
                 android:textSize="12sp"
                 app:icon="@drawable/ic_logout"
                 app:iconSize="14dp"
-                app:iconTint="@color/danger" />
+                app:iconTint="?attr/colorError" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnSuspender"
@@ -382,11 +382,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:text="Poner en espera"
-                android:textColor="@color/white"
+                android:textColor="?attr/android:textColorPrimary"
                 android:visibility="gone"
                 app:icon="@android:drawable/ic_menu_recent_history"
-                app:iconTint="@color/white"
-                app:strokeColor="@color/border" />
+                app:iconTint="?attr/android:textColorPrimary"
+                app:strokeColor="?attr/colorOutline" />
         </LinearLayout>
 
 

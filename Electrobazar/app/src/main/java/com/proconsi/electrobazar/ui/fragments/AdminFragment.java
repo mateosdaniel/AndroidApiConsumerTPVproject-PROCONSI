@@ -35,6 +35,7 @@ public class AdminFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_admin, container, false);
+        com.proconsi.electrobazar.utils.ThemeManager.applyFontToView(view, requireContext());
 
         drawerLayout = view.findViewById(R.id.adminDrawerLayout);
         recyclerView = view.findViewById(R.id.adminRecyclerView);

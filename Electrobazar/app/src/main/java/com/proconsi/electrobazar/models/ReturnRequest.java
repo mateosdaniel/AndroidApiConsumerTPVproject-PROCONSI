@@ -7,6 +7,15 @@ public class ReturnRequest {
     private List<ReturnLineRequest> lines;
     private String reason;
     private PaymentMethod paymentMethod;
+    
+    public ReturnRequest() {}
+
+    public ReturnRequest(Long saleId, List<ReturnLineRequest> lines, String reason, PaymentMethod paymentMethod) {
+        this.saleId = saleId;
+        this.lines = lines;
+        this.reason = reason;
+        this.paymentMethod = paymentMethod;
+    }
 
     public Long getSaleId() { return saleId; }
     public void setSaleId(Long saleId) { this.saleId = saleId; }

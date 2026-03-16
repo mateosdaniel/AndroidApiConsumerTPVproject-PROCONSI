@@ -6,7 +6,6 @@ import java.util.List;
 public class SaleReturn {
     private Long id;
     private String returnNumber;
-    private Sale originalSale;
     private String createdAt;
     private Worker worker;
     private String reason;
@@ -21,9 +20,6 @@ public class SaleReturn {
 
     public String getReturnNumber() { return returnNumber; }
     public void setReturnNumber(String returnNumber) { this.returnNumber = returnNumber; }
-
-    public Sale getOriginalSale() { return originalSale; }
-    public void setOriginalSale(Sale originalSale) { this.originalSale = originalSale; }
 
     public String getCreatedAt() { return createdAt; }
     public void setCreatedAt(String createdAt) { this.createdAt = createdAt; }

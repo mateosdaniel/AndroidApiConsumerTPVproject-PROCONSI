@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.proconsi.electrobazar.databinding.FragmentActivityLogBinding;
 import com.proconsi.electrobazar.models.ActivityLog;
-import com.proconsi.electrobazar.network.ApiClient;
+import com.proconsi.electrobazar.network.RetrofitClient;
 import com.proconsi.electrobazar.network.ApiService;
 import com.proconsi.electrobazar.ui.adapters.ActivityLogAdapter;
 
@@ -35,7 +35,8 @@ public class ActivityLogFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentActivityLogBinding.inflate(inflater, container, false);
-        apiService = ApiClient.getClient().create(ApiService.class);
+        com.proconsi.electrobazar.utils.ThemeManager.applyFontToView(binding.getRoot(), requireContext());
+        apiService = RetrofitClient.getInstance().getApi();
 
         setupRecyclerView();
         setupFilters();
