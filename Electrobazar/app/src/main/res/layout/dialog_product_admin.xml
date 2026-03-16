@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="20dp"
-    android:background="@color/secondary">
+    android:background="?attr/colorSurfaceVariant">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,7 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Datos del Producto"
-            android:textColor="@color/text_main"
+            android:textColor="?attr/android:textColorPrimary"
             android:textSize="20sp"
             android:textStyle="bold"
             android:layout_marginBottom="24dp" />
@@ -27,13 +27,13 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:hint="Nombre"
-            app:boxStrokeColor="@color/accent"
-            app:hintTextColor="@color/accent">
+            app:boxStrokeColor="?attr/colorAccent"
+            app:hintTextColor="?attr/colorAccent">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/text_main" />
+                android:textColor="?attr/android:textColorPrimary" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -42,13 +42,13 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:hint="Descripción"
-            app:boxStrokeColor="@color/accent"
-            app:hintTextColor="@color/accent">
+            app:boxStrokeColor="?attr/colorAccent"
+            app:hintTextColor="?attr/colorAccent">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/text_main" />
+                android:textColor="?attr/android:textColorPrimary" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <LinearLayout
@@ -64,14 +64,14 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="16dp"
                 android:hint="Precio (€)"
-                app:boxStrokeColor="@color/accent"
-                app:hintTextColor="@color/accent">
+                app:boxStrokeColor="?attr/colorAccent"
+                app:hintTextColor="?attr/colorAccent">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etPrice"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="numberDecimal"
-                    android:textColor="@color/text_main" />
+                    android:textColor="?attr/android:textColorPrimary" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -82,14 +82,14 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginBottom="16dp"
                 android:hint="Stock"
-                app:boxStrokeColor="@color/accent"
-                app:hintTextColor="@color/accent">
+                app:boxStrokeColor="?attr/colorAccent"
+                app:hintTextColor="?attr/colorAccent">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etStock"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="number"
-                    android:textColor="@color/text_main" />
+                    android:textColor="?attr/android:textColorPrimary" />
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 
@@ -97,7 +97,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Categoría"
-            android:textColor="@color/text_muted"
+            android:textColor="?attr/android:textColorSecondary"
             android:textSize="12sp"
             android:layout_marginBottom="4dp" />
         <Spinner
@@ -111,7 +111,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Tipo de IVA"
-            android:textColor="@color/text_muted"
+            android:textColor="?attr/android:textColorSecondary"
             android:textSize="12sp"
             android:layout_marginBottom="4dp" />
         <Spinner
@@ -127,13 +127,13 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:hint="URL de Imagen"
-            app:boxStrokeColor="@color/accent"
-            app:hintTextColor="@color/accent">
+            app:boxStrokeColor="?attr/colorAccent"
+            app:hintTextColor="?attr/colorAccent">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etImageUrl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/text_main" />
+                android:textColor="?attr/android:textColorPrimary" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.switchmaterial.SwitchMaterial
@@ -141,10 +141,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Producto Activo"
-            android:textColor="@color/text_main"
+            android:textColor="?attr/android:textColorPrimary"
             android:checked="true"
-            app:thumbTint="@color/accent"
-            app:trackTint="@color/accent" />
+            app:thumbTint="?attr/colorAccent"
+            app:trackTint="?attr/colorAccent" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnSave"
@@ -152,8 +152,8 @@
             android:layout_height="56dp"
             android:layout_marginTop="24dp"
             android:text="Guardar Producto"
-            android:textColor="@color/primary"
-            app:backgroundTint="@color/accent"
+            android:textColor="?attr/android:windowBackground"
+            app:backgroundTint="?attr/colorAccent"
             app:cornerRadius="12dp" />
 
     </LinearLayout>

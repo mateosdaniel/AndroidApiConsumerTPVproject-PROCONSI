@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/primary">
+    android:background="?attr/android:windowBackground">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
             android:text="Rol"
-            android:textColor="@color/text_main"
+            android:textColor="?attr/android:textColorPrimary"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -25,7 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nombre del rol *"
-            android:textColor="@color/text_muted"
+            android:textColor="?attr/android:textColorSecondary"
             android:textSize="12sp"
             android:textStyle="bold" />
 
@@ -39,14 +39,14 @@
             android:hint="Ej: Cajero, Supervisor"
             android:inputType="text"
             android:paddingHorizontal="16dp"
-            android:textColor="@color/text_main"
-            android:textColorHint="@color/text_muted" />
+            android:textColor="?attr/android:textColorPrimary"
+            android:textColorHint="?attr/android:textColorSecondary" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Descripción"
-            android:textColor="@color/text_muted"
+            android:textColor="?attr/android:textColorSecondary"
             android:textSize="12sp"
             android:textStyle="bold" />
 
@@ -60,14 +60,14 @@
             android:hint="Descripción opcional"
             android:inputType="text"
             android:paddingHorizontal="16dp"
-            android:textColor="@color/text_main"
-            android:textColorHint="@color/text_muted" />
+            android:textColor="?attr/android:textColorPrimary"
+            android:textColorHint="?attr/android:textColorSecondary" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Permisos"
-            android:textColor="@color/text_muted"
+            android:textColor="?attr/android:textColorSecondary"
             android:textSize="12sp"
             android:textStyle="bold" />
 
@@ -101,14 +101,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="CANCELAR"
-                android:textColor="@color/text_muted" />
+                android:textColor="?attr/android:textColorSecondary" />
 
             <Button
                 android:id="@+id/saveRoleBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:backgroundTint="@color/accent"
+                android:backgroundTint="?attr/colorAccent"
                 android:text="GUARDAR"
                 android:textColor="@color/white" />
         </LinearLayout>

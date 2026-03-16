@@ -39,6 +39,7 @@ public class PreferencesFragment extends Fragment {
         setupAccentGrid();
         setupPrimaryGrid();
         setupFontPickers();
+        ThemeManager.applyColorsToView(binding.getRoot(), requireContext());
 
         binding.btnReset.setOnClickListener(v -> {
             ThemeManager.reset(requireContext());

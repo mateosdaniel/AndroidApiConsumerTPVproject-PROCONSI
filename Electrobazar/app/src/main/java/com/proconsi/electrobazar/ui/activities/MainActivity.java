@@ -1,6 +1,7 @@
 package com.proconsi.electrobazar.ui.activities;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -44,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         com.proconsi.electrobazar.utils.ThemeManager.applyTheme(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getWindow().setNavigationBarColor(Color.BLACK);
         com.proconsi.electrobazar.utils.ThemeManager.applyColors(this);
         com.proconsi.electrobazar.utils.ThemeManager.applyFontToView(getWindow().getDecorView(), this);
 

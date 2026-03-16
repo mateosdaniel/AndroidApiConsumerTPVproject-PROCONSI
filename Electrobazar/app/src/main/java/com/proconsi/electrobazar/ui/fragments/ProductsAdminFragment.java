@@ -29,6 +29,7 @@ import com.proconsi.electrobazar.models.Product;
 import com.proconsi.electrobazar.models.ProductRequest;
 import com.proconsi.electrobazar.models.TaxRate;
 import com.proconsi.electrobazar.ui.adapters.AdminProductAdapter;
+import com.proconsi.electrobazar.ui.adapters.CategoryAdapter;
 import com.proconsi.electrobazar.viewmodels.ProductsViewModel;
 
 import java.math.BigDecimal;
@@ -39,6 +40,7 @@ public class ProductsAdminFragment extends Fragment {
 
     private ProductsViewModel viewModel;
     private AdminProductAdapter adapter;
+    private CategoryAdapter categoryAdapter;
     private SwipeRefreshLayout swipeRefresh;
     private List<Category> availableCategories = new ArrayList<>();
     private List<TaxRate> availableTaxRates = new ArrayList<>();
@@ -47,13 +49,16 @@ public class ProductsAdminFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_products_admin, container, false);
+        com.proconsi.electrobazar.utils.ThemeManager.applyFontToView(view, requireContext());
 
         viewModel = new ViewModelProvider(this).get(ProductsViewModel.class);
 
         swipeRefresh = view.findViewById(R.id.swipeRefresh);
         RecyclerView recyclerView = view.findViewById(R.id.rvProductsAdmin);
+        RecyclerView categoriesRecyclerView = view.findViewById(R.id.rvCategories);
         EditText etSearch = view.findViewById(R.id.etSearch);
         View fabAdd = view.findViewById(R.id.fabAddProduct);
+        com.proconsi.electrobazar.utils.ThemeManager.applyColorsToView(view, requireContext());
 
         adapter = new AdminProductAdapter(new AdminProductAdapter.OnAdminProductActionListener() {
             @Override
@@ -67,6 +72,12 @@ public class ProductsAdminFragment extends Fragment {
             }
         });
         recyclerView.setAdapter(adapter);
+
+        categoryAdapter = new CategoryAdapter(category -> {
+            viewModel.filterByCategory(category.getId());
+            categoryAdapter.setSelectedCategoryId(category.getId());
+        });
+        categoriesRecyclerView.setAdapter(categoryAdapter);
 
         swipeRefresh.setOnRefreshListener(() -> viewModel.loadProducts());
 
@@ -95,26 +106,7 @@ public class ProductsAdminFragment extends Fragment {
         
         viewModel.getCategories().observe(getViewLifecycleOwner(), categories -> {
             availableCategories = categories;
-            ChipGroup chipGroup = getView().findViewById(R.id.chipGroupFilters);
-            if (chipGroup != null) {
-                chipGroup.removeAllViews();
-                
-                // "All" chip
-                Chip allChip = new Chip(getContext());
-                allChip.setText("Todos");
-                allChip.setCheckable(true);
-                allChip.setChecked(true);
-                allChip.setOnClickListener(v -> viewModel.filterByCategory(null));
-                chipGroup.addView(allChip);
-
-                for (Category category : categories) {
-                    Chip chip = new Chip(getContext());
-                    chip.setText(category.getName());
-                    chip.setCheckable(true);
-                    chip.setOnClickListener(v -> viewModel.filterByCategory(category.getId()));
-                    chipGroup.addView(chip);
-                }
-            }
+            categoryAdapter.setCategories(categories);
         });
         
         viewModel.getTaxRates().observe(getViewLifecycleOwner(), rates -> availableTaxRates = rates);

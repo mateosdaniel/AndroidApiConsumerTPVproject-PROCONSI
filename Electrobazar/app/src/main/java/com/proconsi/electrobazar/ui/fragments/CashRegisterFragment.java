@@ -246,8 +246,43 @@ public class CashRegisterFragment extends Fragment {
                 showLoading(false);
                 if (response.isSuccessful() && response.body() != null) {
                     closeInfo = response.body();
-                    binding.closeTheoryAmountText.setText(String.format("Efectivo Teórico: %.2f€", closeInfo.getExpectedCashInDrawer()));
+                    
+                    // Populate stats grid
+                    binding.closeTotalSales.setText(String.format("%.2f€", closeInfo.getTotalToday()));
+                    binding.closeOpCount.setText(String.valueOf(closeInfo.getCountToday()));
+                    binding.closeCardSales.setText(String.format("%.2f€", closeInfo.getCardSalesToday().subtract(closeInfo.getCardRefundsToday())));
+                    binding.closeCashSales.setText(String.format("%.2f€", closeInfo.getCashSalesToday()));
+
+                    // Populate detailed summary
+                    binding.summaryOpening.setText(String.format("%.2f€", closeInfo.getOpeningBalance()));
+                    binding.summaryCashSales.setText(String.format("+%.2f€", closeInfo.getCashSalesToday()));
+                    binding.summaryRefunds.setText(String.format("-%.2f€", closeInfo.getCashRefundsToday()));
+                    
+                    BigDecimal netMovements = closeInfo.getTotalEntries().subtract(closeInfo.getTotalWithdrawals());
+                    binding.summaryMovements.setText(String.format("%s%.2f€", 
+                            netMovements.compareTo(BigDecimal.ZERO) >= 0 ? "+" : "", 
+                            netMovements));
+
+                    binding.closeTheoryAmountText.setText(String.format("%.2f€", closeInfo.getExpectedCashInDrawer()));
                     binding.closeRealAmountInput.setText(closeInfo.getExpectedCashInDrawer().toString());
+                    
+                    binding.summaryCancelled.setText(String.format("Anuladas: %d ops / %.2f€", 
+                            closeInfo.getCancelledCount(), 
+                            closeInfo.getCancelledTotal()));
+
+                    if (closeInfo.getReturnsToday() != null && !closeInfo.getReturnsToday().isEmpty()) {
+                        StringBuilder sb = new StringBuilder();
+                        for (com.proconsi.electrobazar.models.SaleReturn ret : closeInfo.getReturnsToday()) {
+                            String method = "EFECTIVO".equals(ret.getPaymentMethod()) ? "E" : "T";
+                            sb.append(String.format("• %s (%s): -%.2f€\n", 
+                                ret.getReturnNumber(), method, ret.getTotalRefunded()));
+                        }
+                        binding.returnsListText.setText(sb.toString().trim());
+                        binding.returnsSummaryContainer.setVisibility(View.VISIBLE);
+                    } else {
+                        binding.returnsSummaryContainer.setVisibility(View.GONE);
+                    }
+                    
                     updateCloseDifference();
                     showState(LayoutState.CLOSE_FORM);
                 }

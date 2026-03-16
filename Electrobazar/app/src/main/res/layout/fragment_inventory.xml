@@ -36,12 +36,13 @@
             android:maxLines="1"
             android:inputType="text" />
 
-        <com.google.android.material.chip.ChipGroup
-            android:id="@+id/chipGroupCategories"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvCategories"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            app:singleSelection="true" />
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvInventory"

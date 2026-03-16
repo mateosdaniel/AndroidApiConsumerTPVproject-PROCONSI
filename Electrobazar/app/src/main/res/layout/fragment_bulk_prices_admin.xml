@@ -144,7 +144,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
                     android:hint="Valor de incremento/decremento"
-                    app:hintTextColor="@color/text_muted">
+                    app:hintTextColor="?attr/android:textColorSecondary">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etAdjustmentValue"
@@ -160,7 +160,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
                     android:hint="Fecha de Efectividad"
-                    app:hintTextColor="@color/text_muted"
+                    app:hintTextColor="?attr/android:textColorSecondary"
                     app:startIconDrawable="@android:drawable/ic_menu_today">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -177,7 +177,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
                     android:hint="Etiqueta (opcional)"
-                    app:hintTextColor="@color/text_muted">
+                    app:hintTextColor="?attr/android:textColorSecondary">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etLabel"

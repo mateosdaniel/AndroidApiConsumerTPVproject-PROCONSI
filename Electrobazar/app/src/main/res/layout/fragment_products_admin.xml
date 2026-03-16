@@ -40,20 +40,13 @@
                 android:maxLines="1"
                 android:inputType="text" />
 
-            <HorizontalScrollView
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvCategories"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:scrollbars="none">
-                <com.google.android.material.chip.ChipGroup
-                    android:id="@+id/chipGroupFilters"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:singleLine="true"
-                    app:singleSelection="true">
-                    <!-- Chips will be added dynamically: Category, Stock Status, Active Status, VAT type -->
-                </com.google.android.material.chip.ChipGroup>
-            </HorizontalScrollView>
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvProductsAdmin"

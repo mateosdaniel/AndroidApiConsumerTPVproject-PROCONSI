@@ -51,11 +51,11 @@
 
     <!-- Dark 1: Negro Total -->
     <color name="dark1_primary">#000000</color>
-    <color name="dark1_secondary">#0c0c0c</color>
-    <color name="dark1_surface">#161616</color>
-    <color name="dark1_border">#222222</color>
-    <color name="dark1_muted">#777777</color>
-    <color name="dark1_text">#e0e0e0</color>
+    <color name="dark1_secondary">#000000</color>
+    <color name="dark1_surface">#050505</color>
+    <color name="dark1_border">#1a1a1a</color>
+    <color name="dark1_muted">#666666</color>
+    <color name="dark1_text">#ffffff</color>
 
     <!-- Dark 2: Carbon -->
     <color name="dark2_primary">#121212</color>

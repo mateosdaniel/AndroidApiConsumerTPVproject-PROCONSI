@@ -1,5 +1,6 @@
 package com.proconsi.electrobazar.ui.adapters;
 
+import android.content.Context;
 import android.content.res.ColorStateList;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -80,12 +81,13 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
             boolean isSelected = (selectedId == null && category.getId() == null) || 
                                  (selectedId != null && category.getId() != null && selectedId.equals(category.getId()));
 
+            Context ctx = itemView.getContext();
             if (isSelected) {
-                categoryButton.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(itemView.getContext(), R.color.accent)));
-                categoryButton.setTextColor(ContextCompat.getColor(itemView.getContext(), R.color.primary));
+                categoryButton.setBackgroundTintList(ColorStateList.valueOf(com.proconsi.electrobazar.utils.ThemeManager.getAccentColor(ctx)));
+                categoryButton.setTextColor(com.proconsi.electrobazar.utils.ThemeManager.getPrimaryColor(ctx));
             } else {
-                categoryButton.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(itemView.getContext(), R.color.secondary)));
-                categoryButton.setTextColor(ContextCompat.getColor(itemView.getContext(), R.color.text_main));
+                categoryButton.setBackgroundTintList(ColorStateList.valueOf(com.proconsi.electrobazar.utils.ThemeManager.getSurfaceColor(ctx)));
+                categoryButton.setTextColor(com.proconsi.electrobazar.utils.ThemeManager.getTextColor(ctx));
             }
             
             categoryButton.setOnClickListener(v -> listener.onCategoryClick(category));

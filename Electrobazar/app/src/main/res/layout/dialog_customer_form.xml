@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/primary">
+    android:background="?attr/android:windowBackground">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
             android:text="Cliente"
-            android:textColor="@color/text_main"
+            android:textColor="?attr/android:textColorPrimary"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -25,7 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Tipo de Cliente *"
-            android:textColor="@color/text_muted"
+            android:textColor="?attr/android:textColorSecondary"
             android:textSize="12sp"
             android:textStyle="bold" />
 
@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:checked="true"
                 android:text="Particular"
-                android:textColor="@color/text_main" />
+                android:textColor="?attr/android:textColorPrimary" />
 
             <RadioButton
                 android:id="@+id/radioCompany"
@@ -51,14 +51,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:text="Empresa"
-                android:textColor="@color/text_main" />
+                android:textColor="?attr/android:textColorPrimary" />
         </RadioGroup>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nombre / Razón Social *"
-            android:textColor="@color/text_muted"
+            android:textColor="?attr/android:textColorSecondary"
             android:textSize="12sp"
             android:textStyle="bold" />
 
@@ -72,15 +72,15 @@
             android:hint="Nombre completo"
             android:inputType="textPersonName"
             android:paddingHorizontal="16dp"
-            android:textColor="@color/text_main"
-            android:textColorHint="@color/text_muted" />
+            android:textColor="?attr/android:textColorPrimary"
+            android:textColorHint="?attr/android:textColorSecondary" />
 
         <TextView
             android:id="@+id/customerTaxIdLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="NIF / CIF"
-            android:textColor="@color/text_muted"
+            android:textColor="?attr/android:textColorSecondary"
             android:textSize="12sp"
             android:textStyle="bold" />
 
@@ -94,8 +94,8 @@
             android:hint="12345678X"
             android:inputType="text"
             android:paddingHorizontal="16dp"
-            android:textColor="@color/text_main"
-            android:textColorHint="@color/text_muted" />
+            android:textColor="?attr/android:textColorPrimary"
+            android:textColorHint="?attr/android:textColorSecondary" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -114,7 +114,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Email"
-                    android:textColor="@color/text_muted"
+                    android:textColor="?attr/android:textColorSecondary"
                     android:textSize="12sp"
                     android:textStyle="bold" />
 
@@ -128,8 +128,8 @@
                     android:hint="ejemplo@correo.com"
                     android:inputType="textEmailAddress"
                     android:paddingHorizontal="16dp"
-                    android:textColor="@color/text_main"
-                    android:textColorHint="@color/text_muted" />
+                    android:textColor="?attr/android:textColorPrimary"
+                    android:textColorHint="?attr/android:textColorSecondary" />
             </LinearLayout>
 
             <LinearLayout
@@ -143,7 +143,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Teléfono"
-                    android:textColor="@color/text_muted"
+                    android:textColor="?attr/android:textColorSecondary"
                     android:textSize="12sp"
                     android:textStyle="bold" />
 
@@ -157,8 +157,8 @@
                     android:hint="600 000 000"
                     android:inputType="phone"
                     android:paddingHorizontal="16dp"
-                    android:textColor="@color/text_main"
-                    android:textColorHint="@color/text_muted" />
+                    android:textColor="?attr/android:textColorPrimary"
+                    android:textColorHint="?attr/android:textColorSecondary" />
             </LinearLayout>
         </LinearLayout>
 
@@ -166,7 +166,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Dirección"
-            android:textColor="@color/text_muted"
+            android:textColor="?attr/android:textColorSecondary"
             android:textSize="12sp"
             android:textStyle="bold" />
 
@@ -180,8 +180,8 @@
             android:hint="Calle, número, piso..."
             android:inputType="textPostalAddress"
             android:paddingHorizontal="16dp"
-            android:textColor="@color/text_main"
-            android:textColorHint="@color/text_muted" />
+            android:textColor="?attr/android:textColorPrimary"
+            android:textColorHint="?attr/android:textColorSecondary" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -200,7 +200,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Ciudad"
-                    android:textColor="@color/text_muted"
+                    android:textColor="?attr/android:textColorSecondary"
                     android:textSize="12sp"
                     android:textStyle="bold" />
 
@@ -214,8 +214,8 @@
                     android:hint="Madrid"
                     android:inputType="text"
                     android:paddingHorizontal="16dp"
-                    android:textColor="@color/text_main"
-                    android:textColorHint="@color/text_muted" />
+                    android:textColor="?attr/android:textColorPrimary"
+                    android:textColorHint="?attr/android:textColorSecondary" />
             </LinearLayout>
 
             <LinearLayout
@@ -229,7 +229,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="C.P."
-                    android:textColor="@color/text_muted"
+                    android:textColor="?attr/android:textColorSecondary"
                     android:textSize="12sp"
                     android:textStyle="bold" />
 
@@ -243,8 +243,8 @@
                     android:hint="28001"
                     android:inputType="number"
                     android:paddingHorizontal="16dp"
-                    android:textColor="@color/text_main"
-                    android:textColorHint="@color/text_muted" />
+                    android:textColor="?attr/android:textColorPrimary"
+                    android:textColorHint="?attr/android:textColorSecondary" />
             </LinearLayout>
         </LinearLayout>
 
@@ -252,7 +252,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Tarifa de Precio"
-            android:textColor="@color/text_muted"
+            android:textColor="?attr/android:textColorSecondary"
             android:textSize="12sp"
             android:textStyle="bold" />
 
@@ -280,7 +280,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Sujeto a Recargo de Equivalencia"
-                android:textColor="@color/text_main"
+                android:textColor="?attr/android:textColorPrimary"
                 android:textStyle="bold" />
 
             <TextView
@@ -288,7 +288,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:text="Se aplicará el recargo español según el IVA."
-                android:textColor="@color/text_muted"
+                android:textColor="?attr/android:textColorSecondary"
                 android:textSize="11sp" />
         </LinearLayout>
 
@@ -299,7 +299,7 @@
             android:layout_marginBottom="24dp"
             android:checked="true"
             android:text="Cliente Activo"
-            android:textColor="@color/text_main" />
+            android:textColor="?attr/android:textColorPrimary" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -313,14 +313,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="CANCELAR"
-                android:textColor="@color/text_muted" />
+                android:textColor="?attr/android:textColorSecondary" />
 
             <Button
                 android:id="@+id/saveCustomerBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:backgroundTint="@color/accent"
+                android:backgroundTint="?attr/colorAccent"
                 android:text="GUARDAR"
                 android:textColor="@color/white" />
         </LinearLayout>

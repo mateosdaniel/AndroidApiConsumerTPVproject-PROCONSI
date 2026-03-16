@@ -101,10 +101,10 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <RadioButton android:id="@+id/rbFontSizeSmall" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Pequeño" android:buttonTint="?attr/colorPrimary" />
-                    <RadioButton android:id="@+id/rbFontSizeNormal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Normal" android:buttonTint="?attr/colorPrimary" />
-                    <RadioButton android:id="@+id/rbFontSizeLarge" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Grande" android:buttonTint="?attr/colorPrimary" />
-                    <RadioButton android:id="@+id/rbFontSizeXL" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Extra" android:buttonTint="?attr/colorPrimary" />
+                    <RadioButton android:id="@+id/rbFontSizeSmall" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Pequeño" android:textColor="?attr/android:textColorPrimary" android:buttonTint="?attr/colorPrimary" />
+                    <RadioButton android:id="@+id/rbFontSizeNormal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Normal" android:textColor="?attr/android:textColorPrimary" android:buttonTint="?attr/colorPrimary" />
+                    <RadioButton android:id="@+id/rbFontSizeLarge" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Grande" android:textColor="?attr/android:textColorPrimary" android:buttonTint="?attr/colorPrimary" />
+                    <RadioButton android:id="@+id/rbFontSizeXL" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Extra" android:textColor="?attr/android:textColorPrimary" android:buttonTint="?attr/colorPrimary" />
                 </RadioGroup>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -139,10 +139,10 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <RadioButton android:id="@+id/rbFontBarlow" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Barlow" android:buttonTint="?attr/colorPrimary" />
-                    <RadioButton android:id="@+id/rbFontModerno" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Moderno (Montserrat)" android:buttonTint="?attr/colorPrimary" />
-                    <RadioButton android:id="@+id/rbFontClasico" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Clásico (Playfair)" android:buttonTint="?attr/colorPrimary" />
-                    <RadioButton android:id="@+id/rbFontRounded" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Rounded (Quicksand)" android:buttonTint="?attr/colorPrimary" />
+                    <RadioButton android:id="@+id/rbFontBarlow" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Barlow" android:textColor="?attr/android:textColorPrimary" android:buttonTint="?attr/colorPrimary" />
+                    <RadioButton android:id="@+id/rbFontModerno" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Moderno (Montserrat)" android:textColor="?attr/android:textColorPrimary" android:buttonTint="?attr/colorPrimary" />
+                    <RadioButton android:id="@+id/rbFontClasico" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Clásico (Playfair)" android:textColor="?attr/android:textColorPrimary" android:buttonTint="?attr/colorPrimary" />
+                    <RadioButton android:id="@+id/rbFontRounded" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Rounded (Quicksand)" android:textColor="?attr/android:textColorPrimary" android:buttonTint="?attr/colorPrimary" />
                 </RadioGroup>
             </LinearLayout>
         </androidx.cardview.widget.CardView>

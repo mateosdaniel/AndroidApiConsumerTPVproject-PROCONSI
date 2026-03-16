@@ -62,6 +62,7 @@ public class SaleFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         com.proconsi.electrobazar.utils.ThemeManager.applyFontToView(view, requireContext());
+        com.proconsi.electrobazar.utils.ThemeManager.applyColorsToView(view, requireContext());
 
         productViewModel = new ViewModelProvider(this).get(ProductViewModel.class);
         saleViewModel = new ViewModelProvider(requireActivity()).get(SaleViewModel.class);

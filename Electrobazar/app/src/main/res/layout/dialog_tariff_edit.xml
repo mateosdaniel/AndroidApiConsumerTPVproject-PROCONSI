@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primary"
+    android:background="?attr/android:windowBackground"
     android:orientation="vertical"
     android:padding="24dp">
 
@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
         android:text="Tarifa"
-        android:textColor="@color/text_main"
+        android:textColor="?attr/android:textColorPrimary"
         android:textSize="24sp"
         android:textStyle="bold" />
 
@@ -22,8 +22,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:hint="Nombre de Tarifa"
-        app:boxStrokeColor="@color/accent"
-        app:hintTextColor="@color/text_muted"
+        app:boxStrokeColor="?attr/colorAccent"
+        app:hintTextColor="?attr/android:textColorSecondary"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -31,7 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textCapCharacters"
-            android:textColor="@color/text_main" />
+            android:textColor="?attr/android:textColorPrimary" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -39,8 +39,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:hint="Porcentaje de Descuento (%)"
-        app:boxStrokeColor="@color/accent"
-        app:hintTextColor="@color/text_muted"
+        app:boxStrokeColor="?attr/colorAccent"
+        app:hintTextColor="?attr/android:textColorSecondary"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -48,7 +48,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
-            android:textColor="@color/text_main" />
+            android:textColor="?attr/android:textColorPrimary" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -56,8 +56,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:hint="Descripción"
-        app:boxStrokeColor="@color/accent"
-        app:hintTextColor="@color/text_muted"
+        app:boxStrokeColor="?attr/colorAccent"
+        app:hintTextColor="?attr/android:textColorSecondary"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -67,7 +67,7 @@
             android:gravity="top"
             android:inputType="textMultiLine"
             android:minLines="3"
-            android:textColor="@color/text_main" />
+            android:textColor="?attr/android:textColorPrimary" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <LinearLayout
@@ -82,15 +82,15 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Estado Activo"
-            android:textColor="@color/text_main"
+            android:textColor="?attr/android:textColorPrimary"
             android:textSize="16sp" />
 
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/tariffActiveToggle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:thumbTint="@color/accent"
-            app:trackTint="@color/border" />
+            app:thumbTint="?attr/colorAccent"
+            app:trackTint="?attr/colorOutline" />
     </LinearLayout>
 
     <View
@@ -110,16 +110,16 @@
             android:layout_height="56dp"
             android:layout_weight="1"
             android:text="CANCELAR"
-            android:textColor="@color/text_muted" />
+            android:textColor="?attr/android:textColorSecondary" />
 
         <Button
             android:id="@+id/btnSave"
             android:layout_width="0dp"
             android:layout_height="56dp"
             android:layout_weight="1"
-            android:backgroundTint="@color/accent"
+            android:backgroundTint="?attr/colorAccent"
             android:text="GUARDAR"
-            android:textColor="@color/primary"
+            android:textColor="?attr/android:windowBackground"
             app:cornerRadius="12dp" />
     </LinearLayout>
 

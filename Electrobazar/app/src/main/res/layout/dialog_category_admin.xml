@@ -5,14 +5,14 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="24dp"
-    android:background="@color/secondary">
+    android:background="?attr/colorSurfaceVariant">
 
     <TextView
         android:id="@+id/tvDialogTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Datos de la Categoría"
-        android:textColor="@color/text_main"
+        android:textColor="?attr/android:textColorPrimary"
         android:textSize="20sp"
         android:textStyle="bold"
         android:layout_marginBottom="24dp" />
@@ -23,13 +23,13 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:hint="Nombre"
-        app:boxStrokeColor="@color/accent"
-        app:hintTextColor="@color/accent">
+        app:boxStrokeColor="?attr/colorAccent"
+        app:hintTextColor="?attr/colorAccent">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/text_main" />
+            android:textColor="?attr/android:textColorPrimary" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -38,13 +38,13 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:hint="Descripción"
-        app:boxStrokeColor="@color/accent"
-        app:hintTextColor="@color/accent">
+        app:boxStrokeColor="?attr/colorAccent"
+        app:hintTextColor="?attr/colorAccent">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/text_main" />
+            android:textColor="?attr/android:textColorPrimary" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.switchmaterial.SwitchMaterial
@@ -52,10 +52,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Categoría Activa"
-        android:textColor="@color/text_main"
+        android:textColor="?attr/android:textColorPrimary"
         android:checked="true"
-        app:thumbTint="@color/accent"
-        app:trackTint="@color/accent"
+        app:thumbTint="?attr/colorAccent"
+        app:trackTint="?attr/colorAccent"
         android:layout_marginBottom="24dp" />
 
     <com.google.android.material.button.MaterialButton
@@ -63,8 +63,8 @@
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:text="Guardar Categoría"
-        android:textColor="@color/primary"
-        app:backgroundTint="@color/accent"
+        android:textColor="?attr/android:windowBackground"
+        app:backgroundTint="?attr/colorAccent"
         app:cornerRadius="12dp" />
 
 </LinearLayout>

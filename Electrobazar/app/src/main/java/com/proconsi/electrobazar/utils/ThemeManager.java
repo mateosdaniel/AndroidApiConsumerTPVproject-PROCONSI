@@ -12,6 +12,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
+import androidx.core.view.WindowCompat;
+import androidx.core.view.WindowInsetsControllerCompat;
+import android.view.Window;
 
 /**
  * ThemeManager — mirrors the web app's localStorage-based theme system exactly.
@@ -200,12 +203,19 @@ public class ThemeManager {
         SharedPreferences p = migratedPrefs(ctx);
         boolean dark = isDark(ctx);
         String accentKey = dark ? KEY_DARK_ACCENT : KEY_LIGHT_ACCENT;
-        int defaultAccent = dark ? 7 : 0; // web default: dark=cian(7), light=monochrome(0)
+        int defaultAccent = dark ? 7 : 0; 
         int idx = clamp(p.getInt(accentKey, defaultAccent), ACCENT_VALUES.length);
         if (idx == 0) {
             return dark ? Color.WHITE : Color.BLACK;
         }
         return Color.parseColor(ACCENT_VALUES[idx]);
+    }
+
+    public static int getOnAccentColor(Context ctx) {
+        int accent = getAccentColor(ctx);
+        // Calculate luminance to decide if text should be white or black
+        double luminance = (0.299 * Color.red(accent) + 0.587 * Color.green(accent) + 0.114 * Color.blue(accent)) / 255;
+        return (luminance > 0.5) ? Color.BLACK : Color.WHITE;
     }
 
     /** Resolved accent hover color */
@@ -229,19 +239,64 @@ public class ThemeManager {
      * Must be called BEFORE super.onCreate() and setContentView().
      */
     public static void applyTheme(Activity activity) {
-        SharedPreferences p = migratedPrefs(activity);
-        boolean dark = "dark".equals(p.getString(KEY_THEME, "dark"));
+        boolean dark = isDark(activity);
+        int accentIdx = getCurrentAccentIdx(activity);
+        int primaryIdx = getCurrentPrimaryIdx(activity);
 
-        // Set the base Material theme (controls widget defaults)
-        activity.setTheme(dark
-                ? com.proconsi.electrobazar.R.style.Theme_Electrobazar_Dark
-                : com.proconsi.electrobazar.R.style.Theme_Electrobazar_Light);
+        // 1. Set the base theme with the Accent color
+        int accentThemeId;
+        if (dark) {
+            switch (accentIdx) {
+                case 0: accentThemeId = com.proconsi.electrobazar.R.style.Theme_Electrobazar_Dark_Monochrome; break;
+                case 1: accentThemeId = com.proconsi.electrobazar.R.style.Theme_Electrobazar_Dark_Orange; break;
+                case 2: accentThemeId = com.proconsi.electrobazar.R.style.Theme_Electrobazar_Dark_Blue; break;
+                case 3: accentThemeId = com.proconsi.electrobazar.R.style.Theme_Electrobazar_Dark_Green; break;
+                case 4: accentThemeId = com.proconsi.electrobazar.R.style.Theme_Electrobazar_Dark_Red; break;
+                case 5: accentThemeId = com.proconsi.electrobazar.R.style.Theme_Electrobazar_Dark_Purple; break;
+                case 6: accentThemeId = com.proconsi.electrobazar.R.style.Theme_Electrobazar_Dark_Pink; break;
+                case 7: default: accentThemeId = com.proconsi.electrobazar.R.style.Theme_Electrobazar_Dark_Cyan; break;
+            }
+        } else {
+            switch (accentIdx) {
+                case 0: accentThemeId = com.proconsi.electrobazar.R.style.Theme_Electrobazar_Light_Monochrome; break;
+                case 1: accentThemeId = com.proconsi.electrobazar.R.style.Theme_Electrobazar_Light_Orange; break;
+                case 2: accentThemeId = com.proconsi.electrobazar.R.style.Theme_Electrobazar_Light_Blue; break;
+                case 3: accentThemeId = com.proconsi.electrobazar.R.style.Theme_Electrobazar_Light_Green; break;
+                case 4: accentThemeId = com.proconsi.electrobazar.R.style.Theme_Electrobazar_Light_Red; break;
+                case 5: accentThemeId = com.proconsi.electrobazar.R.style.Theme_Electrobazar_Light_Purple; break;
+                case 6: accentThemeId = com.proconsi.electrobazar.R.style.Theme_Electrobazar_Light_Pink; break;
+                case 7: default: accentThemeId = com.proconsi.electrobazar.R.style.Theme_Electrobazar_Light_Cyan; break;
+            }
+        }
+        activity.setTheme(accentThemeId);
 
-        // Override dynamic window colors from selected palette
-        int primaryColor = getPrimaryColor(activity);
-        activity.getWindow().setBackgroundDrawable(new ColorDrawable(primaryColor));
-        activity.getWindow().setStatusBarColor(primaryColor);
-        activity.getWindow().setNavigationBarColor(primaryColor);
+        // 2. Apply the specific Palette (primary background tone) on top
+        int paletteId;
+        if (dark) {
+            switch (primaryIdx) {
+                case 1: paletteId = com.proconsi.electrobazar.R.style.Palette_Electrobazar_Dark1; break;
+                case 2: paletteId = com.proconsi.electrobazar.R.style.Palette_Electrobazar_Dark2; break;
+                case 0: default: paletteId = com.proconsi.electrobazar.R.style.Palette_Electrobazar_Dark0; break;
+            }
+        } else {
+            switch (primaryIdx) {
+                case 1: paletteId = com.proconsi.electrobazar.R.style.Palette_Electrobazar_Light1; break;
+                case 2: paletteId = com.proconsi.electrobazar.R.style.Palette_Electrobazar_Light2; break;
+                case 0: default: paletteId = com.proconsi.electrobazar.R.style.Palette_Electrobazar_Light0; break;
+            }
+        }
+        activity.getTheme().applyStyle(paletteId, true);
+
+        // 3. Force Status Bar to be ALWAYS BLACK as per user request
+        Window window = activity.getWindow();
+        WindowInsetsControllerCompat controller = WindowCompat.getInsetsController(window, window.getDecorView());
+        if (controller != null) {
+            // Navigation bar (bottom) follows theme mode
+            controller.setAppearanceLightNavigationBars(!dark);
+        }
+
+        // Force Status Bar to be ALWAYS BLACK at the very end to avoid overrides
+        window.setStatusBarColor(Color.BLACK);
     }
 
     /**
@@ -270,12 +325,25 @@ public class ThemeManager {
                                         int surface, int secondary, Context ctx) {
         if (view instanceof TextView) {
             TextView tv = (TextView) view;
-            // Only override if view is using the default text color token
-            // (avoids overwriting intentionally colored views like danger/success badges)
             int currentColor = tv.getCurrentTextColor();
-            // If the color is exactly the old dark default text or old dark muted, update it
-            if (isMaterialThemeTextColor(currentColor)) {
-                tv.setTextColor(text);
+            
+            // Check if it's a "filled" button that needs contrast with the accent color
+            boolean isFilledButton = (view instanceof android.widget.Button || view instanceof com.google.android.material.button.MaterialButton)
+                                     && !(view instanceof android.widget.CompoundButton); // Exclude RadioButtons, Checkboxes, etc.
+
+            if (isFilledButton) {
+                // For filled buttons, use contrast color if it's currently white or default
+                if (currentColor == Color.WHITE || currentColor == 0xFFFFFFFF || isMaterialThemeTextColor(currentColor)) {
+                    tv.setTextColor(getOnAccentColor(ctx));
+                }
+            } else if (isMaterialThemeTextColor(currentColor)) {
+                // For normal text and RadioButtons, use the standard text color for the theme
+                // But if it was a muted color, use the new muted color to maintain hierarchy
+                if (isMutedTextColor(currentColor)) {
+                    tv.setTextColor(muted);
+                } else {
+                    tv.setTextColor(text);
+                }
             }
         }
         if (view instanceof ViewGroup) {
@@ -286,13 +354,26 @@ public class ThemeManager {
         }
     }
 
+    private static boolean isMutedTextColor(int color) {
+        return color == 0xFF8892A4 // dark0 muted
+            || color == 0xFF666666 // dark1 muted
+            || color == 0xFF888888 // dark2 muted
+            || color == 0xFF64748B // light muted
+            || color == 0xFF808080 // generic gray
+            || color == 0xFF757575; // material default secondary
+    }
+
     /** Colors assigned by the Material theme xml that we want to override */
     private static boolean isMaterialThemeTextColor(int color) {
-        // Match typical Material dark/light theme text colors
+        // Match typical Material dark/light theme text colors (Primary AND Secondary/Muted)
         return color == 0xFFE8EAF0 // dark0 text
             || color == 0xFFE0E0E0 // dark1 text
             || color == 0xFFE8E8E8 // dark2 text
             || color == 0xFF0F172A // light text
+            || color == 0xFF8892A4 // dark0 muted
+            || color == 0xFF666666 // dark1 muted
+            || color == 0xFF888888 // dark2 muted
+            || color == 0xFF64748B // light muted
             || color == 0xDE000000 // Material default black 87%
             || color == 0xFFFFFFFF // Material default white
             || color == 0xFF212121; // Material dark text

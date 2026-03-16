@@ -19,6 +19,7 @@ import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.proconsi.electrobazar.R;
 import com.proconsi.electrobazar.models.Category;
+import com.proconsi.electrobazar.ui.adapters.CategoryAdapter;
 import com.proconsi.electrobazar.ui.adapters.InventoryProductAdapter;
 import com.proconsi.electrobazar.viewmodels.ProductsViewModel;
 
@@ -26,8 +27,8 @@ public class InventoryFragment extends Fragment {
 
     private ProductsViewModel viewModel;
     private InventoryProductAdapter adapter;
+    private CategoryAdapter categoryAdapter;
     private SwipeRefreshLayout swipeRefresh;
-    private ChipGroup chipGroupCategories;
 
     @Nullable
     @Override
@@ -38,12 +39,19 @@ public class InventoryFragment extends Fragment {
         viewModel = new ViewModelProvider(this).get(ProductsViewModel.class);
         
         swipeRefresh = view.findViewById(R.id.swipeRefresh);
-        chipGroupCategories = view.findViewById(R.id.chipGroupCategories);
         RecyclerView recyclerView = view.findViewById(R.id.rvInventory);
+        RecyclerView categoriesRecyclerView = view.findViewById(R.id.rvCategories);
         EditText etSearch = view.findViewById(R.id.etSearch);
+        com.proconsi.electrobazar.utils.ThemeManager.applyColorsToView(view, requireContext());
 
         adapter = new InventoryProductAdapter();
         recyclerView.setAdapter(adapter);
+
+        categoryAdapter = new CategoryAdapter(category -> {
+            viewModel.filterByCategory(category.getId());
+            categoryAdapter.setSelectedCategoryId(category.getId());
+        });
+        categoriesRecyclerView.setAdapter(categoryAdapter);
 
         swipeRefresh.setOnRefreshListener(() -> viewModel.loadProducts());
 
@@ -73,23 +81,7 @@ public class InventoryFragment extends Fragment {
         });
 
         viewModel.getCategories().observe(getViewLifecycleOwner(), categories -> {
-            chipGroupCategories.removeAllViews();
-            
-            // "All" chip
-            Chip allChip = new Chip(getContext());
-            allChip.setText("Todos");
-            allChip.setCheckable(true);
-            allChip.setChecked(true);
-            allChip.setOnClickListener(v -> viewModel.filterByCategory(null));
-            chipGroupCategories.addView(allChip);
-
-            for (Category category : categories) {
-                Chip chip = new Chip(getContext());
-                chip.setText(category.getName());
-                chip.setCheckable(true);
-                chip.setOnClickListener(v -> viewModel.filterByCategory(category.getId()));
-                chipGroupCategories.addView(chip);
-            }
+            categoryAdapter.setCategories(categories);
         });
     }
 }
