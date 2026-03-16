@@ -6,11 +6,14 @@ public class TicketLine {
     private Product product;
     private int quantity;
     private BigDecimal unitPrice;
+    private BigDecimal originalPrice;
     private BigDecimal lineTotal;
 
     public TicketLine(Product product, int quantity) {
         this.product = product;
         this.setQuantity(quantity);
+        this.unitPrice = product.getPrice();
+        this.originalPrice = product.getPrice();
     }
 
     public Product getProduct() {
@@ -33,6 +36,14 @@ public class TicketLine {
     public void setUnitPrice(BigDecimal unitPrice) {
         this.unitPrice = unitPrice;
         // The ViewModel will call updateTotals with the correct RE status
+    }
+
+    public BigDecimal getOriginalPrice() {
+        return originalPrice != null ? originalPrice : product.getPrice();
+    }
+
+    public void setOriginalPrice(BigDecimal originalPrice) {
+        this.originalPrice = originalPrice;
     }
 
     public BigDecimal getLineTotal() {

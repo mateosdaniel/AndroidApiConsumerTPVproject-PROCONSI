@@ -185,6 +185,9 @@ public interface ApiService {
     @GET("api/products/selection")
     Call<List<ProductSelectionItem>> getProductsForSelection();
 
+    @GET("tpv/api/products/{id}/price")
+    Call<PriceResponse> getProductPriceByTariff(@Path("id") Long productId, @Query("tariffId") Long tariffId);
+
     // --- Product Prices ---
     @POST("api/product-prices/{productId}/schedule")
     Call<ProductPriceResponse> scheduleProductPrice(@Path("productId") Long productId, @Body ProductPriceRequest request);

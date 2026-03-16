@@ -99,6 +99,8 @@ public class AdminFragment extends Fragment {
             showSubFragment(new CashClosuresAdminFragment());
         } else if (id == R.id.admin_nav_returns) {
             showSubFragment(new ReturnsAdminFragment());
+        } else if (id == R.id.admin_nav_tariffs) {
+            showSubFragment(new TariffsAdminFragment());
         } else {
 
             // Placeholder for other sections

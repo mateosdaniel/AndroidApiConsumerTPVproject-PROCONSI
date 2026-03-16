@@ -21,6 +21,7 @@ public class SaleViewModel extends ViewModel {
     private final SaleRepository saleRepository = new SaleRepository();
     private final CustomerRepository customerRepository = new CustomerRepository();
     private final com.proconsi.electrobazar.repositories.HeldSalesRepository heldSalesRepository = new com.proconsi.electrobazar.repositories.HeldSalesRepository();
+    private final com.proconsi.electrobazar.repositories.ProductRepository productRepository = new com.proconsi.electrobazar.repositories.ProductRepository();
     private final MutableLiveData<List<TicketLine>> ticketLines = new MutableLiveData<>(new ArrayList<>());
     private final MutableLiveData<Integer> totalItems = new MutableLiveData<>(0);
     private final MutableLiveData<BigDecimal> totalAmount = new MutableLiveData<>(BigDecimal.ZERO);
@@ -73,12 +74,48 @@ public class SaleViewModel extends ViewModel {
 
     public void setCustomer(Customer customer) {
         selectedCustomer.setValue(customer);
-        updateTicket(ticketLines.getValue());
+        if (customer != null && customer.getTariff() != null) {
+            applyTariff();
+        } else {
+            resetPrices();
+        }
     }
 
     public void clearCustomer() {
         selectedCustomer.setValue(null);
-        updateTicket(ticketLines.getValue());
+        resetPrices();
+    }
+
+    private void applyTariff() {
+        Customer customer = selectedCustomer.getValue();
+        if (customer == null || customer.getTariff() == null) return;
+        
+        Long tariffId = customer.getTariff().getId();
+        List<TicketLine> lines = ticketLines.getValue();
+        if (lines == null || lines.isEmpty()) return;
+
+        for (TicketLine line : lines) {
+            productRepository.getProductPriceByTariff(line.getProduct().getId(), tariffId).observeForever(priceResp -> {
+                if (priceResp != null) {
+                    line.setUnitPrice(priceResp.getPrice());
+                    if (priceResp.getBasePrice() != null) {
+                        line.setOriginalPrice(priceResp.getBasePrice());
+                    }
+                    updateTicket(ticketLines.getValue());
+                }
+            });
+        }
+    }
+
+    private void resetPrices() {
+        List<TicketLine> lines = ticketLines.getValue();
+        if (lines == null) return;
+
+        for (TicketLine line : lines) {
+            line.setUnitPrice(line.getProduct().getPrice());
+            line.setOriginalPrice(line.getProduct().getPrice());
+        }
+        updateTicket(lines);
     }
 
     public LiveData<List<Customer>> searchCustomers(String query) {
@@ -108,23 +145,37 @@ public class SaleViewModel extends ViewModel {
     public boolean addProduct(Product product) {
         int stock = product.getStock() != null ? product.getStock() : 0;
         List<TicketLine> currentLines = new ArrayList<>(ticketLines.getValue());
-        boolean found = false;
+        TicketLine targetLine = null;
 
         for (TicketLine line : currentLines) {
             if (line.getProduct().getId().equals(product.getId())) {
                 if (line.getQuantity() >= stock) {
-                    // Cannot add more than available stock
                     return false;
                 }
                 line.setQuantity(line.getQuantity() + 1);
-                found = true;
+                targetLine = line;
                 break;
             }
         }
 
-        if (!found) {
+        if (targetLine == null) {
             if (stock <= 0) return false;
-            currentLines.add(new TicketLine(product, 1));
+            targetLine = new TicketLine(product, 1);
+            currentLines.add(targetLine);
+        }
+
+        Customer customer = selectedCustomer.getValue();
+        if (customer != null && customer.getTariff() != null) {
+            final TicketLine finalLine = targetLine;
+            productRepository.getProductPriceByTariff(product.getId(), customer.getTariff().getId()).observeForever(priceResp -> {
+                if (priceResp != null) {
+                    finalLine.setUnitPrice(priceResp.getPrice());
+                    if (priceResp.getBasePrice() != null) {
+                        finalLine.setOriginalPrice(priceResp.getBasePrice());
+                    }
+                    updateTicket(ticketLines.getValue());
+                }
+            });
         }
 
         updateTicket(currentLines);

@@ -80,4 +80,24 @@ public class ProductRepository {
         });
         return data;
     }
+
+    public LiveData<com.proconsi.electrobazar.models.PriceResponse> getProductPriceByTariff(Long productId, Long tariffId) {
+        MutableLiveData<com.proconsi.electrobazar.models.PriceResponse> data = new MutableLiveData<>();
+        apiService.getProductPriceByTariff(productId, tariffId).enqueue(new Callback<com.proconsi.electrobazar.models.PriceResponse>() {
+            @Override
+            public void onResponse(Call<com.proconsi.electrobazar.models.PriceResponse> call, Response<com.proconsi.electrobazar.models.PriceResponse> response) {
+                if (response.isSuccessful()) {
+                    data.setValue(response.body());
+                } else {
+                    data.setValue(null);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<com.proconsi.electrobazar.models.PriceResponse> call, Throwable t) {
+                data.setValue(null);
+            }
+        });
+        return data;
+    }
 }
