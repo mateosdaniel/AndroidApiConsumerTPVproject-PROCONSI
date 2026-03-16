@@ -55,8 +55,14 @@ public interface ApiService {
     @POST("api/admin/tax-rates/{newId}/apply-to-products")
     Call<Void> applyTaxRateToProducts(@Path("newId") Long newId);
 
+    @GET("api/admin/settings")
+    Call<CompanySettings> getCompanySettings();
+
     @POST("api/admin/settings")
     Call<Map<String, Object>> saveCompanySettings(@Body CompanySettings settings);
+
+    @POST("admin/settings/pin")
+    Call<Map<String, Object>> updateAdminPin(@Body UpdatePinRequest request);
 
     @DELETE("api/admin/workers/{id}")
     Call<Void> deactivateWorker(@Path("id") Long id);

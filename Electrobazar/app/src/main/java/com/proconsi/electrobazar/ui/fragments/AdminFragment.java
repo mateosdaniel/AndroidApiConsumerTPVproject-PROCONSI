@@ -107,6 +107,14 @@ public class AdminFragment extends Fragment {
             showSubFragment(new SelectiveTaxFragment());
         } else if (id == R.id.admin_nav_price_bulk) {
             showSubFragment(new BulkPricesFragment());
+        } else if (id == R.id.admin_nav_analytics) {
+            showSubFragment(new AnalyticsFragment());
+        } else if (id == R.id.admin_nav_activity) {
+            showSubFragment(new ActivityLogFragment());
+        } else if (id == R.id.admin_nav_settings) {
+            showSubFragment(new SettingsAdminFragment());
+        } else if (id == R.id.admin_nav_security) {
+            showSubFragment(new SecurityAdminFragment());
         } else {
 
             // Placeholder for other sections

@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primary">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ajustes de Empresa"
+            android:textColor="@color/text_main"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="24dp" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/secondary"
+            app:cardCornerRadius="12dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Datos de la Empresa"
+                    android:textColor="@color/text_main"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="16dp"/>
+
+                <!-- App Name -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nombre de la Aplicación"
+                    android:textColor="@color/text_muted"
+                    android:textSize="12sp"
+                    android:layout_marginBottom="4dp"/>
+                <EditText
+                    android:id="@+id/etAppName"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:background="@drawable/bg_edittext"
+                    android:padding="12dp"
+                    android:textColor="@color/text_main"
+                    android:layout_marginBottom="16dp"/>
+
+                <!-- Name / Razón Social -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nombre / Razón Social"
+                    android:textColor="@color/text_muted"
+                    android:textSize="12sp"
+                    android:layout_marginBottom="4dp"/>
+                <EditText
+                    android:id="@+id/etCompanyName"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:background="@drawable/bg_edittext"
+                    android:padding="12dp"
+                    android:textColor="@color/text_main"
+                    android:layout_marginBottom="16dp"/>
+
+                <!-- CIF -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="CIF / NIF"
+                    android:textColor="@color/text_muted"
+                    android:textSize="12sp"
+                    android:layout_marginBottom="4dp"/>
+                <EditText
+                    android:id="@+id/etCompanyCif"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:background="@drawable/bg_edittext"
+                    android:padding="12dp"
+                    android:textColor="@color/text_main"
+                    android:layout_marginBottom="16dp"/>
+
+                <!-- Address -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dirección"
+                    android:textColor="@color/text_muted"
+                    android:textSize="12sp"
+                    android:layout_marginBottom="4dp"/>
+                <EditText
+                    android:id="@+id/etCompanyAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:background="@drawable/bg_edittext"
+                    android:padding="12dp"
+                    android:textColor="@color/text_main"
+                    android:layout_marginBottom="16dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:orientation="vertical"
+                        android:layout_marginEnd="8dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Ciudad"
+                            android:textColor="@color/text_muted"
+                            android:textSize="12sp"
+                            android:layout_marginBottom="4dp"/>
+                        <EditText
+                            android:id="@+id/etCompanyCity"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:background="@drawable/bg_edittext"
+                            android:padding="12dp"
+                            android:textColor="@color/text_main"
+                            android:layout_marginBottom="16dp"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="C.P."
+                            android:textColor="@color/text_muted"
+                            android:textSize="12sp"
+                            android:layout_marginBottom="4dp"/>
+                        <EditText
+                            android:id="@+id/etCompanyPostalCode"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:background="@drawable/bg_edittext"
+                            android:padding="12dp"
+                            android:textColor="@color/text_main"
+                            android:layout_marginBottom="16dp"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Teléfono"
+                    android:textColor="@color/text_muted"
+                    android:textSize="12sp"
+                    android:layout_marginBottom="4dp"/>
+                <EditText
+                    android:id="@+id/etCompanyPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:background="@drawable/bg_edittext"
+                    android:padding="12dp"
+                    android:textColor="@color/text_main"
+                    android:inputType="phone"
+                    android:layout_marginBottom="16dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Email"
+                    android:textColor="@color/text_muted"
+                    android:textSize="12sp"
+                    android:layout_marginBottom="4dp"/>
+                <EditText
+                    android:id="@+id/etCompanyEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:background="@drawable/bg_edittext"
+                    android:padding="12dp"
+                    android:textColor="@color/text_main"
+                    android:inputType="textEmailAddress"
+                    android:layout_marginBottom="24dp"/>
+
+                <Button
+                    android:id="@+id/btnSaveSettings"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:text="Guardar Configuración"
+                    android:textAllCaps="false"
+                    android:backgroundTint="@color/accent"
+                    android:textColor="@color/primary"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

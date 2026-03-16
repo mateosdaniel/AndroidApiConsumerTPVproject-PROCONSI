@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primary">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Seguridad del Sistema"
+            android:textColor="@color/text_main"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="24dp" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/secondary"
+            app:cardCornerRadius="12dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cambiar PIN Administrador"
+                    android:textColor="@color/text_main"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="8dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Este PIN se utiliza para acceder a funciones administrativas y realizar cierres de caja."
+                    android:textColor="@color/text_muted"
+                    android:textSize="13sp"
+                    android:layout_marginBottom="20dp"/>
+
+                <!-- Current PIN -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="PIN Actual"
+                    android:textColor="@color/text_muted"
+                    android:textSize="12sp"
+                    android:layout_marginBottom="4dp"/>
+                <EditText
+                    android:id="@+id/etCurrentPin"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:background="@drawable/bg_edittext"
+                    android:padding="12dp"
+                    android:textColor="@color/text_main"
+                    android:inputType="numberPassword"
+                    android:maxLength="10"
+                    android:layout_marginBottom="16dp"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/border"
+                    android:layout_marginBottom="16dp" />
+
+                <!-- New PIN -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nuevo PIN"
+                    android:textColor="@color/text_muted"
+                    android:textSize="12sp"
+                    android:layout_marginBottom="4dp"/>
+                <EditText
+                    android:id="@+id/etNewPin"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:background="@drawable/bg_edittext"
+                    android:padding="12dp"
+                    android:textColor="@color/text_main"
+                    android:inputType="numberPassword"
+                    android:maxLength="10"
+                    android:layout_marginBottom="16dp"/>
+
+                <!-- Confirm PIN -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Confirmar Nuevo PIN"
+                    android:textColor="@color/text_muted"
+                    android:textSize="12sp"
+                    android:layout_marginBottom="4dp"/>
+                <EditText
+                    android:id="@+id/etConfirmPin"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:background="@drawable/bg_edittext"
+                    android:padding="12dp"
+                    android:textColor="@color/text_main"
+                    android:inputType="numberPassword"
+                    android:maxLength="10"
+                    android:layout_marginBottom="24dp"/>
+
+                <Button
+                    android:id="@+id/btnUpdatePin"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:text="Actualizar PIN de Seguridad"
+                    android:textAllCaps="false"
+                    android:backgroundTint="@color/accent"
+                    android:textColor="@color/primary"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>
