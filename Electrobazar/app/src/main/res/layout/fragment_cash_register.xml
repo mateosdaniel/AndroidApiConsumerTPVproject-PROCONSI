@@ -386,164 +386,120 @@
                     android:layout_height="wrap_content"
                     android:text="Cierre de Caja"
                     android:textColor="?attr/android:textColorPrimary"
-                    android:textSize="24sp"
+                    android:textSize="26sp"
                     android:textStyle="bold"
-                    android:layout_marginBottom="16dp" />
+                    android:layout_marginBottom="24dp" />
 
-                <!-- Detailed Stats Grid -->
-                <GridLayout
+                <!-- Main Adaptive Container -->
+                <LinearLayout
+                    android:id="@+id/cashCloseBodyRow"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:columnCount="2"
-                    android:layout_marginBottom="16dp">
+                    android:orientation="vertical">
 
-                    <com.google.android.material.card.MaterialCardView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_columnWeight="1"
-                        android:layout_margin="4dp"
-                        app:cardBackgroundColor="?attr/colorSurface"
-                        app:cardCornerRadius="8dp">
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:padding="12dp">
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Ventas Totales" android:textColor="?attr/android:textColorSecondary" android:textSize="12sp" />
-                            <TextView android:id="@+id/closeTotalSales" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0.00€" android:textColor="?attr/colorPrimary" android:textSize="16sp" android:textStyle="bold" />
-                        </LinearLayout>
-                    </com.google.android.material.card.MaterialCardView>
-
-                    <com.google.android.material.card.MaterialCardView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_columnWeight="1"
-                        android:layout_margin="4dp"
-                        app:cardBackgroundColor="?attr/colorSurface"
-                        app:cardCornerRadius="8dp">
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:padding="12dp">
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Operaciones" android:textColor="?attr/android:textColorSecondary" android:textSize="12sp" />
-                            <TextView android:id="@+id/closeOpCount" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0" android:textColor="?attr/android:textColorPrimary" android:textSize="16sp" android:textStyle="bold" />
-                        </LinearLayout>
-                    </com.google.android.material.card.MaterialCardView>
-
-                    <com.google.android.material.card.MaterialCardView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_columnWeight="1"
-                        android:layout_margin="4dp"
-                        app:cardBackgroundColor="?attr/colorSurface"
-                        app:cardCornerRadius="8dp">
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:padding="12dp">
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Cobros Tarjeta" android:textColor="?attr/android:textColorSecondary" android:textSize="12sp" />
-                            <TextView android:id="@+id/closeCardSales" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0.00€" android:textColor="@color/info" android:textSize="16sp" android:textStyle="bold" />
-                        </LinearLayout>
-                    </com.google.android.material.card.MaterialCardView>
-
-                    <com.google.android.material.card.MaterialCardView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_columnWeight="1"
-                        android:layout_margin="4dp"
-                        app:cardBackgroundColor="?attr/colorSurface"
-                        app:cardCornerRadius="8dp">
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:padding="12dp">
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Efectivo (Bruto)" android:textColor="?attr/android:textColorSecondary" android:textSize="12sp" />
-                            <TextView android:id="@+id/closeCashSales" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0.00€" android:textColor="@color/success" android:textSize="16sp" android:textStyle="bold" />
-                        </LinearLayout>
-                    </com.google.android.material.card.MaterialCardView>
-
-                </GridLayout>
-
-                <!-- Detailed Summary Card -->
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:cardBackgroundColor="?attr/colorSurface"
-                    app:cardCornerRadius="12dp"
-                    app:strokeColor="?attr/colorOutline"
-                    app:strokeWidth="1dp"
-                    android:layout_marginBottom="24dp">
-                    
+                    <!-- Left Column -->
                     <LinearLayout
+                        android:id="@+id/cashCloseLeftCol"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:padding="16dp">
-                        
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Resumen de Arqueo" android:textColor="?attr/android:textColorPrimary" android:textStyle="bold" android:layout_marginBottom="12dp" />
-                        
-                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginBottom="4dp">
-                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Saldo inicial" android:textColor="?attr/android:textColorSecondary" android:textSize="13sp" />
-                            <TextView android:id="@+id/summaryOpening" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0.00€" android:textColor="?attr/android:textColorPrimary" android:textSize="13sp" />
-                        </LinearLayout>
+                        android:layout_weight="1">
 
-                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginBottom="4dp">
-                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="(+) Efectivo ventas" android:textColor="?attr/android:textColorSecondary" android:textSize="13sp" />
-                            <TextView android:id="@+id/summaryCashSales" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0.00€" android:textColor="@color/success" android:textSize="13sp" />
-                        </LinearLayout>
+                        <!-- Detailed Stats Grid (Dynamic columns) -->
+                        <GridLayout
+                            android:id="@+id/closeStatsGrid"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:columnCount="3"
+                            android:layout_marginBottom="16dp">
 
-                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginBottom="4dp">
-                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="(-) Devoluciones" android:textColor="?attr/android:textColorSecondary" android:textSize="13sp" />
-                            <TextView android:id="@+id/summaryRefunds" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0.00€" android:textColor="@color/danger" android:textSize="13sp" />
-                        </LinearLayout>
+                            <!-- Row 1 -->
+                            <com.google.android.material.card.MaterialCardView
+                                android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:layout_margin="4dp"
+                                app:cardBackgroundColor="?attr/colorSurface" app:cardCornerRadius="8dp">
+                                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="12dp">
+                                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Ventas Totales" android:textColor="?attr/android:textColorSecondary" android:textSize="10sp" />
+                                    <TextView android:id="@+id/closeTotalSales" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0.00€" android:textColor="?attr/colorPrimary" android:textSize="14sp" android:textStyle="bold" />
+                                </LinearLayout>
+                            </com.google.android.material.card.MaterialCardView>
 
-                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginBottom="4dp">
-                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="(+) Entradas / (-) Retiradas" android:textColor="?attr/android:textColorSecondary" android:textSize="13sp" />
-                            <TextView android:id="@+id/summaryMovements" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0.00€" android:textColor="?attr/android:textColorPrimary" android:textSize="13sp" />
-                        </LinearLayout>
+                            <com.google.android.material.card.MaterialCardView
+                                android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:layout_margin="4dp"
+                                app:cardBackgroundColor="?attr/colorSurface" app:cardCornerRadius="8dp">
+                                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="12dp">
+                                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Operaciones" android:textColor="?attr/android:textColorSecondary" android:textSize="10sp" />
+                                    <TextView android:id="@+id/closeOpCount" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0" android:textColor="?attr/android:textColorPrimary" android:textSize="14sp" android:textStyle="bold" />
+                                </LinearLayout>
+                            </com.google.android.material.card.MaterialCardView>
 
-                        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="?attr/colorOutline" android:layout_marginVertical="8dp" />
+                            <com.google.android.material.card.MaterialCardView
+                                android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:layout_margin="4dp"
+                                app:cardBackgroundColor="?attr/colorSurface" app:cardCornerRadius="8dp">
+                                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="12dp">
+                                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Cobros Tarjeta" android:textColor="?attr/android:textColorSecondary" android:textSize="10sp" />
+                                    <TextView android:id="@+id/closeCardSales" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0.00€" android:textColor="@color/info" android:textSize="14sp" android:textStyle="bold" />
+                                </LinearLayout>
+                            </com.google.android.material.card.MaterialCardView>
 
-                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
-                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="EFECTIVO ESPERADO" android:textColor="?attr/android:textColorPrimary" android:textStyle="bold" />
-                            <TextView android:id="@+id/closeTheoryAmountText" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0.00€" android:textColor="?attr/colorPrimary" android:textStyle="bold" />
-                        </LinearLayout>
+                            <!-- Row 2 -->
+                            <com.google.android.material.card.MaterialCardView
+                                android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:layout_margin="4dp"
+                                app:cardBackgroundColor="?attr/colorSurface" app:cardCornerRadius="8dp">
+                                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="12dp">
+                                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Tarjeta (Devol.)" android:textColor="?attr/android:textColorSecondary" android:textSize="10sp" />
+                                    <TextView android:id="@+id/closeCardRefunds" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0.00€" android:textColor="@color/danger" android:textSize="14sp" android:textStyle="bold" />
+                                </LinearLayout>
+                            </com.google.android.material.card.MaterialCardView>
 
-                        <TextView android:id="@+id/summaryCancelled" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Anuladas: 0 ops / 0.00€" android:textColor="@color/danger" android:textSize="11sp" android:layout_marginTop="8dp" android:gravity="end" android:alpha="0.7" />
+                            <com.google.android.material.card.MaterialCardView
+                                android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:layout_margin="4dp"
+                                app:cardBackgroundColor="?attr/colorSurface" app:cardCornerRadius="8dp">
+                                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="12dp">
+                                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Efectivo (Ventas)" android:textColor="?attr/android:textColorSecondary" android:textSize="10sp" />
+                                    <TextView android:id="@+id/closeCashSales" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0.00€" android:textColor="@color/success" android:textSize="14sp" android:textStyle="bold" />
+                                </LinearLayout>
+                            </com.google.android.material.card.MaterialCardView>
 
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
+                            <com.google.android.material.card.MaterialCardView
+                                android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:layout_margin="4dp"
+                                app:cardBackgroundColor="?attr/colorSurface" app:cardCornerRadius="8dp">
+                                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="12dp">
+                                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Efectivo (Devol.)" android:textColor="?attr/android:textColorSecondary" android:textSize="10sp" />
+                                    <TextView android:id="@+id/closeCashRefunds" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0.00€" android:textColor="@color/danger" android:textSize="14sp" android:textStyle="bold" />
+                                </LinearLayout>
+                            </com.google.android.material.card.MaterialCardView>
 
-                <LinearLayout
-                    android:id="@+id/returnsSummaryContainer"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:background="@drawable/bg_rounded_card"
-                    android:padding="16dp"
-                    android:layout_marginBottom="24dp"
-                    android:visibility="gone">
+                            <!-- Row 3 -->
+                            <com.google.android.material.card.MaterialCardView
+                                android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:layout_margin="4dp"
+                                app:cardBackgroundColor="?attr/colorSurface" app:cardCornerRadius="8dp">
+                                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="12dp">
+                                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Entradas" android:textColor="?attr/android:textColorSecondary" android:textSize="10sp" />
+                                    <TextView android:id="@+id/closeEntries" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0.00€" android:textColor="@color/success" android:textSize="14sp" android:textStyle="bold" />
+                                </LinearLayout>
+                            </com.google.android.material.card.MaterialCardView>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Devoluciones de hoy"
-                        android:textColor="@color/danger"
-                        android:textStyle="bold"
-                        android:layout_marginBottom="8dp" />
+                            <com.google.android.material.card.MaterialCardView
+                                android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:layout_margin="4dp"
+                                app:cardBackgroundColor="?attr/colorSurface" app:cardCornerRadius="8dp">
+                                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="12dp">
+                                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Retiradas" android:textColor="?attr/android:textColorSecondary" android:textSize="10sp" />
+                                    <TextView android:id="@+id/closeWithdrawals" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0.00€" android:textColor="@color/danger" android:textSize="14sp" android:textStyle="bold" />
+                                </LinearLayout>
+                            </com.google.android.material.card.MaterialCardView>
 
-                    <TextView
-                        android:id="@+id/returnsListText"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text=""
-                        android:textColor="?attr/android:textColorSecondary"
-                        android:textSize="12sp"
-                        android:lineSpacingExtra="4dp" />
-                </LinearLayout>
+                            <com.google.android.material.card.MaterialCardView
+                                android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:layout_margin="4dp"
+                                app:cardBackgroundColor="?attr/colorSurface" app:cardCornerRadius="8dp">
+                                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="12dp">
+                                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Anuladas" android:textColor="?attr/android:textColorSecondary" android:textSize="10sp" />
+                                    <TextView android:id="@+id/closeCancelledStats" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0 / 0.00€" android:textColor="@color/danger" android:textSize="11sp" android:textStyle="bold" />
+                                </LinearLayout>
+                            </com.google.android.material.card.MaterialCardView>
+
+                        </GridLayout>
+
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -623,24 +579,83 @@
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnSubmitClose"
                         android:layout_width="match_parent"
-                        android:layout_height="56dp"
-                        android:text="CONFIRMAR CIERRE"
-                        android:backgroundTint="@color/danger"
-                        android:textColor="?attr/android:windowBackground" />
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnCancelClose"
-                        style="@style/Widget.MaterialComponents.Button.TextButton"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="VOLVER"
-                        android:textColor="?attr/android:textColorSecondary"
+                        android:layout_height="60dp"
+                        android:text="CONFIRMAR CIERRE DE CAJA"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:cornerRadius="12dp"
                         android:layout_marginTop="8dp" />
 
+                </LinearLayout> <!-- End Left Column Inner Container -->
+            </LinearLayout> <!-- End Left Column (cashCloseLeftCol) -->
+
+            <!-- Right Column -->
+            <LinearLayout
+                android:id="@+id/cashCloseRightCol"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1">
+                <!-- Detailed Summary Card (Right Panel) -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardBackgroundColor="?attr/colorSurface"
+                    app:cardCornerRadius="12dp"
+                    app:strokeColor="?attr/colorOutline"
+                    app:strokeWidth="1dp"
+                    android:layout_margin="8dp"
+                    android:layout_marginBottom="24dp">
+                    
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="16dp">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Resumen del Diferencial" android:textColor="?attr/android:textColorPrimary" android:textStyle="bold" android:layout_marginBottom="12dp" />
+                        
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginBottom="4dp">
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Saldo inicial" android:textColor="?attr/android:textColorSecondary" android:textSize="13sp" />
+                            <TextView android:id="@+id/summaryOpening" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0.00€" android:textColor="?attr/android:textColorPrimary" android:textSize="13sp" />
+                        </LinearLayout>
+
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginBottom="4dp">
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="(+) Efectivo ventas" android:textColor="?attr/android:textColorSecondary" android:textSize="13sp" />
+                            <TextView android:id="@+id/summaryCashSales" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0.00€" android:textColor="@color/success" android:textSize="13sp" />
+                        </LinearLayout>
+
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginBottom="4dp">
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="(-) Devoluciones" android:textColor="?attr/android:textColorSecondary" android:textSize="13sp" />
+                            <TextView android:id="@+id/summaryRefunds" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0.00€" android:textColor="@color/danger" android:textSize="13sp" />
+                        </LinearLayout>
+
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginBottom="4dp">
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="(+) Entradas / (-) Retiradas" android:textColor="?attr/android:textColorSecondary" android:textSize="13sp" />
+                            <TextView android:id="@+id/summaryMovements" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0.00€" android:textColor="?attr/android:textColorPrimary" android:textSize="13sp" />
+                        </LinearLayout>
+
+                        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="?attr/colorOutline" android:layout_marginVertical="8dp" />
+
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="EFECTIVO ESPERADO" android:textColor="?attr/android:textColorPrimary" android:textStyle="bold" />
+                            <TextView android:id="@+id/closeTheoryAmountText" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0.00€" android:textColor="?attr/colorPrimary" android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <TextView android:id="@+id/summaryCancelled" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Anuladas: 0 ops / 0.00€" android:textColor="@color/danger" android:textSize="11sp" android:layout_marginTop="8dp" android:gravity="end" android:alpha="0.7" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <LinearLayout
+                    android:id="@+id/returnsSummaryContainer"
+                    android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@drawable/bg_rounded_card"
+                    android:padding="16dp"
+                    android:layout_margin="8dp"
+                    android:visibility="gone">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Devoluciones de hoy" android:textColor="@color/danger" android:textStyle="bold" android:layout_marginBottom="8dp" />
+                    <TextView android:id="@+id/returnsListText" android:layout_width="match_parent" android:layout_height="wrap_content" android:textColor="?attr/android:textColorSecondary" android:textSize="12sp" android:lineSpacingExtra="4dp" />
                 </LinearLayout>
+
             </LinearLayout>
-
         </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
-
+    </LinearLayout>
+</LinearLayout>
+</androidx.core.widget.NestedScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

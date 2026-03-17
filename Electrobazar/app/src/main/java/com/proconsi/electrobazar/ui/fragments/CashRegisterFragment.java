@@ -73,6 +73,7 @@ public class CashRegisterFragment extends Fragment {
         setupRecyclerView();
         setupListeners();
         loadStatus();
+        updateLayoutForOrientation();
     }
 
     private void setupRecyclerView() {
@@ -86,7 +87,6 @@ public class CashRegisterFragment extends Fragment {
         binding.btnNewMovement.setOnClickListener(v -> showState(LayoutState.MOVEMENT_FORM));
         binding.btnGotoClose.setOnClickListener(v -> loadCloseInfo());
         binding.btnCancelMovement.setOnClickListener(v -> showState(LayoutState.ACTIVE_DASHBOARD));
-        binding.btnCancelClose.setOnClickListener(v -> showState(LayoutState.ACTIVE_DASHBOARD));
         
         binding.btnSubmitMovement.setOnClickListener(v -> submitMovement());
         binding.btnSubmitClose.setOnClickListener(v -> submitClose());
@@ -247,11 +247,17 @@ public class CashRegisterFragment extends Fragment {
                 if (response.isSuccessful() && response.body() != null) {
                     closeInfo = response.body();
                     
-                    // Populate stats grid
+                    // Populate stats grid (9 items)
                     binding.closeTotalSales.setText(String.format("%.2f€", closeInfo.getTotalToday()));
                     binding.closeOpCount.setText(String.valueOf(closeInfo.getCountToday()));
-                    binding.closeCardSales.setText(String.format("%.2f€", closeInfo.getCardSalesToday().subtract(closeInfo.getCardRefundsToday())));
+                    binding.closeCardSales.setText(String.format("%.2f€", closeInfo.getCardSalesToday()));
+                    binding.closeCardRefunds.setText(String.format("%.2f€", closeInfo.getCardRefundsToday()));
                     binding.closeCashSales.setText(String.format("%.2f€", closeInfo.getCashSalesToday()));
+                    binding.closeCashRefunds.setText(String.format("%.2f€", closeInfo.getCashRefundsToday()));
+                    binding.closeEntries.setText(String.format("%.2f€", closeInfo.getTotalEntries()));
+                    binding.closeWithdrawals.setText(String.format("%.2f€", closeInfo.getTotalWithdrawals()));
+                    binding.closeCancelledStats.setText(String.format("%d / %.2f€", 
+                            closeInfo.getCancelledCount(), closeInfo.getCancelledTotal()));
 
                     // Populate detailed summary
                     binding.summaryOpening.setText(String.format("%.2f€", closeInfo.getOpeningBalance()));
@@ -273,7 +279,7 @@ public class CashRegisterFragment extends Fragment {
                     if (closeInfo.getReturnsToday() != null && !closeInfo.getReturnsToday().isEmpty()) {
                         StringBuilder sb = new StringBuilder();
                         for (com.proconsi.electrobazar.models.SaleReturn ret : closeInfo.getReturnsToday()) {
-                            String method = "EFECTIVO".equals(ret.getPaymentMethod()) ? "E" : "T";
+                            String method = (ret.getPaymentMethod() == com.proconsi.electrobazar.models.PaymentMethod.CASH) ? "E" : "T";
                             sb.append(String.format("• %s (%s): -%.2f€\n", 
                                 ret.getReturnNumber(), method, ret.getTotalRefunded()));
                         }
@@ -282,6 +288,8 @@ public class CashRegisterFragment extends Fragment {
                     } else {
                         binding.returnsSummaryContainer.setVisibility(View.GONE);
                     }
+                    
+                    updateLayoutForOrientation();
                     
                     updateCloseDifference();
                     showState(LayoutState.CLOSE_FORM);
@@ -426,5 +434,30 @@ public class CashRegisterFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+    @Override
+    public void onConfigurationChanged(@NonNull android.content.res.Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        updateLayoutForOrientation();
+    }
+
+    private void updateLayoutForOrientation() {
+        if (binding == null) return;
+        int orientation = getResources().getConfiguration().orientation;
+        if (orientation == android.content.res.Configuration.ORIENTATION_LANDSCAPE) {
+            binding.cashCloseBodyRow.setOrientation(android.widget.LinearLayout.HORIZONTAL);
+            binding.cashCloseLeftCol.setLayoutParams(new android.widget.LinearLayout.LayoutParams(
+                    0, android.view.ViewGroup.LayoutParams.WRAP_CONTENT, 2.0f));
+            binding.cashCloseRightCol.setLayoutParams(new android.widget.LinearLayout.LayoutParams(
+                    0, android.view.ViewGroup.LayoutParams.WRAP_CONTENT, 1.2f));
+            binding.closeStatsGrid.setColumnCount(3);
+        } else {
+            binding.cashCloseBodyRow.setOrientation(android.widget.LinearLayout.VERTICAL);
+            binding.cashCloseLeftCol.setLayoutParams(new android.widget.LinearLayout.LayoutParams(
+                    android.view.ViewGroup.LayoutParams.MATCH_PARENT, android.view.ViewGroup.LayoutParams.WRAP_CONTENT, 0.0f));
+            binding.cashCloseRightCol.setLayoutParams(new android.widget.LinearLayout.LayoutParams(
+                    android.view.ViewGroup.LayoutParams.MATCH_PARENT, android.view.ViewGroup.LayoutParams.WRAP_CONTENT, 0.0f));
+            binding.closeStatsGrid.setColumnCount(2);
+        }
     }
 }
