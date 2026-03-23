@@ -18,24 +18,65 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:contentInsetStart="0dp">
 
-            <ImageButton
-                android:id="@+id/adminHamburgerBtn"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:src="@drawable/ic_menu"
-                app:tint="?attr/colorOnPrimary" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingEnd="16dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:text="Administración"
-                android:textColor="?attr/colorOnPrimary"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                <ImageButton
+                    android:id="@+id/adminHamburgerBtn"
+                    android:layout_width="56dp"
+                    android:layout_height="match_parent"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:src="@drawable/ic_menu"
+                    app:tint="?attr/colorOnPrimary" />
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="8dp"
+                    android:src="@drawable/ic_logo" />
+
+                <TextView
+                    android:id="@+id/adminAppNameText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="ElectroBazar Admin"
+                    android:textColor="?attr/colorOnPrimary"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnReturnTpv"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:minHeight="0dp"
+                    android:minWidth="0dp"
+                    android:paddingHorizontal="12dp"
+                    android:text="VOLVER"
+                    android:textColor="?attr/colorOnPrimary"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    app:icon="@drawable/ic_cart"
+                    app:iconSize="14dp"
+                    app:iconPadding="6dp"
+                    app:iconTint="?attr/colorOnPrimary"
+                    app:strokeColor="?attr/colorOnPrimary"
+                    app:strokeWidth="1dp"
+                    app:cornerRadius="18dp"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp" />
+            </LinearLayout>
 
         </com.google.android.material.appbar.MaterialToolbar>
 

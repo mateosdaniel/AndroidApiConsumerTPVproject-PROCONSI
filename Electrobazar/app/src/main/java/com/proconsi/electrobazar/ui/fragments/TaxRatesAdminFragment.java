@@ -50,6 +50,7 @@ public class TaxRatesAdminFragment extends Fragment {
         swipeRefresh = view.findViewById(R.id.swipeRefresh);
         fabAdd = view.findViewById(R.id.fabAddTaxRate);
         btnApplyGlobally = view.findViewById(R.id.btnApplyGlobally);
+        view.findViewById(R.id.btnBack).setOnClickListener(v -> requireActivity().onBackPressed());
 
         rvTaxRates.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter = new TaxRatesAdapter(new TaxRatesAdapter.OnTaxRateActionListener() {
@@ -67,6 +68,7 @@ public class TaxRatesAdminFragment extends Fragment {
 
         swipeRefresh.setOnRefreshListener(this::loadTaxRates);
         fabAdd.setOnClickListener(v -> showTaxRateDialog(null));
+        view.findViewById(R.id.btnBack).setOnClickListener(v -> requireActivity().onBackPressed());
         btnApplyGlobally.setOnClickListener(v -> confirmApplyGlobally());
 
         loadTaxRates();
@@ -148,6 +150,15 @@ public class TaxRatesAdminFragment extends Fragment {
         });
 
         dialog.show();
+        
+        // Fix for narrow dialog
+        if (dialog.getWindow() != null) {
+            dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        }
+        
+        // Apply theme colors and fonts to the dialog
+        com.proconsi.electrobazar.utils.ThemeManager.applyFontToView(dialogView, requireContext());
+        com.proconsi.electrobazar.utils.ThemeManager.applyColorsToView(dialogView, requireContext());
     }
 
     private void showDatePicker(EditText et) {

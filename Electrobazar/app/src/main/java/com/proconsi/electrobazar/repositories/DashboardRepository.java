@@ -21,18 +21,18 @@ public class DashboardRepository {
     }
 
     public void getSalesRange(String from, String to, final DataCallback<List<Sale>> callback) {
-        apiService.getSalesRange(from, to).enqueue(new Callback<List<Sale>>() {
+        apiService.getSalesRange(from, to).enqueue(new retrofit2.Callback<com.proconsi.electrobazar.models.PagedResponse<Sale>>() {
             @Override
-            public void onResponse(Call<List<Sale>> call, Response<List<Sale>> response) {
-                if (response.isSuccessful()) {
-                    callback.onSuccess(response.body());
+            public void onResponse(retrofit2.Call<com.proconsi.electrobazar.models.PagedResponse<Sale>> call, retrofit2.Response<com.proconsi.electrobazar.models.PagedResponse<Sale>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    callback.onSuccess(response.body().getContent());
                 } else {
                     callback.onError("Error fetching sales: " + response.code());
                 }
             }
 
             @Override
-            public void onFailure(Call<List<Sale>> call, Throwable t) {
+            public void onFailure(retrofit2.Call<com.proconsi.electrobazar.models.PagedResponse<Sale>> call, Throwable t) {
                 callback.onError(t.getMessage());
             }
         });

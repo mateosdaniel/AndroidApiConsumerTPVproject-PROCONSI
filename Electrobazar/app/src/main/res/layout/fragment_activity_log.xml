@@ -9,17 +9,42 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/headerContainer"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Registro de Actividad"
-            android:textColor="?attr/android:textColorPrimary"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="20dp" />
+            android:background="?attr/colorSurfaceVariant"
+            android:elevation="4dp"
+            android:fitsSystemWindows="true"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <ImageButton
+                android:id="@+id/btnBack"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_back"
+                app:tint="?attr/android:textColorPrimary" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_weight="1"
+                android:text="Registro de Actividad"
+                android:textColor="?attr/android:textColorPrimary"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="16dp">
 
         <!-- Filters -->
         <androidx.cardview.widget.CardView
@@ -69,5 +94,6 @@
             android:clipToPadding="false"
             android:paddingBottom="80dp" />
 
+        </LinearLayout>
     </LinearLayout>
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

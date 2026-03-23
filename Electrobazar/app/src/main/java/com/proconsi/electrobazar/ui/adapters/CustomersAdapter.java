@@ -78,10 +78,12 @@ public class CustomersAdapter extends RecyclerView.Adapter<CustomersAdapter.Cust
             
             if ("COMPANY".equals(customer.getType())) {
                 typeBadge.setText("EMPRESA");
-                typeBadge.setBackgroundResource(R.drawable.badge_bg_ticket); // Logic from web: badge-type-company
+                typeBadge.setBackgroundResource(R.drawable.badge_bg_ticket); // colorAccent background
+                typeBadge.setTextColor(com.proconsi.electrobazar.utils.ThemeManager.getOnAccentColor(typeBadge.getContext()));
             } else {
                 typeBadge.setText("PARTICULAR");
-                typeBadge.setBackgroundResource(R.drawable.bg_category_badge); // Logic from web: badge-type-individual
+                typeBadge.setBackgroundResource(R.drawable.bg_category_badge); // colorSurfaceVariant background
+                typeBadge.setTextColor(com.proconsi.electrobazar.utils.ThemeManager.getTextColor(typeBadge.getContext()));
             }
 
             if (customer.getTariff() != null) {

@@ -73,7 +73,7 @@ public class BulkPricesFragment extends Fragment {
         cbSelectAll = view.findViewById(R.id.cbSelectAll);
 
         setupAdapter();
-        setupListeners();
+        setupListeners(view);
         loadData();
 
         return view;
@@ -92,7 +92,7 @@ public class BulkPricesFragment extends Fragment {
         rvProducts.setAdapter(productAdapter);
     }
 
-    private void setupListeners() {
+    private void setupListeners(View view) {
         btnFetchIpc.setOnClickListener(v -> fetchIpc());
         btnApplyIpc.setOnClickListener(v -> {
             if (suggestedIpc != null) {
@@ -103,7 +103,7 @@ public class BulkPricesFragment extends Fragment {
 
         etEffectiveDate.setOnClickListener(v -> showDatePicker());
         
-        autoCategory.setOnItemClickListener((parent, view, position, id) -> {
+        autoCategory.setOnItemClickListener((parent, v, position, id) -> {
             Category cat = allCategories.get(position);
             filterProducts(cat.getId());
         });
@@ -112,6 +112,7 @@ public class BulkPricesFragment extends Fragment {
 
         btnPreview.setOnClickListener(v -> showPreview());
         btnSubmit.setOnClickListener(v -> confirmSubmit());
+        view.findViewById(R.id.btnBack).setOnClickListener(v -> requireActivity().onBackPressed());
     }
 
     private void loadData() {

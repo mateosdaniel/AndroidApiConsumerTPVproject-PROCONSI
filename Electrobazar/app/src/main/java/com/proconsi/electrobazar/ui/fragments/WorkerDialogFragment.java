@@ -59,6 +59,7 @@ public class WorkerDialogFragment extends DialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.dialog_worker_form, container, false);
         com.proconsi.electrobazar.utils.ThemeManager.applyFontToView(view, requireContext());
+        com.proconsi.electrobazar.utils.ThemeManager.applyColorsToView(view, requireContext());
 
         dialogTitle = view.findViewById(R.id.dialogTitle);
         usernameEdit = view.findViewById(R.id.editWorkerUsername);

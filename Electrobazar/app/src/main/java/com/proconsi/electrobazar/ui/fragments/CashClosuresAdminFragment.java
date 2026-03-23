@@ -72,6 +72,8 @@ public class CashClosuresAdminFragment extends Fragment implements CashClosureAd
         setupFilters();
         loadWorkers();
         loadClosures();
+
+        binding.btnBack.setOnClickListener(v -> requireActivity().onBackPressed());
     }
 
     private void setupRecyclerView() {

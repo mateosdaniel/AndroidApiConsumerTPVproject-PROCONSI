@@ -16,6 +16,16 @@ import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsControllerCompat;
 import android.view.Window;
 
+import com.proconsi.electrobazar.R;
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.switchmaterial.SwitchMaterial;
+import com.google.android.material.chip.Chip;
+import com.google.android.material.textfield.TextInputLayout;
+import android.widget.CheckBox;
+import android.widget.Button;
+import android.widget.CompoundButton;
+
 /**
  * ThemeManager — mirrors the web app's localStorage-based theme system exactly.
  *
@@ -319,6 +329,14 @@ public class ThemeManager {
         int secondary   = getSecondaryColor(ctx);
 
         applyTextColors(root, textColor, mutedColor, primary, surface, secondary, ctx);
+
+        // Apply background color to the root if it doesn't have a specific one or is a container
+        if (root.getBackground() == null || root.getBackground() instanceof android.graphics.drawable.ColorDrawable) {
+            root.setBackgroundColor(surface);
+        }
+        
+        // Also recursively apply surface background to nested containers that might need it
+        applyBackgroundsRecursive(root, surface, ctx);
     }
 
     private static void applyTextColors(View view, int text, int muted, int primary,
@@ -365,6 +383,59 @@ public class ThemeManager {
             for (int i = 0; i < group.getChildCount(); i++) {
                 applyTextColors(group.getChildAt(i), text, muted, primary, surface, secondary, ctx);
             }
+        }
+    }
+
+    private static void applyBackgroundsRecursive(View view, int surface, Context ctx) {
+        int accentColor = getAccentColor(ctx);
+        int textColor = getTextColor(ctx);
+        int contrastColor = getOnAccentColor(ctx);
+
+        if (view instanceof ViewGroup && !(view instanceof android.widget.AdapterView)) {
+            ViewGroup group = (ViewGroup) view;
+            
+            // Apply background to certain types of containers that act as sections or dialog bodies
+            if (view.getId() == R.id.dialogRoot || (view.getTag() != null && "themed_surface".equals(view.getTag()))) {
+                view.setBackgroundColor(surface);
+            }
+
+            for (int i = 0; i < group.getChildCount(); i++) {
+                applyBackgroundsRecursive(group.getChildAt(i), surface, ctx);
+            }
+        }
+        
+        // Apply specialized colors to Material components
+        if (view instanceof com.google.android.material.button.MaterialButton) {
+            com.google.android.material.button.MaterialButton mb = (com.google.android.material.button.MaterialButton) view;
+            // Detect filled vs outlined
+            boolean isOutlined = mb.getStrokeWidth() > 0;
+            if (!isOutlined && mb.getBackgroundTintList() != null) {
+                 mb.setBackgroundTintList(ColorStateList.valueOf(accentColor));
+                 mb.setTextColor(contrastColor);
+            } else if (isOutlined) {
+                 mb.setStrokeColor(ColorStateList.valueOf(accentColor));
+                 mb.setTextColor(accentColor);
+            }
+        } else if (view instanceof com.google.android.material.floatingactionbutton.FloatingActionButton) {
+            com.google.android.material.floatingactionbutton.FloatingActionButton fab = (com.google.android.material.floatingactionbutton.FloatingActionButton) view;
+            fab.setBackgroundTintList(ColorStateList.valueOf(accentColor));
+            fab.setImageTintList(ColorStateList.valueOf(contrastColor));
+        } else if (view instanceof com.google.android.material.switchmaterial.SwitchMaterial) {
+            com.google.android.material.switchmaterial.SwitchMaterial sw = (com.google.android.material.switchmaterial.SwitchMaterial) view;
+            sw.setThumbTintList(ColorStateList.valueOf(accentColor));
+            sw.setTrackTintList(ColorStateList.valueOf(accentColor));
+        } else if (view instanceof android.widget.CheckBox) {
+            android.widget.CheckBox cb = (android.widget.CheckBox) view;
+            cb.setButtonTintList(ColorStateList.valueOf(accentColor));
+            cb.setTextColor(textColor);
+        } else if (view instanceof com.google.android.material.chip.Chip) {
+            com.google.android.material.chip.Chip chip = (com.google.android.material.chip.Chip) view;
+            chip.setChipBackgroundColor(ColorStateList.valueOf(accentColor));
+            chip.setTextColor(contrastColor);
+        } else if (view instanceof com.google.android.material.textfield.TextInputLayout) {
+             com.google.android.material.textfield.TextInputLayout til = (com.google.android.material.textfield.TextInputLayout) view;
+             til.setBoxStrokeColor(accentColor);
+             til.setHintTextColor(ColorStateList.valueOf(accentColor));
         }
     }
 

@@ -95,7 +95,9 @@ public class InvoicesAdminFragment extends Fragment implements InvoicesAdminAdap
         
         swipeRefresh.setOnRefreshListener(this::loadSales);
         loadSales();
-        
+
+        view.findViewById(R.id.btnBack).setOnClickListener(v -> requireActivity().onBackPressed());
+
         return view;
     }
 

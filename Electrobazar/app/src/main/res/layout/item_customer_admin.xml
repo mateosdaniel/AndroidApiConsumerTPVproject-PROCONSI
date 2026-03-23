@@ -52,7 +52,7 @@
                     android:paddingHorizontal="8dp"
                     android:paddingVertical="2dp"
                     android:text="PARTICULAR"
-                    android:textColor="?attr/android:windowBackground"
+                    android:textColor="?attr/android:textColorPrimary"
                     android:textSize="10sp"
                     android:textStyle="bold" />
 
@@ -65,7 +65,7 @@
                     android:paddingHorizontal="8dp"
                     android:paddingVertical="2dp"
                     android:text="MINORISTA"
-                    android:textColor="?attr/android:windowBackground"
+                    android:textColor="?attr/android:textColorPrimary"
                     android:textSize="10sp"
                     android:textStyle="bold" />
 
@@ -78,7 +78,7 @@
                     android:paddingHorizontal="8dp"
                     android:paddingVertical="2dp"
                     android:text="R.E."
-                    android:textColor="?attr/android:windowBackground"
+                    android:textColor="?attr/android:textColorPrimary"
                     android:textSize="10sp"
                     android:textStyle="bold"
                     android:visibility="gone" />
@@ -97,7 +97,7 @@
                 android:layout_height="40dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:src="@drawable/ic_activity_log"
-                app:tint="?attr/colorPrimary" />
+                app:tint="?attr/colorAccent" />
 
             <ImageButton
                 android:id="@+id/editCustomerBtn"
@@ -106,7 +106,7 @@
                 android:layout_marginStart="8dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:src="@drawable/ic_edit"
-                app:tint="?attr/android:textColorSecondary" />
+                app:tint="?attr/colorAccent" />
 
             <ImageButton
                 android:id="@+id/deleteCustomerBtn"

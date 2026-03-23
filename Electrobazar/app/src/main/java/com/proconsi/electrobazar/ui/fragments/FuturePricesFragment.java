@@ -32,7 +32,10 @@ public class FuturePricesFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentFuturePricesBinding.inflate(inflater, container, false);
+        com.proconsi.electrobazar.utils.ThemeManager.applyFontToView(binding.getRoot(), requireContext());
         apiService = RetrofitClient.getInstance().getApi();
+        
+        binding.btnBack.setOnClickListener(v -> requireActivity().onBackPressed());
         
         setupRecyclerView();
         

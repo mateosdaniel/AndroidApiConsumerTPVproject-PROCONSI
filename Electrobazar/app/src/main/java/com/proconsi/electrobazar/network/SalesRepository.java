@@ -14,7 +14,7 @@ public class SalesRepository {
         this.apiService = apiService;
     }
 
-    public Call<List<Sale>> getSales() {
+    public retrofit2.Call<com.proconsi.electrobazar.models.PagedResponse<Sale>> getSales() {
         return apiService.getSales();
     }
 
@@ -30,7 +30,7 @@ public class SalesRepository {
         return apiService.getTodaySalesStats();
     }
 
-    public Call<List<Sale>> getSalesRange(String from, String to) {
+    public retrofit2.Call<com.proconsi.electrobazar.models.PagedResponse<Sale>> getSalesRange(String from, String to) {
         return apiService.getSalesRange(from, to);
     }
 }

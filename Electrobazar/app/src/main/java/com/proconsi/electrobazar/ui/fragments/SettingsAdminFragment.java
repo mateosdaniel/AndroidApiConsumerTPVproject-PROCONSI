@@ -51,6 +51,7 @@ public class SettingsAdminFragment extends Fragment {
         // 3. SMTP Settings
         loadMailSettings();
         binding.btnSaveMailSettings.setOnClickListener(v -> saveMailSettings());
+        binding.btnBack.setOnClickListener(v -> requireActivity().onBackPressed());
 
         return binding.getRoot();
     }

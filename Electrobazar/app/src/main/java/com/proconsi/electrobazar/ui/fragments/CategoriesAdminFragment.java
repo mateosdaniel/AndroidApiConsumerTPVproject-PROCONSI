@@ -42,6 +42,8 @@ public class CategoriesAdminFragment extends Fragment {
         EditText etSearch = view.findViewById(R.id.etSearch);
         View fabAdd = view.findViewById(R.id.fabAddCategory);
 
+        view.findViewById(R.id.btnBack).setOnClickListener(v -> requireActivity().onBackPressed());
+
         adapter = new AdminCategoryAdapter(new AdminCategoryAdapter.OnCategoryActionListener() {
             @Override
             public void onEdit(Category category) {
@@ -70,6 +72,8 @@ public class CategoriesAdminFragment extends Fragment {
         observeViewModel();
 
         viewModel.loadCategories();
+
+        view.findViewById(R.id.btnBack).setOnClickListener(v -> requireActivity().onBackPressed());
 
         return view;
     }
@@ -136,6 +140,13 @@ public class CategoriesAdminFragment extends Fragment {
         });
 
         dialog.show();
+        
+        // Ensure dialog matches parent width and theme
+        if (dialog.getWindow() != null) {
+            dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            com.proconsi.electrobazar.utils.ThemeManager.applyFontToView(dialogView, requireContext());
+            com.proconsi.electrobazar.utils.ThemeManager.applyColorsToView(dialogView, requireContext());
+        }
     }
 
     private void showDeleteConfirmation(Category category) {

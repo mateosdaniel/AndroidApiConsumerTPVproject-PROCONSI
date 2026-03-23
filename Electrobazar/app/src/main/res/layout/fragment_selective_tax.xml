@@ -7,19 +7,41 @@
     android:orientation="vertical">
 
     <LinearLayout
+        android:id="@+id/headerContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorSurfaceVariant"
+        android:elevation="4dp"
+        android:fitsSystemWindows="true"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_arrow_right"
+            android:rotation="180"
+            app:tint="?attr/android:textColorPrimary" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
+            android:text="IVA Selectivo"
+            android:textColor="?attr/android:textColorPrimary"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorSurface"
         android:orientation="vertical"
         android:padding="16dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="IVA Selectivo"
-            android:textColor="?attr/android:textColorPrimary"
-            android:textSize="20sp"
-            android:textStyle="bold" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -107,7 +129,7 @@
                         android:id="@+id/autoCategoryFilter"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="none"
+                        android:inputType="text"
                         android:textSize="12sp" />
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>

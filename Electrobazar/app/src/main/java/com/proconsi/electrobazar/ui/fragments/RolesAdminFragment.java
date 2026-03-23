@@ -69,6 +69,7 @@ public class RolesAdminFragment extends Fragment implements RolesAdapter.OnRoleA
         loadData();
 
         addFab.setOnClickListener(v -> showRoleDialog(null));
+        view.findViewById(R.id.btnBack).setOnClickListener(v -> requireActivity().onBackPressed());
 
         return view;
     }

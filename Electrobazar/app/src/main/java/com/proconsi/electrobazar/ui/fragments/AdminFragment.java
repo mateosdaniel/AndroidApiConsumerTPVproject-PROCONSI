@@ -45,12 +45,32 @@ public class AdminFragment extends Fragment {
         ImageButton hamburgerBtn = view.findViewById(R.id.adminHamburgerBtn);
         hamburgerBtn.setOnClickListener(v -> drawerLayout.openDrawer(GravityCompat.START));
 
+        // Hide main toolbar while in admin mode
+        View mainToolbar = getActivity().findViewById(R.id.toolbar);
+        if (mainToolbar != null) mainToolbar.setVisibility(View.GONE);
+
+        view.findViewById(R.id.btnReturnTpv).setOnClickListener(v -> {
+            if (getActivity() instanceof com.proconsi.electrobazar.ui.activities.MainActivity) {
+                com.proconsi.electrobazar.ui.activities.MainActivity mainActivity = (com.proconsi.electrobazar.ui.activities.MainActivity) getActivity();
+                NavigationView navView = mainActivity.findViewById(R.id.navigationView);
+                if (navView != null && navView.getMenu() != null) {
+                    android.view.MenuItem tpvItem = navView.getMenu().findItem(R.id.nav_tpv);
+                    if (tpvItem != null) {
+                        mainActivity.onNavigationItemSelected(tpvItem);
+                        return;
+                    }
+                }
+            }
+            requireActivity().onBackPressed();
+        });
+
         NavigationView navigationView = view.findViewById(R.id.adminNavigationView);
         navigationView.setNavigationItemSelectedListener(item -> {
             handleNavigation(item.getItemId(), item.getTitle().toString());
             drawerLayout.closeDrawer(GravityCompat.START);
             return true;
         });
+        navigationView.setCheckedItem(R.id.admin_nav_dashboard);
 
         setupGrid();
 
@@ -83,8 +103,14 @@ public class AdminFragment extends Fragment {
     }
 
     private void handleNavigation(int id, String title) {
+        NavigationView navigationView = getView().findViewById(R.id.adminNavigationView);
+        if (navigationView != null) {
+            navigationView.setCheckedItem(id);
+        }
+
         if (id == R.id.admin_nav_dashboard) {
-            showSubFragment(new DashboardFragment());
+            fragmentContainer.setVisibility(View.GONE);
+            gridContainer.setVisibility(View.VISIBLE);
         } else if (id == R.id.admin_nav_inventory) {
             showSubFragment(new InventoryTabsFragment());
         } else if (id == R.id.admin_nav_invoices) {
@@ -116,8 +142,6 @@ public class AdminFragment extends Fragment {
         } else if (id == R.id.admin_nav_settings) {
             showSubFragment(new SettingsAdminFragment());
         } else {
-
-            // Placeholder for other sections
             Toast.makeText(getContext(), "Sección: " + title, Toast.LENGTH_SHORT).show();
         }
     }
@@ -130,8 +154,7 @@ public class AdminFragment extends Fragment {
                 .replace(R.id.admin_fragment_container, fragment)
                 .commit();
     }
-    
-    // Logic to go back to grid
+
     public boolean onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
@@ -140,8 +163,21 @@ public class AdminFragment extends Fragment {
         if (fragmentContainer.getVisibility() == View.VISIBLE) {
             fragmentContainer.setVisibility(View.GONE);
             gridContainer.setVisibility(View.VISIBLE);
+            
+            // Reset selection to Dashboard when returning to grid
+            NavigationView navigationView = getView().findViewById(R.id.adminNavigationView);
+            if (navigationView != null) {
+                navigationView.setCheckedItem(R.id.admin_nav_dashboard);
+            }
             return true;
         }
         return false;
+    }
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        // Restore main toolbar when leaving admin mode
+        View mainToolbar = getActivity().findViewById(R.id.toolbar);
+        if (mainToolbar != null) mainToolbar.setVisibility(View.VISIBLE);
     }
 }

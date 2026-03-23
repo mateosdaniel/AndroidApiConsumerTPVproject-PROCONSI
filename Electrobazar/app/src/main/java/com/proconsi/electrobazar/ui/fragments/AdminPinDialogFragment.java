@@ -30,10 +30,12 @@ public class AdminPinDialogFragment extends DialogFragment {
 
     public interface AdminPinListener {
         void onPinVerified(String token);
+        void onCancel();
     }
 
     private AdminPinListener listener;
     private SessionManager sessionManager;
+    private boolean isVerified = false;
     private TextInputEditText pinEditText;
     private TextView errorText;
     private MaterialButton btnVerify;
@@ -97,6 +99,7 @@ public class AdminPinDialogFragment extends DialogFragment {
             public void onResponse(@NonNull Call<LoginResponse> call, @NonNull Response<LoginResponse> response) {
                 btnVerify.setEnabled(true);
                 if (response.isSuccessful() && response.body() != null) {
+                    isVerified = true;
                     sessionManager.saveToken(response.body().getToken());
                     if (listener != null) {
                         listener.onPinVerified(response.body().getToken());
@@ -115,5 +118,13 @@ public class AdminPinDialogFragment extends DialogFragment {
                 Toast.makeText(getContext(), "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    public void onDismiss(@NonNull android.content.DialogInterface dialog) {
+        super.onDismiss(dialog);
+        if (!isVerified && listener != null) {
+            listener.onCancel();
+        }
     }
 }

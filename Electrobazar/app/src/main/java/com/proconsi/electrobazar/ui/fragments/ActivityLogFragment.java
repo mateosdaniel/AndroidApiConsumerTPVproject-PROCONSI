@@ -44,6 +44,8 @@ public class ActivityLogFragment extends Fragment {
 
         loadLogs();
 
+        binding.btnBack.setOnClickListener(v -> requireActivity().onBackPressed());
+
         return binding.getRoot();
     }
 

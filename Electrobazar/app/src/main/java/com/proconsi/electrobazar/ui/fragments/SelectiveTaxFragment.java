@@ -67,7 +67,7 @@ public class SelectiveTaxFragment extends Fragment {
         btnApply = view.findViewById(R.id.btnApply);
 
         setupAdapters();
-        setupListeners();
+        setupListeners(view);
         loadInitialData();
 
         return view;
@@ -97,7 +97,7 @@ public class SelectiveTaxFragment extends Fragment {
         rvCategories.setAdapter(categoryAdapter);
     }
 
-    private void setupListeners() {
+    private void setupListeners(View view) {
         tabSelection.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -115,19 +115,36 @@ public class SelectiveTaxFragment extends Fragment {
             public void onTabReselected(TabLayout.Tab tab) {}
         });
 
-        cbAllProducts.setOnCheckedChangeListener((bv, checked) -> productAdapter.selectAll(checked));
-        cbAllCategories.setOnCheckedChangeListener((bv, checked) -> categoryAdapter.selectAll(checked));
-
-        autoTaxRate.setOnItemClickListener((parent, view, position, id) -> {
-            selectedTaxRate = activeTaxRates.get(position);
+        cbAllProducts.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            productAdapter.selectAll(isChecked);
+        });
+        cbAllCategories.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            categoryAdapter.selectAll(isChecked);
         });
 
-        autoCategoryFilter.setOnItemClickListener((parent, view, position, id) -> {
-            Category cat = allCategories.get(position);
-            filterProductsByCategory(cat.getId());
+        autoTaxRate.setOnItemClickListener((parent, v, position, id) -> {
+            String selectedDescription = (String) parent.getItemAtPosition(position);
+            for (TaxRate tr : activeTaxRates) {
+                if (tr.getDescription().equals(selectedDescription)) {
+                    selectedTaxRate = tr;
+                    filterProductsByTaxRate(tr.getId());
+                    break;
+                }
+            }
+        });
+
+        autoCategoryFilter.setOnItemClickListener((parent, v, position, id) -> {
+            String selectedName = (String) parent.getItemAtPosition(position);
+            for (Category cat : allCategories) {
+                if (cat.getName().equals(selectedName)) {
+                    filterProductsByCategory(cat.getId());
+                    break;
+                }
+            }
         });
 
         btnApply.setOnClickListener(v -> confirmApply());
+        view.findViewById(R.id.btnBack).setOnClickListener(v -> requireActivity().onBackPressed());
     }
 
     private void loadInitialData() {
@@ -177,6 +194,16 @@ public class SelectiveTaxFragment extends Fragment {
         List<Product> filtered = new ArrayList<>();
         for (Product p : allProducts) {
             if (p.getCategory() != null && p.getCategory().getId().equals(categoryId)) {
+                filtered.add(p);
+            }
+        }
+        productAdapter.setItems(filtered);
+    }
+
+    private void filterProductsByTaxRate(Long taxRateId) {
+        List<Product> filtered = new ArrayList<>();
+        for (Product p : allProducts) {
+            if (p.getTaxRate() != null && p.getTaxRate().getId().equals(taxRateId)) {
                 filtered.add(p);
             }
         }

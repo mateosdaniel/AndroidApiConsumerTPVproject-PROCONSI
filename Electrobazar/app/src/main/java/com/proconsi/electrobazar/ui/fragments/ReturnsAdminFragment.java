@@ -72,6 +72,7 @@ public class ReturnsAdminFragment extends Fragment {
         initViews();
         loadReturns();
 
+        root.findViewById(R.id.btnBack).setOnClickListener(v -> requireActivity().onBackPressed());
 
         return root;
     }

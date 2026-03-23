@@ -58,6 +58,7 @@ public class WorkersAdminFragment extends Fragment implements WorkersAdapter.OnW
         searchInput = view.findViewById(R.id.workerSearchInput);
         roleFilterChips = view.findViewById(R.id.roleFilterChipGroup);
         statusFilterChips = view.findViewById(R.id.statusFilterChipGroup);
+        view.findViewById(R.id.btnBack).setOnClickListener(v -> requireActivity().onBackPressed());
         resultsCountText = view.findViewById(R.id.workerResultsCountText);
         RecyclerView recyclerView = view.findViewById(R.id.workersRecyclerView);
         FloatingActionButton addFab = view.findViewById(R.id.addWorkerFab);
@@ -70,6 +71,7 @@ public class WorkersAdminFragment extends Fragment implements WorkersAdapter.OnW
         loadData();
 
         addFab.setOnClickListener(v -> showWorkerDialog(null));
+        view.findViewById(R.id.btnBack).setOnClickListener(v -> requireActivity().onBackPressed());
 
         return view;
     }

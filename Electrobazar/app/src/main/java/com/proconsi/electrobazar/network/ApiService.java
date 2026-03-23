@@ -258,7 +258,7 @@ public interface ApiService {
 
     // --- Sales ---
     @GET("api/sales")
-    Call<List<Sale>> getSales();
+    Call<PagedResponse<Sale>> getSales();
 
     @GET("api/sales/{id}")
     Call<Sale> getSaleById(@Path("id") Long id);
@@ -270,7 +270,7 @@ public interface ApiService {
     Call<SaleSummaryResponse> getTodaySalesStats();
 
     @GET("api/sales/range")
-    Call<List<Sale>> getSalesRange(@Query("from") String from, @Query("to") String to);
+    Call<PagedResponse<Sale>> getSalesRange(@Query("from") String from, @Query("to") String to);
 
     @POST("api/sales")
     Call<Sale> createSale(@Body Sale sale, @Header("X-Worker-Id") Long workerId);

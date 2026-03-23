@@ -173,6 +173,13 @@ public class TariffsAdminFragment extends Fragment {
         });
 
         dialog.show();
+        
+        // Ensure dialog is MATCH_PARENT width and properly themed
+        if (dialog.getWindow() != null) {
+            dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            // Re-apply colors to the full window content including background
+            com.proconsi.electrobazar.utils.ThemeManager.applyColorsToView(dialog.getWindow().getDecorView(), requireContext());
+        }
     }
 
     private void toggleTariffStatus(Tariff tariff) {
@@ -202,8 +209,24 @@ public class TariffsAdminFragment extends Fragment {
     }
 
     private void downloadPdf(Tariff tariff) {
-        Toast.makeText(getContext(), "Descargando PDF de precios...", Toast.LENGTH_SHORT).show();
-        // Here we would call downloadTariffHistoryPdf from ApiService and save to file
-        // For now, let's assume standard PDF download logic similar to Invoices
+        String date = new java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault()).format(new java.util.Date());
+        Toast.makeText(getContext(), "Iniciando descarga de '" + tariff.getName() + "'...", Toast.LENGTH_SHORT).show();
+        
+        com.proconsi.electrobazar.network.ApiService api = com.proconsi.electrobazar.network.RetrofitClient.getInstance().getApi();
+        api.downloadTariffHistoryPdf(tariff.getId(), date).enqueue(new retrofit2.Callback<okhttp3.ResponseBody>() {
+            @Override
+            public void onResponse(retrofit2.Call<okhttp3.ResponseBody> call, retrofit2.Response<okhttp3.ResponseBody> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    com.proconsi.electrobazar.utils.PdfUtils.saveAndOpenFile(getContext(), response.body(), "Tarifa_" + tariff.getName() + "_" + date + ".pdf");
+                } else {
+                    Toast.makeText(getContext(), "Error al obtener el PDF", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(retrofit2.Call<okhttp3.ResponseBody> call, Throwable t) {
+                Toast.makeText(getContext(), "Error de red: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

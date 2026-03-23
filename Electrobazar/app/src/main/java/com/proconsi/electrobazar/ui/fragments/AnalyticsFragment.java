@@ -25,6 +25,7 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 import com.proconsi.electrobazar.R;
 import com.proconsi.electrobazar.databinding.FragmentAnalyticsBinding;
 import com.proconsi.electrobazar.models.DashboardStats;
+import com.proconsi.electrobazar.models.PagedResponse;
 import com.proconsi.electrobazar.models.Product;
 import com.proconsi.electrobazar.models.Sale;
 import com.proconsi.electrobazar.network.RetrofitClient;
@@ -58,6 +59,8 @@ public class AnalyticsFragment extends Fragment {
 
         setupPeriodSpinner();
         setupSwipeRefresh();
+        
+        binding.btnBack.setOnClickListener(v -> requireActivity().onBackPressed());
         
         loadData();
 
@@ -139,17 +142,17 @@ public class AnalyticsFragment extends Fragment {
         }
         fromDate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault()).format(cal.getTime());
 
-        apiService.getSalesRange(fromDate, toDate).enqueue(new Callback<List<Sale>>() {
+        apiService.getSalesRange(fromDate, toDate).enqueue(new Callback<PagedResponse<Sale>>() {
             @Override
-            public void onResponse(Call<List<Sale>> call, Response<List<Sale>> response) {
+            public void onResponse(Call<PagedResponse<Sale>> call, Response<PagedResponse<Sale>> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    updateLineChart(response.body());
+                    updateLineChart(response.body().getContent());
                 }
                 checkRefreshDone();
             }
 
             @Override
-            public void onFailure(Call<List<Sale>> call, Throwable t) {
+            public void onFailure(Call<PagedResponse<Sale>> call, Throwable t) {
                 checkRefreshDone();
             }
         });
@@ -286,6 +289,9 @@ public class AnalyticsFragment extends Fragment {
         binding.categoryPieChart.getDescription().setEnabled(false);
         binding.categoryPieChart.getLegend().setTextColor(Color.parseColor("#8892a4"));
         binding.categoryPieChart.getLegend().setOrientation(com.github.mikephil.charting.components.Legend.LegendOrientation.VERTICAL);
+        binding.categoryPieChart.getLegend().setTextSize(14f);
+        binding.categoryPieChart.getLegend().setFormSize(14f);
+        binding.categoryPieChart.setDrawEntryLabels(false); // Hide category names on slices
         binding.categoryPieChart.setHoleColor(Color.TRANSPARENT);
         binding.categoryPieChart.setCenterText("Productos");
         binding.categoryPieChart.setCenterTextColor(Color.WHITE);

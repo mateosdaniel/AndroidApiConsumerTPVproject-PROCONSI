@@ -59,6 +59,7 @@ public class RoleDialogFragment extends DialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.dialog_role_form, container, false);
         com.proconsi.electrobazar.utils.ThemeManager.applyFontToView(view, requireContext());
+        com.proconsi.electrobazar.utils.ThemeManager.applyColorsToView(view, requireContext());
 
         nameEdit = view.findViewById(R.id.editRoleName);
         descriptionEdit = view.findViewById(R.id.editRoleDescription);
@@ -97,8 +98,7 @@ public class RoleDialogFragment extends DialogFragment {
             CheckBox cb = new CheckBox(requireContext());
             cb.setText(p);
             // Use theme-aware text color to support both light and dark themes
-            cb.setTextColor(com.google.android.material.color.MaterialColors.getColor(
-                    requireContext(), com.google.android.material.R.attr.colorOnSurface, android.graphics.Color.BLACK));
+            cb.setTextColor(com.proconsi.electrobazar.utils.ThemeManager.getTextColor(requireContext()));
             
             if ("ADMIN_ACCESS".equals(p)) {
                 int dangerColor = requireContext().getColor(R.color.danger);
@@ -139,5 +139,12 @@ public class RoleDialogFragment extends DialogFragment {
 
         listener.onRoleSaved(newRole);
         dismiss();
+    }
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (getDialog() != null && getDialog().getWindow() != null) {
+            getDialog().getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        }
     }
 }

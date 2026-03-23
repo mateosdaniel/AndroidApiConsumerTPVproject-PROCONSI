@@ -59,27 +59,29 @@ public class CustomerDialogFragment extends DialogFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.dialog_customer_form, container, false);
+        View root = inflater.inflate(R.layout.dialog_customer_form, container, false);
+        com.proconsi.electrobazar.utils.ThemeManager.applyFontToView(root, requireContext());
+        com.proconsi.electrobazar.utils.ThemeManager.applyColorsToView(root, requireContext());
 
-        nameEdit = view.findViewById(R.id.editCustomerName);
-        taxIdEdit = view.findViewById(R.id.editCustomerTaxId);
-        taxIdLabel = view.findViewById(R.id.customerTaxIdLabel);
-        emailEdit = view.findViewById(R.id.editCustomerEmail);
-        phoneEdit = view.findViewById(R.id.editCustomerPhone);
-        addressEdit = view.findViewById(R.id.editCustomerAddress);
-        cityEdit = view.findViewById(R.id.editCustomerCity);
-        postalCodeEdit = view.findViewById(R.id.editCustomerPostalCode);
-        typeRadioGroup = view.findViewById(R.id.customerTypeRadioGroup);
-        tariffSpinner = view.findViewById(R.id.editCustomerTariffSpinner);
-        activeSwitch = view.findViewById(R.id.editCustomerActiveSwitch);
-        reSwitch = view.findViewById(R.id.editCustomerReSwitch);
-        reSection = view.findViewById(R.id.customerReSection);
+        nameEdit = root.findViewById(R.id.editCustomerName);
+        taxIdEdit = root.findViewById(R.id.editCustomerTaxId);
+        taxIdLabel = root.findViewById(R.id.customerTaxIdLabel);
+        emailEdit = root.findViewById(R.id.editCustomerEmail);
+        phoneEdit = root.findViewById(R.id.editCustomerPhone);
+        addressEdit = root.findViewById(R.id.editCustomerAddress);
+        cityEdit = root.findViewById(R.id.editCustomerCity);
+        postalCodeEdit = root.findViewById(R.id.editCustomerPostalCode);
+        typeRadioGroup = root.findViewById(R.id.customerTypeRadioGroup);
+        tariffSpinner = root.findViewById(R.id.editCustomerTariffSpinner);
+        activeSwitch = root.findViewById(R.id.editCustomerActiveSwitch);
+        reSwitch = root.findViewById(R.id.editCustomerReSwitch);
+        reSection = root.findViewById(R.id.customerReSection);
 
         setupTariffSpinner();
         setupTypeListeners();
 
         if (customer != null) {
-            ((TextView)view.findViewById(R.id.customerDialogTitle)).setText("Editar Cliente");
+            ((TextView)root.findViewById(R.id.customerDialogTitle)).setText("Editar Cliente");
             nameEdit.setText(customer.getName());
             taxIdEdit.setText(customer.getTaxId());
             emailEdit.setText(customer.getEmail());
@@ -109,10 +111,10 @@ public class CustomerDialogFragment extends DialogFragment {
             }
         }
 
-        view.findViewById(R.id.cancelCustomerBtn).setOnClickListener(v -> dismiss());
-        view.findViewById(R.id.saveCustomerBtn).setOnClickListener(v -> saveCustomer());
+        root.findViewById(R.id.cancelCustomerBtn).setOnClickListener(v -> dismiss());
+        root.findViewById(R.id.saveCustomerBtn).setOnClickListener(v -> saveCustomer());
 
-        return view;
+        return root;
     }
 
     private void setupTariffSpinner() {
@@ -170,5 +172,12 @@ public class CustomerDialogFragment extends DialogFragment {
 
         listener.onCustomerSaved(request);
         dismiss();
+    }
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (getDialog() != null && getDialog().getWindow() != null) {
+            getDialog().getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        }
     }
 }

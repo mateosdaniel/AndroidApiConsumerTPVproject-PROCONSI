@@ -44,6 +44,7 @@ public class MailSettingsAdminFragment extends Fragment {
         loadMailSettings();
 
         btnSave.setOnClickListener(v -> saveMailSettings());
+        view.findViewById(R.id.btnBack).setOnClickListener(v -> requireActivity().onBackPressed());
 
         return view;
     }

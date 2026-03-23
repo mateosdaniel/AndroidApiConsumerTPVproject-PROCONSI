@@ -58,6 +58,7 @@ public class CrmAdminFragment extends Fragment implements CustomersAdapter.OnCus
         searchInput = view.findViewById(R.id.crmSearchInput);
         typeFilterChips = view.findViewById(R.id.crmTypeFilterChipGroup);
         reFilterChips = view.findViewById(R.id.crmReFilterChipGroup);
+        view.findViewById(R.id.btnBack).setOnClickListener(v -> requireActivity().onBackPressed());
         resultsCountText = view.findViewById(R.id.crmResultsCountText);
         RecyclerView recyclerView = view.findViewById(R.id.crmRecyclerView);
         FloatingActionButton addFab = view.findViewById(R.id.addCustomerFab);
@@ -70,6 +71,7 @@ public class CrmAdminFragment extends Fragment implements CustomersAdapter.OnCus
         loadData();
 
         addFab.setOnClickListener(v -> showCustomerDialog(null));
+        view.findViewById(R.id.btnBack).setOnClickListener(v -> requireActivity().onBackPressed());
 
         return view;
     }

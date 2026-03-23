@@ -153,9 +153,34 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (savedInstanceState == null) {
             loadFragment(new SaleFragment(), "TPV_FRAGMENT");
+            if (navigationView != null) {
+                navigationView.setCheckedItem(R.id.nav_tpv);
+            }
         }
 
+        getSupportFragmentManager().addOnBackStackChangedListener(this::updateDrawerSelection);
+
         checkPermissions();
+    }
+
+    private void updateDrawerSelection() {
+        Fragment current = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+        NavigationView nav = findViewById(R.id.navigationView);
+        if (nav == null || current == null) return;
+        
+        if (current instanceof SaleFragment) nav.setCheckedItem(R.id.nav_tpv);
+        else if (current instanceof InventoryFragment) nav.setCheckedItem(R.id.nav_inventory);
+        else if (current instanceof AdminFragment) nav.setCheckedItem(R.id.nav_admin);
+        else if (current instanceof CashRegisterFragment) {
+            Bundle args = current.getArguments();
+            if (args != null && CashRegisterFragment.STATE_CLOSE.equals(args.getString(CashRegisterFragment.ARG_INITIAL_STATE))) {
+                nav.setCheckedItem(R.id.nav_cash_close);
+            } else {
+                nav.setCheckedItem(R.id.nav_cash_movement);
+            }
+        } else if (current instanceof ReturnsFragment) nav.setCheckedItem(R.id.nav_returns);
+        else if (current instanceof HeldSalesFragment) nav.setCheckedItem(R.id.nav_suspended);
+        else if (current instanceof com.proconsi.electrobazar.ui.fragments.PreferencesFragment) nav.setCheckedItem(R.id.nav_preferences);
     }
 
     private void checkPermissions() {
@@ -216,6 +241,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
      * Unified navigation handler for Drawer, Landscape Header, and Popup Menus
      */
     private boolean handleNavigation(int id, String title) {
+        NavigationView navigationView = findViewById(R.id.navigationView);
+        if (navigationView != null) {
+            navigationView.setCheckedItem(id);
+        }
+
         if (id == R.id.nav_tpv) {
             loadFragment(new SaleFragment(), "TPV_FRAGMENT");
             return true;
@@ -274,10 +304,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void promptAdminPin() {
         AdminPinDialogFragment pinDialog = AdminPinDialogFragment.newInstance();
-        pinDialog.setListener(token -> {
-            // Token is already saved in SessionManager by the dialog
-            Toast.makeText(MainActivity.this, "Nivel de acceso elevado", Toast.LENGTH_SHORT).show();
-            loadFragment(new AdminFragment(), "ADMIN_FRAGMENT");
+        pinDialog.setListener(new AdminPinDialogFragment.AdminPinListener() {
+            @Override
+            public void onPinVerified(String token) {
+                // Token is already saved in SessionManager by the dialog
+                Toast.makeText(MainActivity.this, "Nivel de acceso elevado", Toast.LENGTH_SHORT).show();
+                loadFragment(new AdminFragment(), "ADMIN_FRAGMENT");
+            }
+
+            @Override
+            public void onCancel() {
+                updateDrawerSelection();
+            }
         });
         pinDialog.show(getSupportFragmentManager(), "ADMIN_PIN_DIALOG");
     }

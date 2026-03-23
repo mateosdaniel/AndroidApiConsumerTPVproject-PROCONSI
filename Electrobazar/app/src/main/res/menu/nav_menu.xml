@@ -19,45 +19,51 @@
 
     <item android:title="Operaciones de Caja">
         <menu>
-            <item
-                android:id="@+id/nav_cash_close"
-                android:icon="@drawable/ic_cash_close"
-                android:title="Cierre de caja"
-                android:visible="false" />
-            <item
-                android:id="@+id/nav_cash_movement"
-                android:icon="@drawable/ic_cash_movement"
-                android:title="Movimiento de caja"
-                android:visible="false" />
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_cash_close"
+                    android:icon="@drawable/ic_cash_close"
+                    android:title="Cierre de caja"
+                    android:visible="false" />
+                <item
+                    android:id="@+id/nav_cash_movement"
+                    android:icon="@drawable/ic_cash_movement"
+                    android:title="Movimiento de caja"
+                    android:visible="false" />
+            </group>
         </menu>
     </item>
 
     <item android:title="Ventas y Devoluciones">
         <menu>
-            <item
-                android:id="@+id/nav_suspended"
-                android:icon="@drawable/ic_suspended"
-                android:title="Ventas en espera"
-                android:visible="false" />
-            <item
-                android:id="@+id/nav_returns"
-                android:icon="@drawable/ic_return"
-                android:title="Devoluciones"
-                android:visible="false" />
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_suspended"
+                    android:icon="@drawable/ic_suspended"
+                    android:title="Ventas en espera"
+                    android:visible="false" />
+                <item
+                    android:id="@+id/nav_returns"
+                    android:icon="@drawable/ic_return"
+                    android:title="Devoluciones"
+                    android:visible="false" />
+            </group>
         </menu>
     </item>
 
     <item android:title="Otros">
         <menu>
-            <item
-                android:id="@+id/nav_preferences"
-                android:icon="@drawable/ic_settings"
-                android:title="Preferencias"
-                android:visible="false" />
-            <item
-                android:id="@+id/nav_logout"
-                android:icon="@drawable/ic_logout"
-                android:title="Cerrar Sesión" />
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_preferences"
+                    android:icon="@drawable/ic_settings"
+                    android:title="Preferencias"
+                    android:visible="false" />
+                <item
+                    android:id="@+id/nav_logout"
+                    android:icon="@drawable/ic_logout"
+                    android:title="Cerrar Sesión" />
+            </group>
         </menu>
     </item>
 </menu>

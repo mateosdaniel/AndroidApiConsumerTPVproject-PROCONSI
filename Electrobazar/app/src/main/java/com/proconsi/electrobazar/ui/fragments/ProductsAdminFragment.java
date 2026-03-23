@@ -79,6 +79,7 @@ public class ProductsAdminFragment extends Fragment {
         EditText etSearch = view.findViewById(R.id.etSearch);
         View fabAdd = view.findViewById(R.id.fabAddProduct);
         com.proconsi.electrobazar.utils.ThemeManager.applyColorsToView(view, requireContext());
+        view.findViewById(R.id.btnBack).setOnClickListener(v -> requireActivity().onBackPressed());
 
         adapter = new AdminProductAdapter(new AdminProductAdapter.OnAdminProductActionListener() {
             @Override
@@ -120,6 +121,8 @@ public class ProductsAdminFragment extends Fragment {
         viewModel.loadProducts();
         viewModel.loadCategories();
         viewModel.loadTaxRates();
+
+        view.findViewById(R.id.btnBack).setOnClickListener(v -> requireActivity().onBackPressed());
 
         return view;
     }
@@ -238,6 +241,13 @@ public class ProductsAdminFragment extends Fragment {
         });
 
         dialog.show();
+        
+        // Ensure dialog matches parent width and theme
+        if (dialog.getWindow() != null) {
+            dialog.getWindow().setLayout(android.view.ViewGroup.LayoutParams.MATCH_PARENT, android.view.ViewGroup.LayoutParams.WRAP_CONTENT);
+            com.proconsi.electrobazar.utils.ThemeManager.applyFontToView(dialogView, requireContext());
+            com.proconsi.electrobazar.utils.ThemeManager.applyColorsToView(dialogView, requireContext());
+        }
     }
 
     private void showDeleteConfirmation(Product product) {

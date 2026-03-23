@@ -1,5 +1,6 @@
 package com.proconsi.electrobazar.repositories;
 
+import com.proconsi.electrobazar.models.PagedResponse;
 import com.proconsi.electrobazar.models.Sale;
 import com.proconsi.electrobazar.network.ApiService;
 import com.proconsi.electrobazar.network.RetrofitClient;
@@ -21,36 +22,36 @@ public class InvoicesAdminRepository {
     }
 
     public void getSales(final RepositoryCallback<List<Sale>> callback) {
-        apiService.getSales().enqueue(new Callback<List<Sale>>() {
+        apiService.getSales().enqueue(new Callback<PagedResponse<Sale>>() {
             @Override
-            public void onResponse(Call<List<Sale>> call, Response<List<Sale>> response) {
+            public void onResponse(Call<PagedResponse<Sale>> call, Response<PagedResponse<Sale>> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    callback.onSuccess(response.body());
+                    callback.onSuccess(response.body().getContent());
                 } else {
                     callback.onError("Error fetching sales: " + response.code());
                 }
             }
 
             @Override
-            public void onFailure(Call<List<Sale>> call, Throwable t) {
+            public void onFailure(Call<PagedResponse<Sale>> call, Throwable t) {
                 callback.onError(t.getMessage());
             }
         });
     }
 
     public void getSalesRange(String from, String to, final RepositoryCallback<List<Sale>> callback) {
-        apiService.getSalesRange(from, to).enqueue(new Callback<List<Sale>>() {
+        apiService.getSalesRange(from, to).enqueue(new Callback<PagedResponse<Sale>>() {
             @Override
-            public void onResponse(Call<List<Sale>> call, Response<List<Sale>> response) {
+            public void onResponse(Call<PagedResponse<Sale>> call, Response<PagedResponse<Sale>> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    callback.onSuccess(response.body());
+                    callback.onSuccess(response.body().getContent());
                 } else {
                     callback.onError("Error fetching sales range: " + response.code());
                 }
             }
 
             @Override
-            public void onFailure(Call<List<Sale>> call, Throwable t) {
+            public void onFailure(Call<PagedResponse<Sale>> call, Throwable t) {
                 callback.onError(t.getMessage());
             }
         });
