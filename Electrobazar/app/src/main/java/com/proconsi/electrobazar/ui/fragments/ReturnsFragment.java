@@ -282,9 +282,7 @@ public class ReturnsFragment extends Fragment {
 
     private void saveAndOpenPdf(ResponseBody body, String filename) {
         try {
-            File path = new File(getContext().getExternalFilesDir(null), "returns");
-            if (!path.exists()) path.mkdirs();
-            File file = new File(path, filename);
+            File file = new File(requireContext().getExternalFilesDir(android.os.Environment.DIRECTORY_DOWNLOADS), filename);
 
             try (InputStream inputStream = body.byteStream();
                  OutputStream outputStream = new FileOutputStream(file)) {
@@ -297,11 +295,11 @@ public class ReturnsFragment extends Fragment {
                 outputStream.flush();
             }
 
-            Uri uri = FileProvider.getUriForFile(getContext(), getContext().getPackageName() + ".provider", file);
+            Uri uri = FileProvider.getUriForFile(requireContext(), requireContext().getPackageName() + ".provider", file);
             Intent intent = new Intent(Intent.ACTION_VIEW);
             intent.setDataAndType(uri, "application/pdf");
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            startActivity(intent);
+            startActivity(Intent.createChooser(intent, "Abrir Devolución"));
 
         } catch (IOException e) {
             Log.e(TAG, "Error saving PDF", e);

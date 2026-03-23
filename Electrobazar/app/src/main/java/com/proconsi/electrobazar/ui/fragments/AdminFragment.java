@@ -74,8 +74,7 @@ public class AdminFragment extends Fragment {
         sections.add(new AdminSection(R.id.admin_nav_tariffs, "Tarifas", R.drawable.ic_tariff));
         sections.add(new AdminSection(R.id.admin_nav_vat_types, "Tipos de IVA", R.drawable.ic_vat));
         sections.add(new AdminSection(R.id.admin_nav_vat_selective, "IVA Selectivo", R.drawable.ic_vat_selective));
-        sections.add(new AdminSection(R.id.admin_nav_settings, "Ajustes", R.drawable.ic_settings));
-        sections.add(new AdminSection(R.id.admin_nav_security, "Seguridad", R.drawable.ic_security));
+        sections.add(new AdminSection(R.id.admin_nav_settings, "Configuración (PIN)", R.drawable.ic_settings));
 
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3));
         recyclerView.setAdapter(new AdminAdapter(sections, section -> {
@@ -112,10 +111,10 @@ public class AdminFragment extends Fragment {
             showSubFragment(new AnalyticsFragment());
         } else if (id == R.id.admin_nav_activity) {
             showSubFragment(new ActivityLogFragment());
+        } else if (id == R.id.admin_nav_price_temp) {
+            showSubFragment(new FuturePricesFragment());
         } else if (id == R.id.admin_nav_settings) {
             showSubFragment(new SettingsAdminFragment());
-        } else if (id == R.id.admin_nav_security) {
-            showSubFragment(new SecurityAdminFragment());
         } else {
 
             // Placeholder for other sections

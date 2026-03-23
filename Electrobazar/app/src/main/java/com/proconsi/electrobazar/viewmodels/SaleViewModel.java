@@ -22,6 +22,7 @@ public class SaleViewModel extends ViewModel {
     private final CustomerRepository customerRepository = new CustomerRepository();
     private final com.proconsi.electrobazar.repositories.HeldSalesRepository heldSalesRepository = new com.proconsi.electrobazar.repositories.HeldSalesRepository();
     private final com.proconsi.electrobazar.repositories.ProductRepository productRepository = new com.proconsi.electrobazar.repositories.ProductRepository();
+    private final com.proconsi.electrobazar.repositories.EmailRepository emailRepository = new com.proconsi.electrobazar.repositories.EmailRepository();
     private final MutableLiveData<List<TicketLine>> ticketLines = new MutableLiveData<>(new ArrayList<>());
     private final MutableLiveData<Integer> totalItems = new MutableLiveData<>(0);
     private final MutableLiveData<BigDecimal> totalAmount = new MutableLiveData<>(BigDecimal.ZERO);
@@ -244,22 +245,36 @@ public class SaleViewModel extends ViewModel {
     }
 
     public void loadHeldSale(com.proconsi.electrobazar.models.SuspendedSaleResponse heldSale) {
-        clearTicket();
-        clearCustomer();
-        
-        List<TicketLine> lines = new ArrayList<>();
-        for (com.proconsi.electrobazar.models.SuspendedSaleResponse.SuspendedSaleLineResponse lineResp : heldSale.getLines()) {
-            Product p = new Product();
-            p.setId(lineResp.getProductId());
-            p.setName(lineResp.getProductName());
-            p.setPrice(lineResp.getUnitPrice());
-            p.setStock(999); // Assume stock is enough for resumed sale, or well handle it in addProduct if we had the full product
-            
-            TicketLine line = new TicketLine(p, lineResp.getQuantity());
-            lines.add(line);
-        }
-        updateTicket(lines);
-        setTicketVisible(true);
+        if (Boolean.TRUE.equals(isProcessing.getValue())) return;
+
+        isProcessing.setValue(true);
+        heldSalesRepository.recoverSale(heldSale.getId()).observeForever(response -> {
+            isProcessing.setValue(false);
+            if (response != null) {
+                clearTicket();
+                clearCustomer();
+                
+                List<TicketLine> lines = new ArrayList<>();
+                for (com.proconsi.electrobazar.models.SuspendedSaleResponse.SuspendedSaleLineResponse lineResp : heldSale.getLines()) {
+                    Product p = new Product();
+                    p.setId(lineResp.getProductId());
+                    p.setName(lineResp.getProductName());
+                    p.setPrice(lineResp.getUnitPrice());
+                    p.setStock(999); 
+                    
+                    TicketLine line = new TicketLine(p, lineResp.getQuantity());
+                    lines.add(line);
+                }
+                updateTicket(lines);
+                setTicketVisible(true);
+            } else {
+                errorMessage.setValue("Error al recuperar la venta del servidor.");
+            }
+        });
+    }
+
+    public LiveData<String> sendReceiptByEmail(Long saleId, String email) {
+        return emailRepository.sendSaleEmail(saleId, email);
     }
 
     private void updateTicket(List<TicketLine> lines) {

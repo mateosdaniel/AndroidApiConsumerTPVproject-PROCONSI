@@ -14,6 +14,8 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.proconsi.electrobazar.R;
 import com.proconsi.electrobazar.viewmodels.AuthViewModel;
+import com.proconsi.electrobazar.viewmodels.MainViewModel;
+
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -23,6 +25,10 @@ public class LoginActivity extends AppCompatActivity {
     private MaterialButton loginButton;
     private ProgressBar loginProgress;
     private TextView errorText;
+    private TextView loginAppName;
+    private MainViewModel mainViewModel;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +45,16 @@ public class LoginActivity extends AppCompatActivity {
         loginButton = findViewById(R.id.loginButton);
         loginProgress = findViewById(R.id.loginProgress);
         errorText = findViewById(R.id.errorText);
+        loginAppName = findViewById(R.id.loginAppName);
+        
+        mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
+
+        mainViewModel.getCompanySettings().observe(this, settings -> {
+            if (settings != null && settings.getAppName() != null) {
+                loginAppName.setText(settings.getAppName());
+            }
+        });
+
 
         loginButton.setOnClickListener(v -> handleLogin());
 

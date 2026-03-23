@@ -45,6 +45,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class CashRegisterFragment extends Fragment {
+    public static final String ARG_INITIAL_STATE = "initial_state";
+    public static final String STATE_DASHBOARD = "DASHBOARD";
+    public static final String STATE_MOVEMENT = "MOVEMENT";
+    public static final String STATE_CLOSE = "CLOSE";
+
 
     private FragmentCashRegisterBinding binding;
     private CashRegisterRepository repository;
@@ -72,7 +77,17 @@ public class CashRegisterFragment extends Fragment {
 
         setupRecyclerView();
         setupListeners();
-        loadStatus();
+        
+        String initialState = getArguments() != null ? getArguments().getString(ARG_INITIAL_STATE) : STATE_DASHBOARD;
+        
+        if (STATE_MOVEMENT.equals(initialState)) {
+             showState(LayoutState.MOVEMENT_FORM);
+        } else if (STATE_CLOSE.equals(initialState)) {
+             loadCloseInfo(); // This shows close form
+        } else {
+             loadStatus();
+        }
+        
         updateLayoutForOrientation();
     }
 

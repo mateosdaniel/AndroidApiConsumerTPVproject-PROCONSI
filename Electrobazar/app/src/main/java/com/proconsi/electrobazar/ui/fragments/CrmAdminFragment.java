@@ -233,4 +233,13 @@ public class CrmAdminFragment extends Fragment implements CustomersAdapter.OnCus
             .setNegativeButton("CANCELAR", null)
             .show();
     }
+
+    @Override
+    public void onViewHistory(Customer customer) {
+        CustomerSalesFragment fragment = CustomerSalesFragment.newInstance(customer.getId(), customer.getName());
+        getParentFragmentManager().beginTransaction()
+                .replace(R.id.admin_fragment_container, fragment)
+                .addToBackStack(null)
+                .commit();
+    }
 }

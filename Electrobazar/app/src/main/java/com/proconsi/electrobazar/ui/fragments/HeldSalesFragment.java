@@ -91,18 +91,9 @@ public class HeldSalesFragment extends Fragment {
     }
 
     private void recoverHeldSale(SuspendedSaleResponse heldSale) {
-        loadingProgress.setVisibility(View.VISIBLE);
-        heldSalesRepository.recoverSale(heldSale.getId()).observe(getViewLifecycleOwner(), response -> {
-            loadingProgress.setVisibility(View.GONE);
-            if (response != null) {
-                saleViewModel.loadHeldSale(response);
-                Toast.makeText(getContext(), "Venta recuperada", Toast.LENGTH_SHORT).show();
-                // Navigate back to SaleFragment
-                requireActivity().onBackPressed();
-            } else {
-                Toast.makeText(getContext(), "Error al recuperar la venta", Toast.LENGTH_SHORT).show();
-            }
-        });
+        // Just use the ViewModel's loadHeldSale which handles the repository call
+        saleViewModel.loadHeldSale(heldSale);
+        requireActivity().onBackPressed();
     }
 
     private void confirmDelete(SuspendedSaleResponse heldSale) {

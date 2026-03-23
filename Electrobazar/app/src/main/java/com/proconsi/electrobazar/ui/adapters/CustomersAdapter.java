@@ -23,6 +23,7 @@ public class CustomersAdapter extends RecyclerView.Adapter<CustomersAdapter.Cust
     public interface OnCustomerActionListener {
         void onEdit(Customer customer);
         void onDelete(Customer customer);
+        void onViewHistory(Customer customer);
     }
 
     public CustomersAdapter(OnCustomerActionListener listener) {
@@ -54,7 +55,7 @@ public class CustomersAdapter extends RecyclerView.Adapter<CustomersAdapter.Cust
 
     static class CustomerViewHolder extends RecyclerView.ViewHolder {
         TextView nameText, taxIdText, typeBadge, tariffBadge, reBadge, emailText, phoneText, cityText;
-        ImageButton editBtn, deleteBtn;
+        ImageButton editBtn, deleteBtn, historyBtn;
 
         public CustomerViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -68,6 +69,7 @@ public class CustomersAdapter extends RecyclerView.Adapter<CustomersAdapter.Cust
             cityText = itemView.findViewById(R.id.customerCityText);
             editBtn = itemView.findViewById(R.id.editCustomerBtn);
             deleteBtn = itemView.findViewById(R.id.deleteCustomerBtn);
+            historyBtn = itemView.findViewById(R.id.historyCustomerBtn);
         }
 
         public void bind(Customer customer, OnCustomerActionListener listener) {
@@ -108,6 +110,7 @@ public class CustomersAdapter extends RecyclerView.Adapter<CustomersAdapter.Cust
 
             editBtn.setOnClickListener(v -> listener.onEdit(customer));
             deleteBtn.setOnClickListener(v -> listener.onDelete(customer));
+            historyBtn.setOnClickListener(v -> listener.onViewHistory(customer));
         }
     }
 }

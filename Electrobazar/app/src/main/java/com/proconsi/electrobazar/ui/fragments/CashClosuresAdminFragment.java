@@ -198,7 +198,7 @@ public class CashClosuresAdminFragment extends Fragment implements CashClosureAd
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    saveAndOpenFile(response.body(), "Cierre_Caja_" + closure.getId() + ".pdf");
+                    com.proconsi.electrobazar.utils.PdfUtils.saveAndOpenFile(requireContext(), response.body(), "Cierre_Caja_" + closure.getId() + ".pdf");
                 } else {
                     Toast.makeText(requireContext(), "Error al descargar PDF", Toast.LENGTH_SHORT).show();
                 }
@@ -209,42 +209,6 @@ public class CashClosuresAdminFragment extends Fragment implements CashClosureAd
                 Toast.makeText(requireContext(), "Error de red", Toast.LENGTH_SHORT).show();
             }
         });
-    }
-
-    private void saveAndOpenFile(ResponseBody body, String filename) {
-        try {
-            File file = new File(requireContext().getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), filename);
-            InputStream inputStream = null;
-            OutputStream outputStream = null;
-
-            try {
-                byte[] fileReader = new byte[4096];
-                inputStream = body.byteStream();
-                outputStream = new FileOutputStream(file);
-
-                while (true) {
-                    int read = inputStream.read(fileReader);
-                    if (read == -1) break;
-                    outputStream.write(fileReader, 0, read);
-                }
-                outputStream.flush();
-
-                // Open File
-                Uri fileUri = FileProvider.getUriForFile(requireContext(), requireContext().getPackageName() + ".provider", file);
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setDataAndType(fileUri, "application/pdf");
-                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                startActivity(Intent.createChooser(intent, "Abrir Cierre de Caja"));
-
-            } catch (IOException e) {
-                Toast.makeText(requireContext(), "Error al guardar archivo", Toast.LENGTH_SHORT).show();
-            } finally {
-                if (inputStream != null) inputStream.close();
-                if (outputStream != null) outputStream.close();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     @Override

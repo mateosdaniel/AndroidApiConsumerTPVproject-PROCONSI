@@ -14,15 +14,17 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ajustes de Empresa"
+            android:text="Configuración del Sistema"
             android:textColor="?attr/android:textColorPrimary"
             android:textSize="22sp"
             android:textStyle="bold"
             android:layout_marginBottom="24dp" />
 
+        <!-- 1. DATOS DE LA EMPRESA -->
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
             app:cardBackgroundColor="?attr/colorSurface"
             app:cardCornerRadius="12dp">
 
@@ -32,23 +34,33 @@
                 android:orientation="vertical"
                 android:padding="20dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Datos de la Empresa"
-                    android:textColor="?attr/android:textColorPrimary"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:layout_marginBottom="16dp"/>
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="16dp">
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_admin"
+                        app:tint="?attr/colorPrimary"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Datos de la Empresa"
+                        android:textColor="?attr/android:textColorPrimary"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:layout_marginStart="8dp"/>
+                </LinearLayout>
 
-                <!-- App Name -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Nombre de la Aplicación"
                     android:textColor="?attr/android:textColorSecondary"
-                    android:textSize="12sp"
-                    android:layout_marginBottom="4dp"/>
+                    android:textSize="12sp" />
                 <EditText
                     android:id="@+id/etAppName"
                     android:layout_width="match_parent"
@@ -58,14 +70,12 @@
                     android:textColor="?attr/android:textColorPrimary"
                     android:layout_marginBottom="16dp"/>
 
-                <!-- Name / Razón Social -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Nombre / Razón Social"
                     android:textColor="?attr/android:textColorSecondary"
-                    android:textSize="12sp"
-                    android:layout_marginBottom="4dp"/>
+                    android:textSize="12sp" />
                 <EditText
                     android:id="@+id/etCompanyName"
                     android:layout_width="match_parent"
@@ -75,14 +85,12 @@
                     android:textColor="?attr/android:textColorPrimary"
                     android:layout_marginBottom="16dp"/>
 
-                <!-- CIF -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="CIF / NIF"
                     android:textColor="?attr/android:textColorSecondary"
-                    android:textSize="12sp"
-                    android:layout_marginBottom="4dp"/>
+                    android:textSize="12sp" />
                 <EditText
                     android:id="@+id/etCompanyCif"
                     android:layout_width="match_parent"
@@ -92,14 +100,12 @@
                     android:textColor="?attr/android:textColorPrimary"
                     android:layout_marginBottom="16dp"/>
 
-                <!-- Address -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Dirección"
                     android:textColor="?attr/android:textColorSecondary"
-                    android:textSize="12sp"
-                    android:layout_marginBottom="4dp"/>
+                    android:textSize="12sp" />
                 <EditText
                     android:id="@+id/etCompanyAddress"
                     android:layout_width="match_parent"
@@ -112,53 +118,45 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="16dp">
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="2"
+                        android:layout_weight="1"
                         android:orientation="vertical"
                         android:layout_marginEnd="8dp">
-
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Ciudad"
                             android:textColor="?attr/android:textColorSecondary"
-                            android:textSize="12sp"
-                            android:layout_marginBottom="4dp"/>
+                            android:textSize="12sp"/>
                         <EditText
                             android:id="@+id/etCompanyCity"
                             android:layout_width="match_parent"
                             android:layout_height="45dp"
                             android:background="@drawable/bg_edittext"
                             android:padding="12dp"
-                            android:textColor="?attr/android:textColorPrimary"
-                            android:layout_marginBottom="16dp"/>
+                            android:textColor="?attr/android:textColorPrimary"/>
                     </LinearLayout>
-
                     <LinearLayout
-                        android:layout_width="0dp"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:orientation="vertical">
-
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="C.P."
                             android:textColor="?attr/android:textColorSecondary"
-                            android:textSize="12sp"
-                            android:layout_marginBottom="4dp"/>
+                            android:textSize="12sp"/>
                         <EditText
                             android:id="@+id/etCompanyPostalCode"
                             android:layout_width="match_parent"
                             android:layout_height="45dp"
                             android:background="@drawable/bg_edittext"
                             android:padding="12dp"
-                            android:textColor="?attr/android:textColorPrimary"
-                            android:layout_marginBottom="16dp"/>
+                            android:textColor="?attr/android:textColorPrimary"/>
                     </LinearLayout>
                 </LinearLayout>
 
@@ -167,8 +165,7 @@
                     android:layout_height="wrap_content"
                     android:text="Teléfono"
                     android:textColor="?attr/android:textColorSecondary"
-                    android:textSize="12sp"
-                    android:layout_marginBottom="4dp"/>
+                    android:textSize="12sp" />
                 <EditText
                     android:id="@+id/etCompanyPhone"
                     android:layout_width="match_parent"
@@ -182,10 +179,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Email"
+                    android:text="Email de Contacto"
                     android:textColor="?attr/android:textColorSecondary"
-                    android:textSize="12sp"
-                    android:layout_marginBottom="4dp"/>
+                    android:textSize="12sp" />
                 <EditText
                     android:id="@+id/etCompanyEmail"
                     android:layout_width="match_parent"
@@ -194,16 +190,330 @@
                     android:padding="12dp"
                     android:textColor="?attr/android:textColorPrimary"
                     android:inputType="textEmailAddress"
+                    android:layout_marginBottom="16dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sitio Web (Opcional)"
+                    android:textColor="?attr/android:textColorSecondary"
+                    android:textSize="12sp" />
+                <EditText
+                    android:id="@+id/etCompanyWebsite"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:background="@drawable/bg_edittext"
+                    android:padding="12dp"
+                    android:textColor="?attr/android:textColorPrimary"
                     android:layout_marginBottom="24dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="LEYENDAS DE FACTURACIÓN"
+                    android:textColor="?attr/colorPrimary"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    android:letterSpacing="0.1"
+                    android:layout_marginBottom="12dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Registro Mercantil (Pie Factura)"
+                    android:textColor="?attr/android:textColorSecondary"
+                    android:textSize="12sp" />
+                <EditText
+                    android:id="@+id/etRegistroMercantil"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:background="@drawable/bg_edittext"
+                    android:padding="12dp"
+                    android:gravity="top"
+                    android:textColor="?attr/android:textColorPrimary"
+                    android:layout_marginBottom="16dp"
+                    android:inputType="textMultiLine"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Texto Pie de Factura"
+                    android:textColor="?attr/android:textColorSecondary"
+                    android:textSize="12sp" />
+                <EditText
+                    android:id="@+id/etInvoiceFooter"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:background="@drawable/bg_edittext"
+                    android:padding="12dp"
+                    android:gravity="top"
+                    android:textColor="?attr/android:textColorPrimary"
+                    android:layout_marginBottom="24dp"
+                    android:inputType="textMultiLine"/>
 
                 <Button
                     android:id="@+id/btnSaveSettings"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:text="Guardar Configuración"
+                    android:text="Guardar Configuración General"
                     android:textAllCaps="false"
                     android:backgroundTint="?attr/colorPrimary"
                     android:textColor="?attr/android:windowBackground"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- 2. SEGURIDAD (PIN) -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            app:cardBackgroundColor="?attr/colorSurface"
+            app:cardCornerRadius="12dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="8dp">
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_security"
+                        app:tint="#f39c12"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Seguridad del Sistema"
+                        android:textColor="?attr/android:textColorPrimary"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:layout_marginStart="8dp"/>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="PIN de acceso al panel de administración."
+                    android:textColor="?attr/android:textColorSecondary"
+                    android:textSize="12sp"
+                    android:layout_marginBottom="16dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="PIN Actual"
+                    android:textColor="?attr/android:textColorSecondary"
+                    android:textSize="12sp" />
+                <EditText
+                    android:id="@+id/etCurrentPin"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:background="@drawable/bg_edittext"
+                    android:padding="12dp"
+                    android:inputType="numberPassword"
+                    android:textColor="?attr/android:textColorPrimary"
+                    android:layout_marginBottom="16dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="24dp">
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_marginEnd="8dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Nuevo PIN"
+                            android:textColor="?attr/android:textColorSecondary"
+                            android:textSize="12sp"/>
+                        <EditText
+                            android:id="@+id/etNewPin"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:background="@drawable/bg_edittext"
+                            android:padding="12dp"
+                            android:inputType="numberPassword"
+                            android:textColor="?attr/android:textColorPrimary"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Confirmar"
+                            android:textColor="?attr/android:textColorSecondary"
+                            android:textSize="12sp"/>
+                        <EditText
+                            android:id="@+id/etConfirmPin"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:background="@drawable/bg_edittext"
+                            android:padding="12dp"
+                            android:inputType="numberPassword"
+                            android:textColor="?attr/android:textColorPrimary"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/btnUpdatePin"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:text="Actualizar PIN"
+                    android:textAllCaps="false"
+                    android:backgroundTint="#f39c12"
+                    android:textColor="?attr/android:windowBackground"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- 3. SERVIDOR SMTP -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
+            app:cardBackgroundColor="?attr/colorSurface"
+            app:cardCornerRadius="12dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="8dp">
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_mail"
+                        app:tint="?attr/colorAccent"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Servidor SMTP (Correos)"
+                        android:textColor="?attr/android:textColorPrimary"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:layout_marginStart="8dp"/>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Configura el servidor para enviar tickets y facturas."
+                    android:textColor="?attr/android:textColorSecondary"
+                    android:textSize="12sp"
+                    android:layout_marginBottom="16dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Host SMTP"
+                    android:textColor="?attr/android:textColorSecondary"
+                    android:textSize="12sp" />
+                <EditText
+                    android:id="@+id/etMailHost"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:background="@drawable/bg_edittext"
+                    android:padding="12dp"
+                    android:hint="smtp.gmail.com"
+                    android:textColor="?attr/android:textColorPrimary"
+                    android:layout_marginBottom="16dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="16dp">
+                    <LinearLayout
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginEnd="8dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Puerto"
+                            android:textColor="?attr/android:textColorSecondary"
+                            android:textSize="12sp"/>
+                        <EditText
+                            android:id="@+id/etMailPort"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:background="@drawable/bg_edittext"
+                            android:padding="12dp"
+                            android:hint="587"
+                            android:textColor="?attr/android:textColorPrimary"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Usuario / Email"
+                            android:textColor="?attr/android:textColorSecondary"
+                            android:textSize="12sp"/>
+                        <EditText
+                            android:id="@+id/etMailUsername"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:background="@drawable/bg_edittext"
+                            android:padding="12dp"
+                            android:hint="email@ejemplo.com"
+                            android:textColor="?attr/android:textColorPrimary"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Contraseña / Token APP"
+                    android:textColor="?attr/android:textColorSecondary"
+                    android:textSize="12sp" />
+                <EditText
+                    android:id="@+id/etMailPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:background="@drawable/bg_edittext"
+                    android:padding="12dp"
+                    android:inputType="textPassword"
+                    android:textColor="?attr/android:textColorPrimary"
+                    android:layout_marginBottom="24dp"/>
+
+                <Button
+                    android:id="@+id/btnSaveMailSettings"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:text="Actualizar SMTP"
+                    android:textAllCaps="false"
+                    android:backgroundTint="?attr/colorAccent"
+                    android:textColor="?attr/colorPrimaryDark"
                     android:textStyle="bold" />
 
             </LinearLayout>

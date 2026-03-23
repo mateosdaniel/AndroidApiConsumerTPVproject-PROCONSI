@@ -21,66 +21,68 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Nombre de usuario *"
-            android:textColor="?attr/android:textColorSecondary"
-            android:textSize="12sp"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/editWorkerUsername"
+        <!-- Nombre de usuario -->
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="16dp"
-            android:background="@drawable/input_bg"
-            android:hint="Ej: juan.perez"
-            android:inputType="text"
-            android:paddingHorizontal="16dp"
-            android:textColor="?attr/android:textColorPrimary"
-            android:textColorHint="?attr/android:textColorSecondary" />
-
-        <TextView
-            android:id="@+id/workerPasswordLabel"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Contraseña *"
-            android:textColor="?attr/android:textColorSecondary"
-            android:textSize="12sp"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/editWorkerPassword"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="4dp"
             android:layout_marginBottom="16dp"
-            android:background="@drawable/input_bg"
-            android:hint="••••••"
-            android:inputType="textPassword"
-            android:paddingHorizontal="16dp"
-            android:textColor="?attr/android:textColorPrimary"
-            android:textColorHint="?attr/android:textColorSecondary" />
+            android:hint="Nombre de usuario *"
+            app:boxStrokeColor="?attr/colorPrimary"
+            app:hintTextColor="?attr/android:textColorSecondary">
 
-        <TextView
-            android:layout_width="wrap_content"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editWorkerUsername"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:textColor="?attr/android:textColorPrimary" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Contraseña -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/workerPasswordLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Rol *"
-            android:textColor="?attr/android:textColorSecondary"
-            android:textSize="12sp"
-            android:textStyle="bold" />
-
-        <Spinner
-            android:id="@+id/editWorkerRoleSpinner"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="4dp"
             android:layout_marginBottom="16dp"
-            android:background="@drawable/input_bg"
-            android:spinnerMode="dropdown" />
+            android:hint="Contraseña *"
+            app:boxStrokeColor="?attr/colorPrimary"
+            app:hintTextColor="?attr/android:textColorSecondary"
+            app:endIconMode="password_toggle">
 
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editWorkerPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:textColor="?attr/android:textColorPrimary" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Rol: usando TextInputLayout estilo ExposedDropdownMenu -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/workerRoleLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:hint="Rol *"
+            app:boxStrokeColor="?attr/colorPrimary"
+            app:hintTextColor="?attr/android:textColorSecondary">
+
+            <AutoCompleteTextView
+                android:id="@+id/editWorkerRoleSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="false"
+                android:inputType="none"
+                android:textColor="?attr/android:textColorPrimary"
+                android:textColorHint="?attr/android:textColorSecondary"
+                android:background="@null"
+                android:padding="16dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Estado activo -->
         <com.google.android.material.switchmaterial.SwitchMaterial
             android:id="@+id/editWorkerActiveSwitch"
             android:layout_width="match_parent"
@@ -88,30 +90,34 @@
             android:layout_marginBottom="24dp"
             android:checked="true"
             android:text="Trabajador Activo"
-            android:textColor="?attr/android:textColorPrimary" />
+            android:textColor="?attr/android:textColorPrimary"
+            app:thumbTint="?attr/colorPrimary"
+            app:trackTint="?attr/colorPrimary" />
 
+        <!-- Botones -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="end"
             android:orientation="horizontal">
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/cancelWorkerBtn"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
+                style="@style/Widget.Material3.Button.TextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="CANCELAR"
                 android:textColor="?attr/android:textColorSecondary" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/saveWorkerBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:backgroundTint="?attr/colorPrimary"
                 android:text="GUARDAR"
-                android:textColor="?attr/android:windowBackground" />
+                app:backgroundTint="?attr/colorPrimary"
+                app:cornerRadius="8dp" />
+
         </LinearLayout>
 
     </LinearLayout>

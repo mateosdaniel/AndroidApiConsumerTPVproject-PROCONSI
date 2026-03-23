@@ -33,9 +33,10 @@
 
             <EditText
                 android:id="@+id/searchInput"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
+                android:layout_weight="1"
                 android:background="@android:color/transparent"
                 android:hint="Buscar..."
                 android:imeOptions="actionSearch"
@@ -43,6 +44,16 @@
                 android:textColor="?attr/android:textColorPrimary"
                 android:textColorHint="?attr/android:textColorSecondary"
                 android:textSize="14sp" />
+
+            <ImageButton
+                android:id="@+id/btnSuspendedSales"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="8dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@android:drawable/ic_menu_recent_history"
+                app:tint="?attr/colorPrimary"
+                android:contentDescription="Ventas en espera" />
         </LinearLayout>
 
         <!-- Categories Filter Bar -->
@@ -227,7 +238,7 @@
                 android:layout_marginTop="12dp"
                 android:enabled="false"
                 android:text="COBRAR"
-                android:textColor="?attr/android:windowBackground"
+                android:textColor="?attr/colorOnPrimary"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 app:backgroundTint="?attr/colorPrimary"
@@ -235,7 +246,7 @@
                 app:icon="@drawable/ic_arrow_right"
                 app:iconGravity="textEnd"
                 app:iconSize="18dp"
-                app:iconTint="?attr/android:windowBackground" />
+                app:iconTint="?attr/colorOnPrimary" />
             
             <Button
                 android:id="@+id/btnClearTicket"
@@ -249,6 +260,19 @@
                 app:icon="@drawable/ic_logout"
                 app:iconSize="14dp"
                 app:iconTint="?attr/colorError" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSuspender"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Poner en espera"
+                android:textColor="?attr/android:textColorPrimary"
+                android:visibility="gone"
+                app:icon="@android:drawable/ic_menu_recent_history"
+                app:iconTint="?attr/android:textColorPrimary"
+                app:strokeColor="?attr/colorOutline" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

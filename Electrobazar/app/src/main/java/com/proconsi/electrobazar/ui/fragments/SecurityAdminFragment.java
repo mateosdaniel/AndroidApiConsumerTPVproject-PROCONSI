@@ -59,28 +59,22 @@ public class SecurityAdminFragment extends Fragment {
 
         UpdatePinRequest request = new UpdatePinRequest(currentPin, newPin, confirmPin);
 
-        apiService.updateAdminPin(request).enqueue(new Callback<Map<String, Object>>() {
+        apiService.updateAdminPin(request).enqueue(new Callback<Void>() {
             @Override
-            public void onResponse(Call<Map<String, Object>> call, Response<Map<String, Object>> response) {
+            public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
                     Toast.makeText(getContext(), "PIN actualizado correctamente", Toast.LENGTH_SHORT).show();
                     binding.etCurrentPin.setText("");
                     binding.etNewPin.setText("");
                     binding.etConfirmPin.setText("");
                 } else {
-                    String error = "Error al actualizar PIN";
-                    try {
-                        // Try to get error message from body if available
-                        if (response.errorBody() != null) {
-                            error = response.message();
-                        }
-                    } catch (Exception ignored) {}
+                    String error = "Error al actualizar PIN: Puede que el PIN actual sea incorrecto.";
                     Toast.makeText(getContext(), error, Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
-            public void onFailure(Call<Map<String, Object>> call, Throwable t) {
+            public void onFailure(Call<Void> call, Throwable t) {
                 Toast.makeText(getContext(), "Error de red", Toast.LENGTH_SHORT).show();
             }
         });

@@ -23,6 +23,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.math.BigDecimal;
 
 import okhttp3.ResponseBody;
 
@@ -37,6 +38,8 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.google.android.material.chip.ChipGroup;
 import com.proconsi.electrobazar.R;
 import com.proconsi.electrobazar.models.Sale;
+import com.proconsi.electrobazar.network.ApiService;
+import com.proconsi.electrobazar.network.RetrofitClient;
 import com.proconsi.electrobazar.repositories.InvoicesAdminRepository;
 import com.proconsi.electrobazar.ui.adapters.InvoicesAdminAdapter;
 import com.proconsi.electrobazar.utils.SessionManager;
@@ -45,6 +48,11 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class InvoicesAdminFragment extends Fragment implements InvoicesAdminAdapter.OnSaleActionListener {
 
@@ -221,58 +229,27 @@ public class InvoicesAdminFragment extends Fragment implements InvoicesAdminAdap
         boolean hasInvoice = sale.getInvoice() != null;
         String filename = hasInvoice
                 ? "Factura_" + sale.getInvoice().getInvoiceNumber() + ".pdf"
-                : "Ticket_" + sale.getId() + ".pdf";
+                : "Ticket_" + (sale.getTicket() != null ? sale.getTicket().getTicketNumber() : sale.getId()) + ".pdf";
 
-        repository.downloadInvoice(sale.getId(), new InvoicesAdminRepository.RepositoryCallback<ResponseBody>() {
+        InvoicesAdminRepository.RepositoryCallback<ResponseBody> callback = new InvoicesAdminRepository.RepositoryCallback<ResponseBody>() {
             @Override
             public void onSuccess(ResponseBody body) {
-                saveAndOpenFile(body, filename);
+                com.proconsi.electrobazar.utils.PdfUtils.saveAndOpenFile(requireContext(), body, filename);
             }
 
             @Override
             public void onError(String error) {
                 Toast.makeText(getContext(), "Error al descargar PDF: " + error, Toast.LENGTH_SHORT).show();
             }
-        });
+        };
+
+        // We use the Sale ID (parent) for the download to ensure the backend generates 
+        // the correct document based on the sale context.
+        repository.downloadInvoice(sale.getId(), callback);
     }
 
     private void saveAndOpenFile(ResponseBody body, String filename) {
-        try {
-            File file = new File(requireContext().getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), filename);
-            InputStream inputStream = null;
-            OutputStream outputStream = null;
-
-            try {
-                byte[] fileReader = new byte[4096];
-                inputStream = body.byteStream();
-                outputStream = new FileOutputStream(file);
-
-                while (true) {
-                    int read = inputStream.read(fileReader);
-                    if (read == -1) break;
-                    outputStream.write(fileReader, 0, read);
-                }
-                outputStream.flush();
-
-                // Open File
-                Uri fileUri = FileProvider.getUriForFile(
-                        requireContext(),
-                        requireContext().getPackageName() + ".provider",
-                        file);
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setDataAndType(fileUri, "application/pdf");
-                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                startActivity(Intent.createChooser(intent, "Abrir Factura / Ticket"));
-
-            } catch (IOException e) {
-                Toast.makeText(requireContext(), "Error al guardar archivo", Toast.LENGTH_SHORT).show();
-            } finally {
-                if (inputStream != null) inputStream.close();
-                if (outputStream != null) outputStream.close();
-            }
-        } catch (IOException e) {
-            Log.e(TAG, "saveAndOpenFile: " + e.getMessage(), e);
-        }
+        com.proconsi.electrobazar.utils.PdfUtils.saveAndOpenFile(requireContext(), body, filename);
     }
 
     @Override
@@ -324,5 +301,46 @@ public class InvoicesAdminFragment extends Fragment implements InvoicesAdminAdap
                 .setMessage(sb.toString())
                 .setPositiveButton("Cerrar", null)
                 .show();
+    }
+
+    @Override
+    public void onSendEmail(Sale sale) {
+        String defaultEmail = sale.getCustomer() != null ? sale.getCustomer().getEmail() : "";
+        
+        final EditText input = new EditText(requireContext());
+        input.setHint("email@cliente.com");
+        input.setText(defaultEmail);
+        input.setPadding(40, 20, 40, 20);
+
+        new AlertDialog.Builder(requireContext())
+                .setTitle("Enviar por Email")
+                .setMessage("Introduce el email de destino para la venta #" + sale.getId())
+                .setView(input)
+                .setPositiveButton("ENVIAR", (dialog, which) -> {
+                    String email = input.getText().toString().trim();
+                    if (!email.isEmpty()) {
+                        sendEmail(sale.getId(), email);
+                    }
+                })
+                .setNegativeButton("CANCELAR", null)
+                .show();
+    }
+
+    private void sendEmail(Long saleId, String email) {
+        RetrofitClient.getInstance().getApi().sendSaleEmail(saleId, email).enqueue(new Callback<Map<String, String>>() {
+            @Override
+            public void onResponse(Call<Map<String, String>> call, Response<Map<String, String>> response) {
+                if (response.isSuccessful()) {
+                    Toast.makeText(getContext(), "Email enviado con éxito", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getContext(), "Error al enviar el email", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Map<String, String>> call, Throwable t) {
+                Toast.makeText(getContext(), "Error de red", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

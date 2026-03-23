@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="24dp"
-    android:background="?attr/colorSurfaceVariant">
+    android:background="?attr/colorSurface">
 
     <TextView
         android:id="@+id/tvDialogTitle"
@@ -23,8 +23,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:hint="Nombre"
-        app:boxStrokeColor="?attr/colorAccent"
-        app:hintTextColor="?attr/colorAccent">
+        app:boxStrokeColor="?attr/colorPrimary"
+        app:hintTextColor="?attr/colorPrimary">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etName"
             android:layout_width="match_parent"
@@ -38,8 +38,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:hint="Descripción"
-        app:boxStrokeColor="?attr/colorAccent"
-        app:hintTextColor="?attr/colorAccent">
+        app:boxStrokeColor="?attr/colorPrimary"
+        app:hintTextColor="?attr/colorPrimary">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etDescription"
             android:layout_width="match_parent"
@@ -54,8 +54,8 @@
         android:text="Categoría Activa"
         android:textColor="?attr/android:textColorPrimary"
         android:checked="true"
-        app:thumbTint="?attr/colorAccent"
-        app:trackTint="?attr/colorAccent"
+        app:thumbTint="?attr/colorPrimary"
+        app:trackTint="?attr/colorPrimary"
         android:layout_marginBottom="24dp" />
 
     <com.google.android.material.button.MaterialButton
@@ -64,7 +64,7 @@
         android:layout_height="56dp"
         android:text="Guardar Categoría"
         android:textColor="?attr/android:windowBackground"
-        app:backgroundTint="?attr/colorAccent"
+        app:backgroundTint="?attr/colorPrimary"
         app:cornerRadius="12dp" />
 
 </LinearLayout>

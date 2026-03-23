@@ -33,9 +33,10 @@
 
             <EditText
                 android:id="@+id/searchInput"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
+                android:layout_weight="1"
                 android:background="@android:color/transparent"
                 android:hint="Buscar..."
                 android:imeOptions="actionSearch"
@@ -43,6 +44,16 @@
                 android:textColor="?attr/android:textColorPrimary"
                 android:textColorHint="?attr/android:textColorSecondary"
                 android:textSize="14sp" />
+
+            <ImageButton
+                android:id="@+id/btnSuspendedSales"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="8dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@android:drawable/ic_menu_recent_history"
+                app:tint="?attr/colorPrimary"
+                android:contentDescription="Ventas en espera" />
         </LinearLayout>
 
         <!-- Categories Filter Bar -->
@@ -116,6 +127,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="?attr/colorSurface"
+        android:clipChildren="false"
+        android:clipToPadding="false"
         android:elevation="8dp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -179,6 +192,9 @@
             android:paddingHorizontal="16dp"
             android:paddingVertical="12dp"
             android:background="?attr/colorSurfaceVariant"
+            android:elevation="10dp"
+            android:clipChildren="false"
+            android:clipToPadding="false"
             app:layout_constraintTop_toBottomOf="@id/ticketHeader">
 
             <LinearLayout
@@ -352,7 +368,7 @@
                 android:layout_marginTop="16dp"
                 android:enabled="false"
                 android:text="COBRAR"
-                android:textColor="?attr/android:windowBackground"
+                android:textColor="?attr/colorOnPrimary"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:backgroundTint="?attr/colorPrimary"
@@ -360,7 +376,7 @@
                 app:icon="@drawable/ic_arrow_right"
                 app:iconGravity="textEnd"
                 app:iconSize="20dp"
-                app:iconTint="?attr/android:windowBackground" />
+                app:iconTint="?attr/colorOnPrimary" />
             
             <Button
                 android:id="@+id/btnClearTicket"

@@ -17,11 +17,11 @@ public class AuthInterceptor implements Interceptor {
     public Response intercept(Chain chain) throws IOException {
         String token = sessionManager.getToken();
         Request.Builder builder = chain.request().newBuilder();
-        
+
         if (token != null) {
             builder.addHeader("Authorization", "Bearer " + token);
         }
-        
+
         return chain.proceed(builder.build());
     }
 }

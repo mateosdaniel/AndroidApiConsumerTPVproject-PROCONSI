@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="20dp"
-    android:background="?attr/colorSurfaceVariant">
+    android:background="?attr/colorSurface">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,14 +21,15 @@
             android:textStyle="bold"
             android:layout_marginBottom="24dp" />
 
+        <!-- Nombre -->
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:hint="Nombre"
-            app:boxStrokeColor="?attr/colorAccent"
-            app:hintTextColor="?attr/colorAccent">
+            android:hint="Nombre *"
+            app:boxStrokeColor="?attr/colorPrimary"
+            app:hintTextColor="?attr/android:textColorSecondary">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etName"
                 android:layout_width="match_parent"
@@ -36,14 +37,15 @@
                 android:textColor="?attr/android:textColorPrimary" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <!-- Descripción -->
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:hint="Descripción"
-            app:boxStrokeColor="?attr/colorAccent"
-            app:hintTextColor="?attr/colorAccent">
+            app:boxStrokeColor="?attr/colorPrimary"
+            app:hintTextColor="?attr/android:textColorSecondary">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etDescription"
                 android:layout_width="match_parent"
@@ -51,6 +53,7 @@
                 android:textColor="?attr/android:textColorPrimary" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <!-- Precio y Stock -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -64,8 +67,8 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="16dp"
                 android:hint="Precio (€)"
-                app:boxStrokeColor="?attr/colorAccent"
-                app:hintTextColor="?attr/colorAccent">
+                app:boxStrokeColor="?attr/colorPrimary"
+                app:hintTextColor="?attr/android:textColorSecondary">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etPrice"
                     android:layout_width="match_parent"
@@ -82,8 +85,8 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginBottom="16dp"
                 android:hint="Stock"
-                app:boxStrokeColor="?attr/colorAccent"
-                app:hintTextColor="?attr/colorAccent">
+                app:boxStrokeColor="?attr/colorPrimary"
+                app:hintTextColor="?attr/android:textColorSecondary">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etStock"
                     android:layout_width="match_parent"
@@ -93,42 +96,61 @@
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Categoría"
-            android:textColor="?attr/android:textColorSecondary"
-            android:textSize="12sp"
-            android:layout_marginBottom="4dp" />
-        <Spinner
-            android:id="@+id/spinnerCategory"
+        <!-- Categoría: ExposedDropdownMenu (fixes black-on-black) -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/categoryLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginBottom="16dp"
-            android:background="@drawable/bg_surface_rounded" />
-
-        <TextView
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tipo de IVA"
-            android:textColor="?attr/android:textColorSecondary"
-            android:textSize="12sp"
-            android:layout_marginBottom="4dp" />
-        <Spinner
-            android:id="@+id/spinnerTaxRate"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
             android:layout_marginBottom="16dp"
-            android:background="@drawable/bg_surface_rounded" />
+            android:hint="Categoría"
+            app:boxStrokeColor="?attr/colorPrimary"
+            app:hintTextColor="?attr/android:textColorSecondary">
 
+            <AutoCompleteTextView
+                android:id="@+id/spinnerCategory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="false"
+                android:inputType="none"
+                android:background="@null"
+                android:padding="16dp"
+                android:textColor="?attr/android:textColorPrimary"
+                android:textColorHint="?attr/android:textColorSecondary" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Tipo de IVA: ExposedDropdownMenu (fixes black-on-black) -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/taxRateLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:hint="Tipo de IVA"
+            app:boxStrokeColor="?attr/colorPrimary"
+            app:hintTextColor="?attr/android:textColorSecondary">
+
+            <AutoCompleteTextView
+                android:id="@+id/spinnerTaxRate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="false"
+                android:inputType="none"
+                android:background="@null"
+                android:padding="16dp"
+                android:textColor="?attr/android:textColorPrimary"
+                android:textColorHint="?attr/android:textColorSecondary" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- URL de imagen -->
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:hint="URL de Imagen"
-            app:boxStrokeColor="?attr/colorAccent"
-            app:hintTextColor="?attr/colorAccent">
+            app:boxStrokeColor="?attr/colorPrimary"
+            app:hintTextColor="?attr/android:textColorSecondary">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etImageUrl"
                 android:layout_width="match_parent"
@@ -136,6 +158,7 @@
                 android:textColor="?attr/android:textColorPrimary" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <!-- Activo -->
         <com.google.android.material.switchmaterial.SwitchMaterial
             android:id="@+id/switchActive"
             android:layout_width="match_parent"
@@ -143,17 +166,19 @@
             android:text="Producto Activo"
             android:textColor="?attr/android:textColorPrimary"
             android:checked="true"
-            app:thumbTint="?attr/colorAccent"
-            app:trackTint="?attr/colorAccent" />
+            app:thumbTint="?attr/colorPrimary"
+            app:trackTint="?attr/colorPrimary" />
 
+        <!-- Guardar -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnSave"
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:layout_marginTop="24dp"
             android:text="Guardar Producto"
-            android:textColor="?attr/android:windowBackground"
-            app:backgroundTint="?attr/colorAccent"
+            android:textAllCaps="false"
+            android:textStyle="bold"
+            app:backgroundTint="?attr/colorPrimary"
             app:cornerRadius="12dp" />
 
     </LinearLayout>

@@ -3,10 +3,10 @@ package com.proconsi.electrobazar.ui.activities;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +24,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.proconsi.electrobazar.ui.fragments.SaleFragment;
 import com.proconsi.electrobazar.ui.fragments.DashboardFragment;
 import com.proconsi.electrobazar.ui.fragments.AdminFragment;
+import com.proconsi.electrobazar.ui.fragments.AdminPinDialogFragment;
 import com.proconsi.electrobazar.ui.fragments.InventoryFragment;
 import com.proconsi.electrobazar.ui.fragments.CashRegisterFragment;
 import com.proconsi.electrobazar.ui.fragments.ReturnsFragment;
@@ -31,6 +32,8 @@ import com.proconsi.electrobazar.ui.fragments.HeldSalesFragment;
 
 import com.proconsi.electrobazar.utils.SessionManager;
 import com.proconsi.electrobazar.viewmodels.SaleViewModel;
+import com.proconsi.electrobazar.viewmodels.MainViewModel;
+
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -39,6 +42,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private SaleViewModel saleViewModel;
     private TextView navWorkerName, navWorkerRole;
     private TextView cartBadge, cartBadgeLand;
+    private TextView appNameText;
+    private MainViewModel mainViewModel;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,10 +58,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         sessionManager = new SessionManager(this);
         saleViewModel = new ViewModelProvider(this).get(SaleViewModel.class);
+        mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
+
         
         // Portrait elements
         drawerLayout = findViewById(R.id.drawerLayout);
         cartBadge = findViewById(R.id.cartBadge);
+        appNameText = findViewById(R.id.appNameText);
+
         NavigationView navigationView = findViewById(R.id.navigationView);
         if (navigationView != null) {
             navigationView.setNavigationItemSelectedListener(this);
@@ -75,8 +86,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         // Landscape elements
         cartBadgeLand = findViewById(R.id.cartBadgeLand);
+        
         View cashCloseBtn = findViewById(R.id.cashCloseBtn);
-        if (cashCloseBtn != null) cashCloseBtn.setOnClickListener(v -> loadFragment(new CashRegisterFragment(), "CASH_REGISTER_FRAGMENT"));
+        if (cashCloseBtn != null) {
+            cashCloseBtn.setVisibility(sessionManager.hasPermission("CASH_CLOSE") ? View.VISIBLE : View.GONE);
+            cashCloseBtn.setOnClickListener(v -> {
+                CashRegisterFragment fragment = new CashRegisterFragment();
+                Bundle args = new Bundle();
+                args.putString(CashRegisterFragment.ARG_INITIAL_STATE, CashRegisterFragment.STATE_CLOSE);
+                fragment.setArguments(args);
+                loadFragment(fragment, "CASH_REGISTER_FRAGMENT");
+            });
+        }
+
+        View cashMovementBtn = findViewById(R.id.cashMovementBtn);
+        if (cashMovementBtn != null) {
+            cashMovementBtn.setVisibility(sessionManager.hasPermission("CASH_CLOSE") ? View.VISIBLE : View.GONE);
+            cashMovementBtn.setOnClickListener(v -> {
+                CashRegisterFragment fragment = new CashRegisterFragment();
+                Bundle args = new Bundle();
+                args.putString(CashRegisterFragment.ARG_INITIAL_STATE, CashRegisterFragment.STATE_MOVEMENT);
+                fragment.setArguments(args);
+                loadFragment(fragment, "CASH_REGISTER_FRAGMENT");
+            });
+        }
 
         View hamburgerBtnLand = findViewById(R.id.hamburgerBtnLand);
         if (hamburgerBtnLand != null) {
@@ -93,10 +126,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         View cartButtonLand = findViewById(R.id.cartButtonLand);
         if (cartButtonLand != null) cartButtonLand.setOnClickListener(v -> saleViewModel.toggleTicket());
 
-        ImageButton moreOptionsBtnLand = findViewById(R.id.moreOptionsBtnLand);
-        if (moreOptionsBtnLand != null) {
-            moreOptionsBtnLand.setOnClickListener(this::showMoreOptionsLand);
-        }
 
         // Observe cart items
         saleViewModel.getTotalItems().observe(this, count -> {
@@ -113,9 +142,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
-        // Set App Name from Session (if available, else default)
-        // Note: App name usually comes from CompanySettings, for now we use default
-        
+        // Set App Name from CompanySettings via ViewModel
+        mainViewModel.getCompanySettings().observe(this, settings -> {
+            if (settings != null && settings.getAppName() != null) {
+                if (appNameText != null) {
+                    appNameText.setText(settings.getAppName());
+                }
+            }
+        });
+
         if (savedInstanceState == null) {
             loadFragment(new SaleFragment(), "TPV_FRAGMENT");
         }
@@ -167,19 +202,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-    private void showMoreOptionsLand(View v) {
-        PopupMenu popup = new PopupMenu(this, v);
-        popup.getMenuInflater().inflate(R.menu.landscape_more_menu, popup.getMenu());
-        popup.setOnMenuItemClickListener(item -> {
-            return handleNavigation(item.getItemId(), item.getTitle().toString());
-        });
-        popup.show();
-    }
-
-    private void showUserMenu(View v) {
-        // Redundant now that it's moved to moreOptionsBtnLand, but kept if needed or just removed
-        showMoreOptionsLand(v);
-    }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -201,13 +223,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             loadFragment(new HeldSalesFragment(), "HELD_SALES_FRAGMENT");
             return true;
         } else if (id == R.id.nav_admin) {
-            loadFragment(new AdminFragment(), "ADMIN_FRAGMENT");
+            promptAdminPin();
             return true;
         } else if (id == R.id.nav_inventory) {
             loadFragment(new InventoryFragment(), "INVENTORY_FRAGMENT");
             return true;
-        } else if (id == R.id.nav_cash_close || id == R.id.nav_cash_movement) {
-            loadFragment(new CashRegisterFragment(), "CASH_REGISTER_FRAGMENT");
+        } else if (id == R.id.nav_cash_close) {
+            CashRegisterFragment fragment = new CashRegisterFragment();
+            Bundle args = new Bundle();
+            args.putString(CashRegisterFragment.ARG_INITIAL_STATE, CashRegisterFragment.STATE_CLOSE);
+            fragment.setArguments(args);
+            loadFragment(fragment, "CASH_REGISTER_FRAGMENT");
+            return true;
+        } else if (id == R.id.nav_cash_movement || id == R.id.menu_cash_movement) {
+            CashRegisterFragment fragment = new CashRegisterFragment();
+            Bundle args = new Bundle();
+            args.putString(CashRegisterFragment.ARG_INITIAL_STATE, CashRegisterFragment.STATE_MOVEMENT);
+            fragment.setArguments(args);
+            loadFragment(fragment, "CASH_REGISTER_FRAGMENT");
             return true;
         } else if (id == R.id.nav_logout || id == R.id.menu_logout) {
             logout();
@@ -237,6 +270,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         sessionManager.clearSession();
         startActivity(new Intent(this, LoginActivity.class));
         finish();
+    }
+
+    private void promptAdminPin() {
+        AdminPinDialogFragment pinDialog = AdminPinDialogFragment.newInstance();
+        pinDialog.setListener(token -> {
+            // Token is already saved in SessionManager by the dialog
+            Toast.makeText(MainActivity.this, "Nivel de acceso elevado", Toast.LENGTH_SHORT).show();
+            loadFragment(new AdminFragment(), "ADMIN_FRAGMENT");
+        });
+        pinDialog.show(getSupportFragmentManager(), "ADMIN_PIN_DIALOG");
     }
 
     @Override

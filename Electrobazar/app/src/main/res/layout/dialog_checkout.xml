@@ -244,10 +244,15 @@
         android:id="@+id/btnConfirmCheckout"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:textColor="?attr/android:windowBackground"
+        android:text="CONFIRMAR COBRO"
+        android:textColor="?attr/colorOnPrimary"
         android:textSize="18sp"
         android:textStyle="bold"
         app:backgroundTint="?attr/colorPrimary"
-        app:cornerRadius="12dp" />
+        app:cornerRadius="12dp"
+        app:icon="@drawable/ic_arrow_right"
+        app:iconGravity="textEnd"
+        app:iconSize="20dp"
+        app:iconTint="?attr/colorOnPrimary" />
 
 </LinearLayout>

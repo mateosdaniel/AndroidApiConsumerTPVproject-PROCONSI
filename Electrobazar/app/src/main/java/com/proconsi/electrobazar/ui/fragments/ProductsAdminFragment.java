@@ -8,17 +8,28 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.net.Uri;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
@@ -44,6 +55,15 @@ public class ProductsAdminFragment extends Fragment {
     private SwipeRefreshLayout swipeRefresh;
     private List<Category> availableCategories = new ArrayList<>();
     private List<TaxRate> availableTaxRates = new ArrayList<>();
+
+    private final ActivityResultLauncher<String[]> csvPickerLauncher = registerForActivityResult(
+            new ActivityResultContracts.OpenDocument(),
+            uri -> {
+                if (uri != null) {
+                    processUploadedCsv(uri);
+                }
+            }
+    );
 
     @Nullable
     @Override
@@ -91,6 +111,10 @@ public class ProductsAdminFragment extends Fragment {
 
         fabAdd.setOnClickListener(v -> showProductDialog(null));
 
+        view.findViewById(R.id.fabUploadCsv).setOnClickListener(v -> {
+            csvPickerLauncher.launch(new String[]{"text/comma-separated-values", "text/csv", "application/vnd.ms-excel"});
+        });
+
         observeViewModel();
 
         viewModel.loadProducts();
@@ -133,27 +157,25 @@ public class ProductsAdminFragment extends Fragment {
                 .create();
 
         TextView tvTitle = dialogView.findViewById(R.id.tvDialogTitle);
-        EditText etName = dialogView.findViewById(R.id.etName);
-        EditText etDescription = dialogView.findViewById(R.id.etDescription);
-        EditText etPrice = dialogView.findViewById(R.id.etPrice);
-        EditText etStock = dialogView.findViewById(R.id.etStock);
-        EditText etImageUrl = dialogView.findViewById(R.id.etImageUrl);
-        Spinner spinnerCategory = dialogView.findViewById(R.id.spinnerCategory);
-        Spinner spinnerTaxRate = dialogView.findViewById(R.id.spinnerTaxRate);
+        com.google.android.material.textfield.TextInputEditText etName = dialogView.findViewById(R.id.etName);
+        com.google.android.material.textfield.TextInputEditText etDescription = dialogView.findViewById(R.id.etDescription);
+        com.google.android.material.textfield.TextInputEditText etPrice = dialogView.findViewById(R.id.etPrice);
+        com.google.android.material.textfield.TextInputEditText etStock = dialogView.findViewById(R.id.etStock);
+        com.google.android.material.textfield.TextInputEditText etImageUrl = dialogView.findViewById(R.id.etImageUrl);
+        AutoCompleteTextView spinnerCategory = dialogView.findViewById(R.id.spinnerCategory);
+        AutoCompleteTextView spinnerTaxRate = dialogView.findViewById(R.id.spinnerTaxRate);
         SwitchMaterial switchActive = dialogView.findViewById(R.id.switchActive);
         View btnSave = dialogView.findViewById(R.id.btnSave);
 
-        // Setup Spinners
+        // Setup Dropdowns (AutoCompleteTextView - fixed theme-aware text colors)
         List<String> catNames = new ArrayList<>();
         for (Category c : availableCategories) catNames.add(c.getName());
-        ArrayAdapter<String> catAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, catNames);
-        catAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> catAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, catNames);
         spinnerCategory.setAdapter(catAdapter);
 
         List<String> taxNames = new ArrayList<>();
         for (TaxRate t : availableTaxRates) taxNames.add(t.getDescription() + " (" + (t.getVatRate().multiply(new BigDecimal("100"))) + "%)");
-        ArrayAdapter<String> taxAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, taxNames);
-        taxAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> taxAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, taxNames);
         spinnerTaxRate.setAdapter(taxAdapter);
 
         if (product != null) {
@@ -165,22 +187,13 @@ public class ProductsAdminFragment extends Fragment {
             etImageUrl.setText(product.getImageUrl());
             switchActive.setChecked(product.getActive() != null && product.getActive());
             
-            // Set selection for spinners
+            // Pre-fill dropdowns when editing
             if (product.getCategory() != null) {
-                for (int i = 0; i < availableCategories.size(); i++) {
-                    if (availableCategories.get(i).getId().equals(product.getCategory().getId())) {
-                        spinnerCategory.setSelection(i);
-                        break;
-                    }
-                }
+                spinnerCategory.setText(product.getCategory().getName(), false);
             }
             if (product.getTaxRate() != null) {
-                for (int i = 0; i < availableTaxRates.size(); i++) {
-                    if (availableTaxRates.get(i).getId().equals(product.getTaxRate().getId())) {
-                        spinnerTaxRate.setSelection(i);
-                        break;
-                    }
-                }
+                String taxLabel = product.getTaxRate().getDescription() + " (" + (product.getTaxRate().getVatRate().multiply(new BigDecimal("100"))) + "%)";
+                spinnerTaxRate.setText(taxLabel, false);
             }
         } else {
             tvTitle.setText("Nuevo Producto");
@@ -200,11 +213,20 @@ public class ProductsAdminFragment extends Fragment {
             request.setImageUrl(etImageUrl.getText().toString());
             request.setActive(switchActive.isChecked());
             
-            if (spinnerCategory.getSelectedItemPosition() >= 0) {
-                request.setCategoryId(availableCategories.get(spinnerCategory.getSelectedItemPosition()).getId());
+            // Find selected category and tax rate by name match
+            String selectedCatName = spinnerCategory.getText().toString().trim();
+            for (Category c : availableCategories) {
+                if (c.getName().equals(selectedCatName)) {
+                    request.setCategoryId(c.getId());
+                    break;
+                }
             }
-            if (spinnerTaxRate.getSelectedItemPosition() >= 0) {
-                request.setTaxRateId(availableTaxRates.get(spinnerTaxRate.getSelectedItemPosition()).getId());
+            String selectedTaxLabel = spinnerTaxRate.getText().toString().trim();
+            for (int i = 0; i < taxNames.size(); i++) {
+                if (taxNames.get(i).equals(selectedTaxLabel)) {
+                    request.setTaxRateId(availableTaxRates.get(i).getId());
+                    break;
+                }
             }
 
             if (product == null) {
@@ -233,5 +255,29 @@ public class ProductsAdminFragment extends Fragment {
                 })
                 .setNegativeButton("Cancelar", null)
                 .show();
+    }
+
+    private void processUploadedCsv(Uri uri) {
+        try {
+            InputStream is = requireContext().getContentResolver().openInputStream(uri);
+            if (is == null) return;
+            byte[] bytes = readAllBytes(is);
+            RequestBody body = RequestBody.create(MediaType.parse("text/csv"), bytes);
+            MultipartBody.Part part = MultipartBody.Part.createFormData("file", "import.csv", body);
+            viewModel.uploadCsv(part);
+        } catch (Exception e) {
+            Toast.makeText(getContext(), "Error al leer archivo: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private byte[] readAllBytes(InputStream inputStream) throws IOException {
+        ByteArrayOutputStream byteBuffer = new ByteArrayOutputStream();
+        int bufferSize = 1024;
+        byte[] buffer = new byte[bufferSize];
+        int len;
+        while ((len = inputStream.read(buffer)) != -1) {
+            byteBuffer.write(buffer, 0, len);
+        }
+        return byteBuffer.toByteArray();
     }
 }

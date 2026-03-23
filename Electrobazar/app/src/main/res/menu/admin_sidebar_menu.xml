@@ -64,10 +64,6 @@
         <item
             android:id="@+id/admin_nav_settings"
             android:icon="@drawable/ic_settings"
-            android:title="Ajustes" />
-        <item
-            android:id="@+id/admin_nav_security"
-            android:icon="@drawable/ic_security"
-            android:title="Seguridad" />
+            android:title="Configuración (PIN)" />
     </group>
 </menu>

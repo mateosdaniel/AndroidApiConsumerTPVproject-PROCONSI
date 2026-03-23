@@ -92,9 +92,18 @@
             android:orientation="horizontal">
 
             <ImageButton
+                android:id="@+id/historyCustomerBtn"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_activity_log"
+                app:tint="?attr/colorPrimary" />
+
+            <ImageButton
                 android:id="@+id/editCustomerBtn"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
+                android:layout_marginStart="8dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:src="@drawable/ic_edit"
                 app:tint="?attr/android:textColorSecondary" />

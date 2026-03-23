@@ -28,6 +28,7 @@ public class InvoicesAdminAdapter extends RecyclerView.Adapter<InvoicesAdminAdap
         void onDownloadInvoice(Sale sale);
         void onCancelSale(Sale sale);
         void onSaleClick(Sale sale);
+        void onSendEmail(Sale sale);
     }
 
     public InvoicesAdminAdapter(OnSaleActionListener listener) {
@@ -86,6 +87,7 @@ public class InvoicesAdminAdapter extends RecyclerView.Adapter<InvoicesAdminAdap
         }
 
         holder.btnDownload.setOnClickListener(v -> listener.onDownloadInvoice(sale));
+        holder.btnEmail.setOnClickListener(v -> listener.onSendEmail(sale));
         holder.btnCancel.setOnClickListener(v -> listener.onCancelSale(sale));
         holder.itemView.setOnClickListener(v -> listener.onSaleClick(sale));
     }
@@ -97,7 +99,7 @@ public class InvoicesAdminAdapter extends RecyclerView.Adapter<InvoicesAdminAdap
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         TextView idText, dateText, customerText, totalText, typeText, methodText, statusText;
-        MaterialButton btnDownload, btnCancel;
+        MaterialButton btnDownload, btnCancel, btnEmail;
 
         ViewHolder(View itemView) {
             super(itemView);
@@ -109,6 +111,7 @@ public class InvoicesAdminAdapter extends RecyclerView.Adapter<InvoicesAdminAdap
             methodText = itemView.findViewById(R.id.invoiceMethodText);
             statusText = itemView.findViewById(R.id.invoiceStatusText);
             btnDownload = itemView.findViewById(R.id.btnDownload);
+            btnEmail = itemView.findViewById(R.id.btnEmail);
             btnCancel = itemView.findViewById(R.id.btnCancel);
         }
     }

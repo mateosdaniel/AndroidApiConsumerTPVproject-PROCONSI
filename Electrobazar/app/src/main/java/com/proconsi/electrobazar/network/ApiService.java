@@ -34,7 +34,7 @@ public interface ApiService {
 
     // --- Admin ---
     @POST("api/admin/verify-pin")
-    Call<Void> verifyAdminPin(@Body Map<String, String> body);
+    Call<LoginResponse> verifyAdminPin(@Body Map<String, String> body);
 
     @GET("api/admin/download/invoice/{id}")
     @Streaming
@@ -61,11 +61,17 @@ public interface ApiService {
     @POST("api/admin/settings")
     Call<Map<String, Object>> saveCompanySettings(@Body CompanySettings settings);
 
-    @POST("admin/settings/pin")
-    Call<Map<String, Object>> updateAdminPin(@Body UpdatePinRequest request);
+    @POST("api/admin/update-pin")
+    Call<Void> updateAdminPin(@Body UpdatePinRequest request);
 
     @DELETE("api/admin/workers/{id}")
     Call<Void> deactivateWorker(@Path("id") Long id);
+
+    @GET("api/admin/mail-settings")
+    Call<Map<String, String>> getMailSettings();
+
+    @POST("api/admin/mail-settings")
+    Call<Map<String, Object>> saveMailSettings(@Body Map<String, String> settings);
 
     // --- Activity Log ---
     @GET("api/activity-log")
@@ -110,6 +116,10 @@ public interface ApiService {
     @POST("api/cash-withdrawals")
     Call<CashWithdrawal> createCashMovement(@Body CashWithdrawalRequest body);
 
+    // --- Email ---
+    @POST("api/email/send-sale/{saleId}")
+    Call<Map<String, String>> sendSaleEmail(@Path("saleId") Long saleId, @Query("email") String email);
+
     // --- Categories ---
     @GET("api/categories")
     Call<List<Category>> getCategories();
@@ -138,6 +148,9 @@ public interface ApiService {
 
     @GET("api/customers/{id}")
     Call<Customer> getCustomerById(@Path("id") Long id);
+
+    @GET("api/customers/{id}/sales")
+    Call<List<Map<String, Object>>> getCustomerSales(@Path("id") Long id);
 
     @POST("api/customers")
     Call<Customer> createCustomer(@Body CustomerRequest request);
@@ -198,8 +211,11 @@ public interface ApiService {
     @POST("api/product-prices/{productId}/schedule")
     Call<ProductPriceResponse> scheduleProductPrice(@Path("productId") Long productId, @Body ProductPriceRequest request);
 
-    @GET("api/product-prices/{productId}")
+    @GET("api/product-prices/{productId}/current")
     Call<ProductPriceResponse> getCurrentProductPrice(@Path("productId") Long productId);
+
+    @GET("api/product-prices/future")
+    Call<List<ProductPriceResponse>> getFuturePrices();
 
     @GET("api/product-prices/{productId}/history")
     Call<List<ProductPriceResponse>> getProductPriceHistory(@Path("productId") Long productId);

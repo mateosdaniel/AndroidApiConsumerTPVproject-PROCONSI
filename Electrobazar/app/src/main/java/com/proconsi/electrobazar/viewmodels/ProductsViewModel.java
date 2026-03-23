@@ -12,7 +12,10 @@ import com.proconsi.electrobazar.repositories.ProductsAdminRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
+
+import okhttp3.MultipartBody;
 
 public class ProductsViewModel extends ViewModel {
 
@@ -147,6 +150,27 @@ public class ProductsViewModel extends ViewModel {
             @Override
             public void onSuccess(Void data) {
                 successMessage.setValue("Producto desactivado");
+                loadProducts();
+            }
+
+            @Override
+            public void onError(String error) {
+                errorMessage.setValue(error);
+                isLoading.setValue(false);
+            }
+        });
+    }
+
+    public void uploadCsv(MultipartBody.Part file) {
+        isLoading.setValue(true);
+        repository.uploadCsv(file, new ProductsAdminRepository.DataCallback<Map<String, Object>>() {
+            @Override
+            public void onSuccess(Map<String, Object> data) {
+                if (data != null && data.containsKey("importedCount")) {
+                    successMessage.setValue("Importados " + data.get("importedCount") + " productos");
+                } else {
+                    successMessage.setValue("CSV importado correctamente");
+                }
                 loadProducts();
             }
 

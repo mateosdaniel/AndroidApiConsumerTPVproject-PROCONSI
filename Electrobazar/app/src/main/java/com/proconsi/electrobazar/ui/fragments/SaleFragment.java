@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.proconsi.electrobazar.R;
+import com.proconsi.electrobazar.models.SaleWithTaxResponse;
 import com.proconsi.electrobazar.models.TicketLine;
 import com.proconsi.electrobazar.ui.adapters.CategoryAdapter;
 import com.proconsi.electrobazar.ui.adapters.ProductAdapter;
@@ -30,6 +31,11 @@ import com.proconsi.electrobazar.utils.SessionManager;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.button.MaterialButtonToggleGroup;
 import com.google.android.material.textfield.TextInputEditText;
+
+import com.proconsi.electrobazar.utils.ThemeManager;
+import com.proconsi.electrobazar.utils.PdfUtils;
+import com.proconsi.electrobazar.repositories.InvoicesAdminRepository;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -45,7 +51,7 @@ public class SaleFragment extends Fragment {
     private TicketAdapter ticketAdapter;
     private View emptyState, ticketContainer, ticketOverlay, btnCloseTicket;
     private TextView ticketTotalText, ticketCountBadge;
-    private View btnCobrar, btnClearTicket, btnSuspender;
+    private View btnCobrar, btnClearTicket, btnSuspender, btnSuspendedSales;
     private View customerSearchContainer, selectedCustomerCard;
     private TextView customerNameText, customerTaxIdText, customerTariffBadge;
     private android.widget.AutoCompleteTextView customerSearchInput;
@@ -76,6 +82,7 @@ public class SaleFragment extends Fragment {
         btnCobrar = view.findViewById(R.id.btnCobrar);
         btnClearTicket = view.findViewById(R.id.btnClearTicket);
         btnSuspender = view.findViewById(R.id.btnSuspender);
+        btnSuspendedSales = view.findViewById(R.id.btnSuspendedSales);
 
         customerSearchContainer = view.findViewById(R.id.customerSearchContainer);
         selectedCustomerCard = view.findViewById(R.id.selectedCustomerCard);
@@ -162,9 +169,8 @@ public class SaleFragment extends Fragment {
     }
 
     private void setupCustomerSection() {
+        if (customerSearchInput == null) return;
         // Threshold 1 so dropdown appears after typing just 1 char.
-        // But we also show all customers on focus (like the web TPV).
-        customerSearchInput.setThreshold(1);
 
         // Custom ArrayAdapter that displays customer.getName() in the dropdown
         final java.util.List<com.proconsi.electrobazar.models.Customer> allCustomers = new java.util.ArrayList<>();
@@ -287,11 +293,12 @@ public class SaleFragment extends Fragment {
     }
     
     private void setupActions() {
-        btnCloseTicket.setOnClickListener(v -> saleViewModel.setTicketVisible(false));
-        ticketOverlay.setOnClickListener(v -> saleViewModel.setTicketVisible(false));
-        btnCobrar.setOnClickListener(v -> showCheckoutDialog());
-        btnClearTicket.setOnClickListener(v -> saleViewModel.clearTicket());
-        btnSuspender.setOnClickListener(v -> showSuspendDialog());
+        if (btnCloseTicket != null) btnCloseTicket.setOnClickListener(v -> saleViewModel.setTicketVisible(false));
+        if (ticketOverlay != null) ticketOverlay.setOnClickListener(v -> saleViewModel.setTicketVisible(false));
+        if (btnCobrar != null) btnCobrar.setOnClickListener(v -> showCheckoutDialog());
+        if (btnClearTicket != null) btnClearTicket.setOnClickListener(v -> saleViewModel.clearTicket());
+        if (btnSuspender != null) btnSuspender.setOnClickListener(v -> showSuspendDialog());
+        if (btnSuspendedSales != null) btnSuspendedSales.setOnClickListener(v -> showSuspendedSalesList());
     }
 
     private void observeViewModel() {
@@ -308,13 +315,15 @@ public class SaleFragment extends Fragment {
         saleViewModel.getTicketLines().observe(getViewLifecycleOwner(), lines -> {
             ticketAdapter.setLines(lines);
             boolean hasItems = !lines.isEmpty();
-            btnCobrar.setEnabled(hasItems);
+            if (btnCobrar != null) btnCobrar.setEnabled(hasItems);
             
-            SessionManager sessionManager = new SessionManager(requireContext());
-            if (hasItems && sessionManager.hasPermission("HOLD_SALES")) {
-                btnSuspender.setVisibility(View.VISIBLE);
-            } else {
-                btnSuspender.setVisibility(View.GONE);
+            if (btnSuspender != null) {
+                SessionManager sessionManager = new SessionManager(requireContext());
+                if (hasItems && sessionManager.hasPermission("HOLD_SALES")) {
+                    btnSuspender.setVisibility(View.VISIBLE);
+                } else {
+                    btnSuspender.setVisibility(View.GONE);
+                }
             }
         });
 
@@ -329,31 +338,34 @@ public class SaleFragment extends Fragment {
         saleViewModel.isTicketVisible().observe(getViewLifecycleOwner(), this::toggleTicketPanel);
 
         saleViewModel.getSelectedCustomer().observe(getViewLifecycleOwner(), customer -> {
+            if (customerSearchContainer == null) return; // landscape layout — no customer section
             if (customer != null) {
                 customerSearchContainer.setVisibility(View.GONE);
-                selectedCustomerCard.setVisibility(View.VISIBLE);
-                customerNameText.setText(customer.getName());
-                customerTaxIdText.setText(customer.getTaxId() != null ? customer.getTaxId() : "Sin NIF");
+                if (selectedCustomerCard != null) selectedCustomerCard.setVisibility(View.VISIBLE);
+                if (customerNameText != null) customerNameText.setText(customer.getName());
+                if (customerTaxIdText != null) customerTaxIdText.setText(customer.getTaxId() != null ? customer.getTaxId() : "Sin NIF");
                 
-                if (customer.getTariff() != null) {
-                    customerTariffBadge.setVisibility(View.VISIBLE);
-                    customerTariffBadge.setText(customer.getTariff().getName());
-                } else if (Boolean.TRUE.equals(customer.getHasRecargoEquivalencia())) {
-                    customerTariffBadge.setVisibility(View.VISIBLE);
-                    customerTariffBadge.setText("RE");
-                } else {
-                    customerTariffBadge.setVisibility(View.GONE);
+                if (customerTariffBadge != null) {
+                    if (customer.getTariff() != null) {
+                        customerTariffBadge.setVisibility(View.VISIBLE);
+                        customerTariffBadge.setText(customer.getTariff().getName());
+                    } else if (Boolean.TRUE.equals(customer.getHasRecargoEquivalencia())) {
+                        customerTariffBadge.setVisibility(View.VISIBLE);
+                        customerTariffBadge.setText("RE");
+                    } else {
+                        customerTariffBadge.setVisibility(View.GONE);
+                    }
                 }
             } else {
                 customerSearchContainer.setVisibility(View.VISIBLE);
-                selectedCustomerCard.setVisibility(View.GONE);
+                if (selectedCustomerCard != null) selectedCustomerCard.setVisibility(View.GONE);
             }
         });
 
         // Observe sale result
         saleViewModel.getSaleResponse().observe(getViewLifecycleOwner(), response -> {
             if (response != null) {
-                Toast.makeText(getContext(), "Venta realizada con éxito (" + response.getGrandTotal() + " €)", Toast.LENGTH_LONG).show();
+                showPostSaleDialog(response);
             }
         });
 
@@ -476,8 +488,8 @@ public class SaleFragment extends Fragment {
                 SaleWithTaxRequest.SaleLineRequest lr = new SaleWithTaxRequest.SaleLineRequest();
                 lr.setProductId(line.getProduct().getId());
                 lr.setQuantity(line.getQuantity());
-                // We send null for overridePrice to let the backend use temporal pricing
-                lr.setOverridePrice(null); 
+                // We send the current unitPrice from the app to ensure the server charges exactly what the user sees
+                lr.setOverridePrice(line.getUnitPrice()); 
                 lines.add(lr);
             }
             request.setLines(lines);
@@ -570,6 +582,95 @@ public class SaleFragment extends Fragment {
         dialog.show();
     }
 
+    private void showPostSaleDialog(SaleWithTaxResponse response) {
+        BigDecimal totalToDisplay = response.getGrandTotal();
+        
+        // Sum components manually to ensure all taxes (including RE) are accounted for if grandTotal is incomplete
+        if (response.getTotalBase() != null && response.getTotalVat() != null) {
+            BigDecimal sum = response.getTotalBase().add(response.getTotalVat());
+            if (response.getTotalRecargo() != null) {
+                sum = sum.add(response.getTotalRecargo());
+            }
+            // Use the sum if it's different from grandTotal, as grandTotal might be missing RE in some responses
+            if (totalToDisplay == null || sum.compareTo(totalToDisplay) != 0) {
+                totalToDisplay = sum;
+            }
+        }
+
+        View dialogView = getLayoutInflater().inflate(R.layout.dialog_post_sale, null);
+        androidx.appcompat.app.AlertDialog dialog = new MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialogTheme)
+                .setView(dialogView)
+                .setCancelable(false)
+                .create();
+
+        // Apply theme colors to the custom view
+        ThemeManager.applyColorsToView(dialogView, requireContext());
+        ThemeManager.applyFontToView(dialogView, requireContext());
+
+        TextView totalAmountText = dialogView.findViewById(R.id.postSaleTotalAmount);
+        totalAmountText.setText(String.format(Locale.getDefault(), "%.2f €", 
+                totalToDisplay != null ? totalToDisplay : BigDecimal.ZERO));
+
+        View emailSection = dialogView.findViewById(R.id.emailSection);
+        EditText emailInput = dialogView.findViewById(R.id.postSaleEmailInput);
+        com.google.android.material.button.MaterialButton btnSendEmail = dialogView.findViewById(R.id.btnSendEmail);
+        com.google.android.material.button.MaterialButton btnPrint = dialogView.findViewById(R.id.btnPrintTicket);
+        com.google.android.material.button.MaterialButton btnFinish = dialogView.findViewById(R.id.btnFinishPostSale);
+
+        final com.proconsi.electrobazar.models.Customer customer = saleViewModel.getSelectedCustomer().getValue();
+        final boolean isInvoice = customer != null;
+
+        if (isInvoice) {
+            emailSection.setVisibility(View.VISIBLE);
+            if (customer.getEmail() != null) {
+                emailInput.setText(customer.getEmail());
+            }
+            btnPrint.setText("IMPRIMIR FACTURA");
+            
+            btnSendEmail.setOnClickListener(v -> {
+                String email = emailInput.getText().toString().trim();
+                if (!email.isEmpty()) {
+                    saleViewModel.sendReceiptByEmail(response.getSaleId(), email).observe(getViewLifecycleOwner(), result -> {
+                        if ("SUCCESS".equals(result)) {
+                            Toast.makeText(getContext(), "Email enviado correctamente", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getContext(), "Error: " + result, Toast.LENGTH_LONG).show();
+                        }
+                    });
+                }
+            });
+        } else {
+            emailSection.setVisibility(View.GONE);
+            btnPrint.setText("IMPRIMIR TICKET");
+        }
+
+        btnPrint.setOnClickListener(v -> {
+            InvoicesAdminRepository repo = new InvoicesAdminRepository();
+            InvoicesAdminRepository.RepositoryCallback<okhttp3.ResponseBody> callback = new InvoicesAdminRepository.RepositoryCallback<okhttp3.ResponseBody>() {
+                @Override
+                public void onSuccess(okhttp3.ResponseBody body) {
+                    String filename = isInvoice ? "Factura_" + response.getSaleId() + ".pdf" : "Ticket_" + response.getSaleId() + ".pdf";
+                    PdfUtils.saveAndOpenFile(requireContext(), body, filename);
+                }
+
+                @Override
+                public void onError(String error) {
+                    Toast.makeText(getContext(), "Error al descargar: " + error, Toast.LENGTH_SHORT).show();
+                }
+            };
+
+            // Both invoices and tickets use the downloadInvoice method as it handles the sale context automatically
+            repo.downloadInvoice(response.getSaleId(), callback);
+        });
+
+        btnFinish.setOnClickListener(v -> {
+            saleViewModel.clearCustomer();
+            dialog.dismiss();
+        });
+
+        dialog.show();
+    }
+
     private void showSuspendDialog() {
         android.widget.EditText input = new android.widget.EditText(requireContext());
         input.setHint("Ej: Cliente esperando tarjeta");
@@ -583,6 +684,15 @@ public class SaleFragment extends Fragment {
                 })
                 .setNegativeButton("CANCELAR", null)
                 .show();
+    }
+
+    private void showSuspendedSalesList() {
+        SuspendedSalesDialogFragment dialog = new SuspendedSalesDialogFragment();
+        dialog.setListener(sale -> {
+            saleViewModel.loadHeldSale(sale);
+            Toast.makeText(getContext(), "Venta recuperada", Toast.LENGTH_SHORT).show();
+        });
+        dialog.show(getChildFragmentManager(), "SuspendedSalesList");
     }
 }
 

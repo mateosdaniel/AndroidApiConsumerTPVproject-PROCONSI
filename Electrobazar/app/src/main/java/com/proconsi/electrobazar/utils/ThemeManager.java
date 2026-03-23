@@ -326,19 +326,33 @@ public class ThemeManager {
         if (view instanceof TextView) {
             TextView tv = (TextView) view;
             int currentColor = tv.getCurrentTextColor();
-            
-            // Check if it's a "filled" button that needs contrast with the accent color
-            boolean isFilledButton = (view instanceof android.widget.Button || view instanceof com.google.android.material.button.MaterialButton)
-                                     && !(view instanceof android.widget.CompoundButton); // Exclude RadioButtons, Checkboxes, etc.
+
+            // Only apply contrast (on-accent) color to truly FILLED buttons.
+            // An OutlinedButton or TextButton has a transparent background — assigning
+            // the on-accent contrast color there would make text invisible.
+            boolean isFilledButton = false;
+            if ((view instanceof com.google.android.material.button.MaterialButton)
+                    && !(view instanceof android.widget.CompoundButton)) {
+                com.google.android.material.button.MaterialButton mb =
+                        (com.google.android.material.button.MaterialButton) view;
+                // Outlined and text buttons have a transparent backgroundTint.
+                // Detect them by stroke width > 0 AND transparent/null tint.
+                boolean isOutlined = mb.getStrokeWidth() > 0
+                        && (mb.getBackgroundTintList() == null
+                            || android.graphics.Color.alpha(mb.getBackgroundTintList().getDefaultColor()) < 128);
+                isFilledButton = !isOutlined;
+            } else if ((view instanceof android.widget.Button)
+                    && !(view instanceof android.widget.CompoundButton)) {
+                isFilledButton = true;
+            }
 
             if (isFilledButton) {
-                // For filled buttons, use contrast color if it's currently white or default
-                if (currentColor == Color.WHITE || currentColor == 0xFFFFFFFF || isMaterialThemeTextColor(currentColor)) {
-                    tv.setTextColor(getOnAccentColor(ctx));
-                }
+                // Always set the on-accent contrast color for filled buttons.
+                // getOnAccentColor() calculates luminance of the accent and returns
+                // black or white accordingly — so this is always visually correct.
+                tv.setTextColor(getOnAccentColor(ctx));
             } else if (isMaterialThemeTextColor(currentColor)) {
-                // For normal text and RadioButtons, use the standard text color for the theme
-                // But if it was a muted color, use the new muted color to maintain hierarchy
+                // For normal text, outlined buttons, etc. use the standard text color.
                 if (isMutedTextColor(currentColor)) {
                     tv.setTextColor(muted);
                 } else {

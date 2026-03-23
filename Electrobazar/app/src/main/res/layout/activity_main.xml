@@ -30,7 +30,7 @@
                 <ImageView
                     android:layout_width="28dp"
                     android:layout_height="28dp"
-                    android:src="@mipmap/ic_launcher" />
+                    android:src="@drawable/ic_logo" />
 
                 <TextView
                     android:id="@+id/appNameText"

@@ -108,22 +108,42 @@
                 </RelativeLayout>
 
                 <Button
+                    android:id="@+id/cashMovementBtn"
+                    style="@style/Widget.Material3.Button.Icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:layout_marginEnd="8dp"
+                    android:backgroundTint="?attr/colorSurface"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:text="Movim."
+                    android:textColor="?attr/android:textColorPrimary"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    app:cornerRadius="8dp"
+                    app:icon="@drawable/ic_cash_movement"
+                    app:iconSize="14dp"
+                    app:iconTint="?attr/android:textColorPrimary"
+                    app:strokeColor="?attr/colorOutline"
+                    app:strokeWidth="1dp" />
+
+                <Button
                     android:id="@+id/cashCloseBtn"
                     style="@style/Widget.Material3.Button.Icon"
                     android:layout_width="wrap_content"
                     android:layout_height="36dp"
                     android:layout_marginEnd="8dp"
-                    android:backgroundTint="@color/accent"
+                    android:backgroundTint="@color/danger"
                     android:insetTop="0dp"
                     android:insetBottom="0dp"
-                    android:text="Caja"
-                    android:textColor="@color/primary"
+                    android:text="Cierre"
+                    android:textColor="@color/white"
                     android:textSize="10sp"
                     android:textStyle="bold"
                     app:cornerRadius="8dp"
                     app:icon="@drawable/ic_cash_close"
                     app:iconSize="14dp"
-                    app:iconTint="@color/primary" />
+                    app:iconTint="@color/white" />
 
                 <ImageButton
                     android:id="@+id/hamburgerBtnLand"
@@ -131,14 +151,6 @@
                     android:layout_height="40dp"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:src="@drawable/ic_menu"
-                    app:tint="@color/text_main" />
-
-                <ImageButton
-                    android:id="@+id/moreOptionsBtnLand"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:src="@drawable/ic_more_vert"
                     app:tint="@color/text_main" />
             </LinearLayout>
 

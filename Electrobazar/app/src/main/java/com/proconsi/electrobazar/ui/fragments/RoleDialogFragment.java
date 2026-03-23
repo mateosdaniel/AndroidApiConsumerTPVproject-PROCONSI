@@ -6,11 +6,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.material.textfield.TextInputEditText;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -30,7 +31,7 @@ public class RoleDialogFragment extends DialogFragment {
     private List<String> availablePermissions = new ArrayList<>();
     private OnRoleSavedListener listener;
 
-    private EditText nameEdit, descriptionEdit;
+    private TextInputEditText nameEdit, descriptionEdit;
     private LinearLayout permissionsContainer;
     private ProgressBar loadingProgress;
     private List<CheckBox> checkBoxes = new ArrayList<>();
@@ -57,6 +58,7 @@ public class RoleDialogFragment extends DialogFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.dialog_role_form, container, false);
+        com.proconsi.electrobazar.utils.ThemeManager.applyFontToView(view, requireContext());
 
         nameEdit = view.findViewById(R.id.editRoleName);
         descriptionEdit = view.findViewById(R.id.editRoleDescription);
@@ -94,12 +96,13 @@ public class RoleDialogFragment extends DialogFragment {
         for (String p : availablePermissions) {
             CheckBox cb = new CheckBox(requireContext());
             cb.setText(p);
-            cb.setTextColor(requireContext().getColor(R.color.text_main));
+            // Use theme-aware text color to support both light and dark themes
+            cb.setTextColor(com.google.android.material.color.MaterialColors.getColor(
+                    requireContext(), com.google.android.material.R.attr.colorOnSurface, android.graphics.Color.BLACK));
             
             if ("ADMIN_ACCESS".equals(p)) {
-                cb.setTextColor(requireContext().getColor(R.color.danger));
-                // Add a divider before special perms like in web? 
-                // In Android we can just style it differently.
+                int dangerColor = requireContext().getColor(R.color.danger);
+                cb.setTextColor(dangerColor);
             }
             
             permissionsContainer.addView(cb);
